@@ -1,0 +1,1069 @@
+<!DOCTYPE html>
+<html lang="en" data-time-state="afternoon">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <meta name="theme-color" content="#000000">
+  <meta name="description" content="Essential guidelines for citizen conduct during Atmospheric Obscuration Surges. Cooperation secures a bright morning.">
+  <title>H.O.P.E. Citizen Instruction Manual — Year 888 A.Dk.</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='14' fill='none' stroke='white' stroke-width='1.5'/><text x='16' y='19' text-anchor='middle' font-size='7' font-family='monospace' fill='white'>H.O.P.E</text></svg>">
+
+  <link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+
+  <!-- Audio unlock overlay -->
+  <div id="audio-gate" class="audio-gate">
+    <div class="audio-gate__inner">
+      <div class="audio-gate__seal" aria-hidden="true"></div>
+      <p class="audio-gate__text label">tap to initialize</p>
+      <p class="audio-gate__sub body-text">H.O.P.E. Citizen Instruction Manual</p>
+      <p class="audio-gate__sub body-text" style="opacity: 0.4; margin-top: 0.5em;">Year 888 A.Dk.</p>
+    </div>
+  </div>
+
+  <!-- Grain overlay -->
+  <div class="grain-overlay" aria-hidden="true"></div>
+
+  <!-- Section indicator -->
+  <nav id="section-nav" class="section-nav" aria-label="Section navigation">
+    <div class="section-nav__dot active" data-section="0"></div>
+    <div class="section-nav__dot" data-section="1"></div>
+    <div class="section-nav__dot" data-section="2"></div>
+    <div class="section-nav__dot" data-section="3"></div>
+    <div class="section-nav__dot" data-section="4"></div>
+    <div class="section-nav__dot" data-section="5"></div>
+    <div class="section-nav__dot" data-section="6"></div>
+    <div class="section-nav__dot" data-section="7"></div>
+  </nav>
+
+  <!-- Main scroll container -->
+  <main id="scroll-container">
+
+    <!-- SECTION 0: COVER -->
+    <section id="section-cover" class="section section--cover" data-section="cover">
+      <div class="section__inner">
+
+        <!-- H.O.P.E. Seal -->
+        <div class="seal-container">
+          <svg class="seal" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+            <!-- Outer ring -->
+            <circle class="seal__ring seal__ring--outer" cx="150" cy="150" r="140" fill="none" stroke="currentColor" stroke-width="1.5"/>
+            <circle class="seal__ring seal__ring--inner" cx="150" cy="150" r="125" fill="none" stroke="currentColor" stroke-width="0.5"/>
+
+            <!-- Text paths -->
+            <defs>
+              <path id="seal-text-top" d="M 150,150 m -110,0 a 110,110 0 1,1 220,0" fill="none"/>
+              <path id="seal-text-bottom" d="M 40,150 a 110,110 0 0,0 220,0" fill="none"/>
+            </defs>
+
+            <!-- Top arc text -->
+            <text class="seal__text seal__text--arc" fill="currentColor">
+              <textPath href="#seal-text-top" startOffset="50%" text-anchor="middle">
+                HUMAN ORDER AND PHASE ENFORCEMENT
+              </textPath>
+            </text>
+
+            <!-- Halftone pyramid / light rays in center -->
+            <g class="seal__emblem" transform="translate(150,120)">
+              <!-- Pyramid / triangle shape made of dots -->
+              <polygon class="seal__pyramid" points="0,-55 -40,25 40,25" fill="none" stroke="currentColor" stroke-width="1" opacity="0.8"/>
+              <!-- Light rays above pyramid -->
+              <line x1="0" y1="-55" x2="0" y2="-75" stroke="currentColor" stroke-width="0.75" opacity="0.6"/>
+              <line x1="0" y1="-55" x2="-15" y2="-72" stroke="currentColor" stroke-width="0.75" opacity="0.5"/>
+              <line x1="0" y1="-55" x2="15" y2="-72" stroke="currentColor" stroke-width="0.75" opacity="0.5"/>
+              <line x1="0" y1="-55" x2="-28" y2="-66" stroke="currentColor" stroke-width="0.75" opacity="0.4"/>
+              <line x1="0" y1="-55" x2="28" y2="-66" stroke="currentColor" stroke-width="0.75" opacity="0.4"/>
+              <!-- Dot grid inside pyramid -->
+              <g class="seal__dots" opacity="0.7">
+                <circle cx="-24" cy="18" r="1.2"/><circle cx="-16" cy="18" r="1.2"/><circle cx="-8" cy="18" r="1.2"/>
+                <circle cx="0" cy="18" r="1.2"/><circle cx="8" cy="18" r="1.2"/><circle cx="16" cy="18" r="1.2"/>
+                <circle cx="24" cy="18" r="1.2"/>
+                <circle cx="-20" cy="10" r="1.2"/><circle cx="-12" cy="10" r="1.2"/><circle cx="-4" cy="10" r="1.2"/>
+                <circle cx="4" cy="10" r="1.2"/><circle cx="12" cy="10" r="1.2"/><circle cx="20" cy="10" r="1.2"/>
+                <circle cx="-16" cy="2" r="1.2"/><circle cx="-8" cy="2" r="1.2"/><circle cx="0" cy="2" r="1.2"/>
+                <circle cx="8" cy="2" r="1.2"/><circle cx="16" cy="2" r="1.2"/>
+                <circle cx="-12" cy="-6" r="1.2"/><circle cx="-4" cy="-6" r="1.2"/><circle cx="4" cy="-6" r="1.2"/>
+                <circle cx="12" cy="-6" r="1.2"/>
+                <circle cx="-8" cy="-14" r="1.2"/><circle cx="0" cy="-14" r="1.2"/><circle cx="8" cy="-14" r="1.2"/>
+                <circle cx="-4" cy="-22" r="1.2"/><circle cx="4" cy="-22" r="1.2"/>
+                <circle cx="0" cy="-30" r="1.2"/>
+              </g>
+            </g>
+
+            <!-- Center text -->
+            <text class="seal__text seal__text--center" x="150" y="185" text-anchor="middle" fill="currentColor" font-size="28" font-weight="700" letter-spacing="6">H.O.P.E.</text>
+
+            <!-- Bottom arc text -->
+            <text class="seal__text seal__text--sub" fill="currentColor">
+              <textPath href="#seal-text-bottom" startOffset="50%" text-anchor="middle">
+                888 A.Dk.
+              </textPath>
+            </text>
+
+            <!-- Cardinal dots -->
+            <circle cx="150" cy="6" r="2" fill="currentColor" opacity="0.5"/>
+            <circle cx="150" cy="294" r="2" fill="currentColor" opacity="0.5"/>
+            <circle cx="6" cy="150" r="2" fill="currentColor" opacity="0.5"/>
+            <circle cx="294" cy="150" r="2" fill="currentColor" opacity="0.5"/>
+          </svg>
+        </div>
+
+        <!-- Title block -->
+        <div class="cover-text">
+          <h1 class="cover-text__title heading">Citizen Instruction Manual</h1>
+          <p class="cover-text__body body-text">
+            This manual contains procedures issued by H.O.P.E.
+            for household safety during Surge conditions.
+          </p>
+          <p class="cover-text__motto body-text"><em>Cooperation secures a bright morning.</em></p>
+        </div>
+
+        <!-- Table of contents -->
+        <nav class="toc">
+          <h2 class="toc__heading label">table of contents</h2>
+          <ol class="toc__list">
+            <li class="toc__item"><span class="toc__num">1</span><span class="toc__label">atmospheric obscuration surges</span></li>
+            <li class="toc__item"><span class="toc__num">2</span><span class="toc__label">the phased / lucid / lost</span></li>
+            <li class="toc__item"><span class="toc__num">3</span><span class="toc__label">siren procedure</span></li>
+            <li class="toc__item"><span class="toc__num">4</span><span class="toc__label">morning return</span></li>
+            <li class="toc__item"><span class="toc__num">5</span><span class="toc__label">watchlight</span></li>
+            <li class="toc__item"><span class="toc__num">6</span><span class="toc__label">legacy</span></li>
+          </ol>
+        </nav>
+
+        <!-- Scroll indicator -->
+        <div class="scroll-indicator">
+          <div class="scroll-indicator__line"></div>
+          <span class="scroll-indicator__text label">scroll</span>
+        </div>
+
+        <p class="cover-text__footer label">Issued: Year 887 A.Dk.</p>
+      </div>
+    </section>
+
+    <!-- SECTION 1: ATMOSPHERIC OBSCURATION SURGES -->
+    <section id="section-surges" class="section section--surges" data-section="atmospheric">
+      <div class="section__inner">
+        <div class="section-header">
+          <span class="section-header__num">1</span>
+          <h2 class="section-header__title heading">atmospheric obscuration surges</h2>
+        </div>
+
+        <p class="body-text section-intro">
+          Atmospheric Obscuration Surges (commonly: <em>Surges</em>) are periods of total darkness
+          caused by dense particulate clouds descending upon populated zones. During a Surge,
+          all visible light is absorbed. Outdoor movement becomes impossible.
+        </p>
+
+        <!-- Halftone darkness descent visualization -->
+        <div class="surge-visual">
+          <svg class="surge-svg" viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg">
+            <!-- Dot grid representing darkness descending -->
+            <g class="surge-dots" opacity="0.8">
+              <!-- Row 1 - dense (top = full darkness) -->
+              <g>
+                <circle cx="20" cy="15" r="6"/><circle cx="40" cy="15" r="6"/><circle cx="60" cy="15" r="6"/>
+                <circle cx="80" cy="15" r="6"/><circle cx="100" cy="15" r="6"/><circle cx="120" cy="15" r="6"/>
+                <circle cx="140" cy="15" r="6"/><circle cx="160" cy="15" r="6"/><circle cx="180" cy="15" r="6"/>
+                <circle cx="200" cy="15" r="6"/><circle cx="220" cy="15" r="6"/><circle cx="240" cy="15" r="6"/>
+                <circle cx="260" cy="15" r="6"/><circle cx="280" cy="15" r="6"/><circle cx="300" cy="15" r="6"/>
+              </g>
+              <!-- Row 2 -->
+              <g>
+                <circle cx="20" cy="35" r="5.5"/><circle cx="40" cy="35" r="5.5"/><circle cx="60" cy="35" r="5.5"/>
+                <circle cx="80" cy="35" r="5.5"/><circle cx="100" cy="35" r="5.5"/><circle cx="120" cy="35" r="5.5"/>
+                <circle cx="140" cy="35" r="5.5"/><circle cx="160" cy="35" r="5.5"/><circle cx="180" cy="35" r="5.5"/>
+                <circle cx="200" cy="35" r="5.5"/><circle cx="220" cy="35" r="5.5"/><circle cx="240" cy="35" r="5.5"/>
+                <circle cx="260" cy="35" r="5.5"/><circle cx="280" cy="35" r="5.5"/><circle cx="300" cy="35" r="5.5"/>
+              </g>
+              <!-- Row 3 -->
+              <g>
+                <circle cx="20" cy="55" r="5"/><circle cx="40" cy="55" r="5"/><circle cx="60" cy="55" r="5"/>
+                <circle cx="80" cy="55" r="5"/><circle cx="100" cy="55" r="4.8"/><circle cx="120" cy="55" r="4.5"/>
+                <circle cx="140" cy="55" r="5"/><circle cx="160" cy="55" r="4.8"/><circle cx="180" cy="55" r="5"/>
+                <circle cx="200" cy="55" r="4.5"/><circle cx="220" cy="55" r="5"/><circle cx="240" cy="55" r="4.8"/>
+                <circle cx="260" cy="55" r="5"/><circle cx="280" cy="55" r="4.5"/><circle cx="300" cy="55" r="5"/>
+              </g>
+              <!-- Row 4 - thinning -->
+              <g>
+                <circle cx="20" cy="75" r="4"/><circle cx="40" cy="75" r="3.5"/><circle cx="60" cy="75" r="4"/>
+                <circle cx="80" cy="75" r="3"/><circle cx="100" cy="75" r="4"/><circle cx="120" cy="75" r="3.5"/>
+                <circle cx="140" cy="75" r="4"/><circle cx="160" cy="75" r="3"/><circle cx="180" cy="75" r="4"/>
+                <circle cx="200" cy="75" r="3.5"/><circle cx="220" cy="75" r="4"/><circle cx="240" cy="75" r="3"/>
+                <circle cx="260" cy="75" r="4"/><circle cx="280" cy="75" r="3.5"/><circle cx="300" cy="75" r="4"/>
+              </g>
+              <!-- Row 5 - sparse -->
+              <g>
+                <circle cx="20" cy="95" r="2.5"/><circle cx="50" cy="95" r="2"/><circle cx="80" cy="95" r="2.5"/>
+                <circle cx="120" cy="95" r="2"/><circle cx="160" cy="95" r="2.5"/><circle cx="200" cy="95" r="2"/>
+                <circle cx="240" cy="95" r="2.5"/><circle cx="280" cy="95" r="2"/>
+              </g>
+              <!-- Row 6 - very sparse -->
+              <g>
+                <circle cx="40" cy="115" r="1.5"/><circle cx="100" cy="118" r="1.2"/>
+                <circle cx="180" cy="112" r="1.5"/><circle cx="260" cy="116" r="1"/>
+              </g>
+              <!-- Row 7 - nearly clear -->
+              <g>
+                <circle cx="70" cy="135" r="0.8"/><circle cx="220" cy="138" r="0.6"/>
+              </g>
+            </g>
+            <!-- Ground line -->
+            <line x1="0" y1="170" x2="320" y2="170" stroke="currentColor" stroke-width="0.5" opacity="0.3"/>
+            <!-- Building silhouettes -->
+            <rect x="30" y="140" width="25" height="30" fill="currentColor" opacity="0.15"/>
+            <rect x="65" y="150" width="15" height="20" fill="currentColor" opacity="0.15"/>
+            <rect x="130" y="135" width="20" height="35" fill="currentColor" opacity="0.15"/>
+            <rect x="155" y="148" width="30" height="22" fill="currentColor" opacity="0.15"/>
+            <rect x="230" y="138" width="18" height="32" fill="currentColor" opacity="0.15"/>
+            <rect x="260" y="152" width="25" height="18" fill="currentColor" opacity="0.15"/>
+            <!-- Label -->
+            <text x="160" y="192" text-anchor="middle" font-size="6" fill="currentColor" opacity="0.4" font-family="'Space Mono', monospace" letter-spacing="2">SURGE DESCENT PATTERN</text>
+          </svg>
+        </div>
+
+        <!-- Warning levels -->
+        <div class="surge-levels">
+          <h3 class="label" style="margin-bottom: var(--space-sm); color: var(--mid);">threat classification</h3>
+          <div class="surge-level">
+            <span class="surge-level__bar" style="--level: 25%"></span>
+            <div>
+              <span class="label">advisory</span>
+              <p class="body-text" style="color: var(--mid);">Reduced visibility. Outdoor activity discouraged.</p>
+            </div>
+          </div>
+          <div class="surge-level">
+            <span class="surge-level__bar" style="--level: 55%"></span>
+            <div>
+              <span class="label">warning</span>
+              <p class="body-text" style="color: var(--mid);">Significant obscuration. Return indoors immediately.</p>
+            </div>
+          </div>
+          <div class="surge-level">
+            <span class="surge-level__bar" style="--level: 85%"></span>
+            <div>
+              <span class="label">critical</span>
+              <p class="body-text" style="color: var(--mid);">Total darkness. Siren will sound. Lock all entry points.</p>
+            </div>
+          </div>
+        </div>
+
+        <p class="body-text" style="color: var(--mid); margin-top: auto; font-size: 0.7rem; opacity: 0.6;">
+          Duration varies. Average: 6-8 hours. Maximum recorded: 72 hours (Year 845 A.Dk.)
+        </p>
+      </div>
+    </section>
+
+    <!-- SECTION 2: THE PHASED / LUCID / LOST -->
+    <section id="section-classification" class="section section--classification" data-section="classification">
+      <div class="section__inner">
+        <div class="section-header">
+          <span class="section-header__num">2</span>
+          <h2 class="section-header__title heading">the phased / lucid / lost</h2>
+        </div>
+
+        <p class="body-text section-intro">
+          All citizens are classified under the Phase Identification System.
+          During Surge conditions, the Watchlight beam reveals an individual's current phase state.
+        </p>
+
+        <!-- Three classification figures -->
+        <div class="classification-grid">
+          <!-- UNPHASED -->
+          <div class="classification-card">
+            <div class="classification-card__figure">
+              <svg viewBox="0 0 80 140" width="80" height="140">
+                <!-- Clean human silhouette — solid, grounded -->
+                <circle cx="40" cy="16" r="10" fill="currentColor"/>
+                <!-- Neck -->
+                <rect x="37" y="26" width="6" height="5" fill="currentColor"/>
+                <!-- Torso — tapered path -->
+                <path d="M 26,31 L 54,31 L 54,35 Q 54,36 53,36 L 51,36 L 51,68 Q 51,70 49,70 L 31,70 Q 29,70 29,68 L 29,36 L 27,36 Q 26,36 26,35 Z" fill="currentColor"/>
+                <!-- Arms -->
+                <path d="M 26,34 L 18,34 Q 16,34 16,36 L 16,58 Q 16,60 18,60 L 22,60 Q 24,60 24,58 L 24,40 L 29,40" fill="currentColor"/>
+                <path d="M 54,34 L 62,34 Q 64,34 64,36 L 64,58 Q 64,60 62,60 L 58,60 Q 56,60 56,58 L 56,40 L 51,40" fill="currentColor"/>
+                <!-- Left leg -->
+                <path d="M 29,70 L 29,118 Q 29,120 31,120 L 37,120 Q 39,120 39,118 L 39,70" fill="currentColor"/>
+                <!-- Right leg -->
+                <path d="M 41,70 L 41,118 Q 41,120 43,120 L 49,120 Q 51,120 51,118 L 51,70" fill="currentColor"/>
+                <!-- Feet -->
+                <rect x="27" y="118" width="14" height="4" rx="2" fill="currentColor"/>
+                <rect x="39" y="118" width="14" height="4" rx="2" fill="currentColor"/>
+              </svg>
+            </div>
+            <h3 class="classification-card__title label">unphased</h3>
+            <p class="classification-card__desc body-text">
+              Solid beam reflection. Individual is present and accounted for. Standard citizen status.
+            </p>
+            <div class="classification-card__status">
+              <svg viewBox="0 0 16 16" width="14" height="14"><circle cx="8" cy="8" r="6" fill="none" stroke="currentColor" stroke-width="1.5"/><polyline points="5,8 7,10.5 11,5.5" fill="none" stroke="currentColor" stroke-width="1.2"/></svg>
+              <span class="label" style="color: var(--fg);">no action required</span>
+            </div>
+          </div>
+
+          <!-- LUCID -->
+          <div class="classification-card">
+            <div class="classification-card__figure">
+              <svg viewBox="0 0 80 140" width="80" height="140">
+                <!-- Same silhouette as Unphased, but outlined — beam passes through -->
+                <circle cx="40" cy="16" r="10" fill="none" stroke="currentColor" stroke-width="1.2"/>
+                <!-- Neck -->
+                <line x1="37" y1="26" x2="37" y2="31" stroke="currentColor" stroke-width="1.2"/>
+                <line x1="43" y1="26" x2="43" y2="31" stroke="currentColor" stroke-width="1.2"/>
+                <!-- Torso outline -->
+                <path d="M 26,31 L 54,31 L 54,35 Q 54,36 53,36 L 51,36 L 51,68 Q 51,70 49,70 L 31,70 Q 29,70 29,68 L 29,36 L 27,36 Q 26,36 26,35 Z" fill="none" stroke="currentColor" stroke-width="1.2"/>
+                <!-- Arms -->
+                <path d="M 26,34 L 18,34 Q 16,34 16,36 L 16,58 Q 16,60 18,60 L 22,60 Q 24,60 24,58 L 24,40" fill="none" stroke="currentColor" stroke-width="1.2"/>
+                <path d="M 54,34 L 62,34 Q 64,34 64,36 L 64,58 Q 64,60 62,60 L 58,60 Q 56,60 56,58 L 56,40" fill="none" stroke="currentColor" stroke-width="1.2"/>
+                <!-- Left leg -->
+                <path d="M 29,70 L 29,118 Q 29,120 31,120 L 37,120 Q 39,120 39,118 L 39,70" fill="none" stroke="currentColor" stroke-width="1.2"/>
+                <!-- Right leg -->
+                <path d="M 41,70 L 41,118 Q 41,120 43,120 L 49,120 Q 51,120 51,118 L 51,70" fill="none" stroke="currentColor" stroke-width="1.2"/>
+                <!-- Feet -->
+                <rect x="27" y="118" width="14" height="4" rx="2" fill="none" stroke="currentColor" stroke-width="1.2"/>
+                <rect x="39" y="118" width="14" height="4" rx="2" fill="none" stroke="currentColor" stroke-width="1.2"/>
+                <!-- Internal horizontal scan lines (suggesting transparency) -->
+                <g opacity="0.15" stroke="currentColor" stroke-width="0.5">
+                  <line x1="30" y1="38" x2="50" y2="38"/>
+                  <line x1="30" y1="44" x2="50" y2="44"/>
+                  <line x1="30" y1="50" x2="50" y2="50"/>
+                  <line x1="30" y1="56" x2="50" y2="56"/>
+                  <line x1="30" y1="62" x2="50" y2="62"/>
+                </g>
+              </svg>
+            </div>
+            <h3 class="classification-card__title label">lucid</h3>
+            <p class="classification-card__desc body-text">
+              Beam passes through. Individual is partially phased. Maintain distance. Report to sector authority.
+            </p>
+            <div class="classification-card__status">
+              <svg viewBox="0 0 16 16" width="14" height="14"><polygon points="8,1 15,15 1,15" fill="none" stroke="currentColor" stroke-width="1.2"/><line x1="8" y1="6" x2="8" y2="10" stroke="currentColor" stroke-width="1.2"/><circle cx="8" cy="12.5" r="0.8" fill="currentColor"/></svg>
+              <span class="label" style="color: var(--accent);">observe and report</span>
+            </div>
+          </div>
+
+          <!-- LOST -->
+          <div class="classification-card">
+            <div class="classification-card__figure">
+              <svg viewBox="0 0 80 140" width="80" height="140">
+                <!-- Dissolving figure — top intact, progressively scattering downward -->
+                <!-- Head — mostly intact but fading -->
+                <circle cx="40" cy="16" r="10" fill="currentColor" opacity="0.7"/>
+                <circle cx="40" cy="16" r="10" fill="none" stroke="currentColor" stroke-width="0.4" opacity="0.3"/>
+                <!-- Neck fragment -->
+                <rect x="37" y="26" width="6" height="4" fill="currentColor" opacity="0.5"/>
+                <!-- Upper torso — starting to break -->
+                <path d="M 28,31 L 52,31 L 52,35 L 51,36 L 51,48 L 29,48 L 29,36 L 28,35 Z" fill="currentColor" opacity="0.45"/>
+                <!-- Mid torso — fragmenting -->
+                <rect x="30" y="50" width="9" height="10" fill="currentColor" opacity="0.3" transform="translate(-2,1) rotate(-3,34,55)"/>
+                <rect x="42" y="49" width="8" height="12" fill="currentColor" opacity="0.25" transform="translate(3,0) rotate(4,46,55)"/>
+                <!-- Left arm fragment -->
+                <path d="M 26,34 L 18,34 Q 16,34 16,36 L 16,50" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.35"/>
+                <!-- Right arm fragment -->
+                <path d="M 54,34 L 62,34 Q 64,34 64,36 L 64,46" fill="none" stroke="currentColor" stroke-width="1.2" opacity="0.25" stroke-dasharray="4,3"/>
+                <!-- Left leg fragments -->
+                <rect x="29" y="70" width="10" height="14" fill="currentColor" opacity="0.2" transform="translate(-4,2) rotate(-5,34,77)"/>
+                <rect x="27" y="88" width="8" height="10" fill="currentColor" opacity="0.12" transform="translate(-7,4) rotate(-8,31,93)"/>
+                <!-- Right leg fragments -->
+                <rect x="42" y="68" width="9" height="12" fill="currentColor" opacity="0.18" transform="translate(5,0) rotate(6,46,74)"/>
+                <rect x="45" y="84" width="7" height="8" fill="currentColor" opacity="0.08" transform="translate(9,3) rotate(10,48,88)"/>
+                <!-- Dissolving particles — increasing scatter outward and downward -->
+                <circle cx="18" cy="42" r="2" fill="currentColor" opacity="0.2"/>
+                <circle cx="64" cy="38" r="1.5" fill="currentColor" opacity="0.18"/>
+                <circle cx="12" cy="56" r="2.2" fill="currentColor" opacity="0.15"/>
+                <circle cx="68" cy="54" r="1.8" fill="currentColor" opacity="0.14"/>
+                <circle cx="8" cy="72" r="1.8" fill="currentColor" opacity="0.1"/>
+                <circle cx="72" cy="68" r="2" fill="currentColor" opacity="0.1"/>
+                <circle cx="14" cy="88" r="1.5" fill="currentColor" opacity="0.07"/>
+                <circle cx="66" cy="86" r="1.2" fill="currentColor" opacity="0.06"/>
+                <circle cx="22" cy="100" r="1.2" fill="currentColor" opacity="0.05"/>
+                <circle cx="58" cy="98" r="1" fill="currentColor" opacity="0.04"/>
+                <!-- Smallest particles — almost gone -->
+                <circle cx="6" cy="95" r="0.8" fill="currentColor" opacity="0.04"/>
+                <circle cx="74" cy="92" r="0.7" fill="currentColor" opacity="0.03"/>
+                <circle cx="18" cy="112" r="0.6" fill="currentColor" opacity="0.03"/>
+                <circle cx="62" cy="108" r="0.5" fill="currentColor" opacity="0.02"/>
+              </svg>
+            </div>
+            <h3 class="classification-card__title label">lost</h3>
+            <p class="classification-card__desc body-text">
+              Figure disperses under beam. Individual is no longer present. Do not approach. Seal the area.
+            </p>
+            <div class="classification-card__status">
+              <svg viewBox="0 0 16 16" width="14" height="14"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.2"/><line x1="3" y1="3" x2="13" y2="13" stroke="currentColor" stroke-width="1.2"/></svg>
+              <span class="label" style="color: var(--accent);">do not engage</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: SIREN PROCEDURE -->
+    <section id="section-siren" class="section section--siren" data-section="siren">
+      <div class="section__inner">
+        <div class="section-header">
+          <span class="section-header__num">3</span>
+          <h2 class="section-header__title heading">siren procedure</h2>
+        </div>
+
+        <p class="body-text section-intro">
+          When the Night Siren sounds, execute the following procedure without delay.
+          Compliance is mandatory. Deviation endangers all citizens within your sector.
+        </p>
+
+        <!-- 4-panel procedure -->
+        <div class="siren-panels">
+          <div class="siren-panel">
+            <div class="siren-panel__icon">
+              <svg viewBox="0 0 60 60" width="48" height="48">
+                <!-- Siren / sound waves -->
+                <circle cx="30" cy="30" r="8" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M 42,20 A 18,18 0 0,1 42,40" fill="none" stroke="currentColor" stroke-width="1" opacity="0.6"/>
+                <path d="M 46,15 A 24,24 0 0,1 46,45" fill="none" stroke="currentColor" stroke-width="0.8" opacity="0.4"/>
+                <path d="M 50,10 A 30,30 0 0,1 50,50" fill="none" stroke="currentColor" stroke-width="0.6" opacity="0.2"/>
+                <circle cx="30" cy="30" r="3" fill="currentColor"/>
+              </svg>
+            </div>
+            <div class="siren-panel__content">
+              <span class="siren-panel__num label">step 01</span>
+              <h3 class="siren-panel__title label">recognize the siren</h3>
+              <p class="body-text">The Night Siren emits a rising-falling tone cycle. When heard, cease all activity.</p>
+            </div>
+          </div>
+
+          <div class="siren-panel">
+            <div class="siren-panel__icon">
+              <svg viewBox="0 0 60 60" width="48" height="48">
+                <!-- Door / exit -->
+                <rect x="18" y="10" width="24" height="40" rx="1" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                <circle cx="37" cy="32" r="2" fill="currentColor" opacity="0.6"/>
+                <line x1="30" y1="55" x2="30" y2="50" stroke="currentColor" stroke-width="1"/>
+                <!-- Arrow pointing in -->
+                <polyline points="22,55 30,50 38,55" fill="none" stroke="currentColor" stroke-width="1"/>
+              </svg>
+            </div>
+            <div class="siren-panel__content">
+              <span class="siren-panel__num label">step 02</span>
+              <h3 class="siren-panel__title label">proceed indoors</h3>
+              <p class="body-text">Move to the nearest designated shelter or your assigned dwelling. Close all openings.</p>
+            </div>
+          </div>
+
+          <div class="siren-panel">
+            <div class="siren-panel__icon">
+              <svg viewBox="0 0 60 60" width="48" height="48">
+                <!-- Lock + flashlight -->
+                <rect x="10" y="25" width="16" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M 14,25 L 14,20 A 4,4 0 0,1 22,20 L 22,25" fill="none" stroke="currentColor" stroke-width="1.2"/>
+                <circle cx="18" cy="32" r="1.5" fill="currentColor"/>
+                <!-- Flashlight -->
+                <rect x="36" y="20" width="10" height="24" rx="1" fill="none" stroke="currentColor" stroke-width="1"/>
+                <rect x="34" y="16" width="14" height="6" rx="1" fill="none" stroke="currentColor" stroke-width="1"/>
+                <!-- Beam lines -->
+                <line x1="41" y1="10" x2="41" y2="4" stroke="currentColor" stroke-width="0.6" opacity="0.5"/>
+                <line x1="36" y1="12" x2="32" y2="6" stroke="currentColor" stroke-width="0.6" opacity="0.4"/>
+                <line x1="46" y1="12" x2="50" y2="6" stroke="currentColor" stroke-width="0.6" opacity="0.4"/>
+              </svg>
+            </div>
+            <div class="siren-panel__content">
+              <span class="siren-panel__num label">step 03</span>
+              <h3 class="siren-panel__title label">lock and illuminate</h3>
+              <p class="body-text">Secure all entry points. Activate your Watchlight. Monitor windows and doorways.</p>
+            </div>
+          </div>
+
+          <div class="siren-panel">
+            <div class="siren-panel__icon">
+              <svg viewBox="0 0 60 60" width="48" height="48">
+                <!-- Clock / wait -->
+                <circle cx="30" cy="30" r="18" fill="none" stroke="currentColor" stroke-width="1.2"/>
+                <line x1="30" y1="30" x2="30" y2="18" stroke="currentColor" stroke-width="1.2"/>
+                <line x1="30" y1="30" x2="40" y2="30" stroke="currentColor" stroke-width="1"/>
+                <circle cx="30" cy="30" r="2" fill="currentColor"/>
+                <!-- Small marks at 12, 3, 6, 9 -->
+                <line x1="30" y1="12" x2="30" y2="15" stroke="currentColor" stroke-width="0.8"/>
+                <line x1="48" y1="30" x2="45" y2="30" stroke="currentColor" stroke-width="0.8"/>
+                <line x1="30" y1="48" x2="30" y2="45" stroke="currentColor" stroke-width="0.8"/>
+                <line x1="12" y1="30" x2="15" y2="30" stroke="currentColor" stroke-width="0.8"/>
+              </svg>
+            </div>
+            <div class="siren-panel__content">
+              <span class="siren-panel__num label">step 04</span>
+              <h3 class="siren-panel__title label">await morning signal</h3>
+              <p class="body-text">Remain in position until the Morning Signal sounds. Do not exit before confirmation.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: MORNING RETURN -->
+    <section id="section-morning" class="section section--morning" data-section="morning">
+      <div class="section__inner">
+        <div class="section-header">
+          <span class="section-header__num">4</span>
+          <h2 class="section-header__title heading">morning return</h2>
+        </div>
+
+        <p class="body-text section-intro">
+          The Morning Signal confirms the end of Surge conditions.
+          Citizens must follow the Verification Protocol before resuming normal activity.
+        </p>
+
+        <!-- Three-step verification flow -->
+        <div class="morning-flow">
+          <div class="morning-step">
+            <div class="morning-step__marker">
+              <svg viewBox="0 0 40 40" width="36" height="36">
+                <circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="1"/>
+                <!-- Eye icon -->
+                <ellipse cx="20" cy="20" rx="10" ry="6" fill="none" stroke="currentColor" stroke-width="1"/>
+                <circle cx="20" cy="20" r="3" fill="currentColor"/>
+              </svg>
+            </div>
+            <div class="morning-step__content">
+              <h3 class="label">observe</h3>
+              <p class="body-text">Check windows for visible light. Confirm natural daylight has returned to your sector.</p>
+            </div>
+          </div>
+
+          <div class="morning-step__connector">
+            <svg viewBox="0 0 2 30" width="2" height="30"><line x1="1" y1="0" x2="1" y2="30" stroke="currentColor" stroke-width="0.5" stroke-dasharray="3,3"/></svg>
+          </div>
+
+          <div class="morning-step">
+            <div class="morning-step__marker">
+              <svg viewBox="0 0 40 40" width="36" height="36">
+                <circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="1"/>
+                <!-- Checkmark icon -->
+                <polyline points="12,20 18,26 28,14" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <div class="morning-step__content">
+              <h3 class="label">verify</h3>
+              <p class="body-text">Listen for the Morning Signal — three ascending tones. This confirms H.O.P.E. authorization to proceed.</p>
+            </div>
+          </div>
+
+          <div class="morning-step__connector">
+            <svg viewBox="0 0 2 30" width="2" height="30"><line x1="1" y1="0" x2="1" y2="30" stroke="currentColor" stroke-width="0.5" stroke-dasharray="3,3"/></svg>
+          </div>
+
+          <div class="morning-step">
+            <div class="morning-step__marker">
+              <svg viewBox="0 0 40 40" width="36" height="36">
+                <circle cx="20" cy="20" r="18" fill="none" stroke="currentColor" stroke-width="1"/>
+                <!-- Door opening icon -->
+                <rect x="14" y="10" width="12" height="20" rx="1" fill="none" stroke="currentColor" stroke-width="1"/>
+                <line x1="26" y1="10" x2="30" y2="13" stroke="currentColor" stroke-width="0.8"/>
+                <line x1="26" y1="30" x2="30" y2="27" stroke="currentColor" stroke-width="0.8"/>
+                <line x1="30" y1="13" x2="30" y2="27" stroke="currentColor" stroke-width="0.8"/>
+              </svg>
+            </div>
+            <div class="morning-step__content">
+              <h3 class="label">permit</h3>
+              <p class="body-text">Unlock entry points. Exit is now permitted. Report any anomalies to your sector coordinator.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="morning-quote">
+          <p class="body-text"><em>"Cooperation secures a bright morning."</em></p>
+          <span class="label" style="color: var(--dim);">— H.O.P.E. Directorate, Year 001 A.Dk.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: WATCHLIGHT -->
+    <section id="section-watchlight" class="section section--watchlight" data-section="watchlight">
+      <div class="section__inner">
+        <div class="section-header">
+          <span class="section-header__num">5</span>
+          <h2 class="section-header__title heading">watchlight</h2>
+        </div>
+
+        <!-- Watchlight device diagram -->
+        <div class="watchlight-diagram">
+          <svg class="watchlight-svg" viewBox="0 0 340 460" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <!-- Cross-hatch pattern for material sections -->
+              <pattern id="hatch" patternUnits="userSpaceOnUse" width="4" height="4" patternTransform="rotate(45)">
+                <line x1="0" y1="0" x2="0" y2="4" stroke="currentColor" stroke-width="0.3" opacity="0.08"/>
+              </pattern>
+              <pattern id="hatch-dense" patternUnits="userSpaceOnUse" width="3" height="3" patternTransform="rotate(45)">
+                <line x1="0" y1="0" x2="0" y2="3" stroke="currentColor" stroke-width="0.3" opacity="0.12"/>
+              </pattern>
+            </defs>
+
+            <!-- Center axis (chain line: long-short-long) -->
+            <line x1="170" y1="12" x2="170" y2="400" stroke="currentColor" stroke-width="0.3" stroke-dasharray="12,3,3,3" opacity="0.15"/>
+
+            <!-- ═══ FLASHLIGHT ASSEMBLY ═══ -->
+            <g class="wl-device" transform="translate(170, 200)">
+
+              <!-- LENS HEAD — wider, tapered housing -->
+              <path d="M -46,-175 L 46,-175 L 46,-108 L 40,-102 L -40,-102 L -46,-108 Z" fill="url(#hatch)" stroke="currentColor" stroke-width="1"/>
+              <!-- Top face detail -->
+              <line x1="-40" y1="-170" x2="40" y2="-170" stroke="currentColor" stroke-width="0.3" opacity="0.3"/>
+              <line x1="-40" y1="-166" x2="40" y2="-166" stroke="currentColor" stroke-width="0.3" opacity="0.3"/>
+              <!-- Lens reflector (concentric) -->
+              <ellipse cx="0" cy="-140" rx="28" ry="12" fill="none" stroke="currentColor" stroke-width="0.4" opacity="0.3"/>
+              <ellipse cx="0" cy="-140" rx="18" ry="8" fill="none" stroke="currentColor" stroke-width="0.5" opacity="0.45"/>
+              <!-- Certified bulb -->
+              <circle cx="0" cy="-140" r="6" fill="none" stroke="currentColor" stroke-width="0.8"/>
+              <circle cx="0" cy="-140" r="2" fill="currentColor" opacity="0.25"/>
+              <!-- Glass lens line -->
+              <line x1="-38" y1="-110" x2="38" y2="-110" stroke="currentColor" stroke-width="0.4" opacity="0.35"/>
+
+              <!-- NECK COUPLING — knurled ring -->
+              <rect x="-38" y="-102" width="76" height="14" rx="1" fill="url(#hatch-dense)" stroke="currentColor" stroke-width="0.7"/>
+              <!-- Knurl lines -->
+              <g opacity="0.15" stroke="currentColor" stroke-width="0.4">
+                <line x1="-33" y1="-99" x2="33" y2="-99"/>
+                <line x1="-33" y1="-96" x2="33" y2="-96"/>
+                <line x1="-33" y1="-93" x2="33" y2="-93"/>
+              </g>
+
+              <!-- BODY BARREL -->
+              <rect x="-32" y="-88" width="64" height="145" rx="1" fill="url(#hatch)" stroke="currentColor" stroke-width="1"/>
+              <!-- Grip texture (diagonal cross-hatch zone) -->
+              <g opacity="0.06" stroke="currentColor" stroke-width="0.4">
+                <line x1="-28" y1="-75" x2="-18" y2="-55"/><line x1="-20" y1="-75" x2="-10" y2="-55"/>
+                <line x1="-12" y1="-75" x2="-2" y2="-55"/><line x1="-4" y1="-75" x2="6" y2="-55"/>
+                <line x1="4" y1="-75" x2="14" y2="-55"/><line x1="12" y1="-75" x2="22" y2="-55"/>
+                <line x1="20" y1="-75" x2="28" y2="-59"/>
+                <line x1="-18" y1="-75" x2="-28" y2="-55"/><line x1="-10" y1="-75" x2="-20" y2="-55"/>
+                <line x1="-2" y1="-75" x2="-12" y2="-55"/><line x1="6" y1="-75" x2="-4" y2="-55"/>
+                <line x1="14" y1="-75" x2="4" y2="-55"/><line x1="22" y1="-75" x2="12" y2="-55"/>
+              </g>
+              <!-- Section lines on barrel -->
+              <line x1="-28" y1="-45" x2="28" y2="-45" stroke="currentColor" stroke-width="0.25" opacity="0.15"/>
+              <line x1="-28" y1="10" x2="28" y2="10" stroke="currentColor" stroke-width="0.25" opacity="0.15"/>
+
+              <!-- SWITCH (proud of barrel surface) -->
+              <rect x="-36" y="-32" width="6" height="20" rx="2" fill="currentColor" opacity="0.4"/>
+              <rect x="-36" y="-32" width="6" height="20" rx="2" fill="none" stroke="currentColor" stroke-width="0.5"/>
+
+              <!-- POWER INDICATOR LED -->
+              <circle cx="-24" cy="18" r="3" fill="none" stroke="currentColor" stroke-width="0.6"/>
+              <circle cx="-24" cy="18" r="1" fill="currentColor" opacity="0.2"/>
+
+              <!-- BATTERY COMPARTMENT (dashed = removable panel) -->
+              <rect x="-26" y="58" width="52" height="52" rx="1" fill="none" stroke="currentColor" stroke-width="0.5" stroke-dasharray="4,2"/>
+              <!-- Battery cells -->
+              <g>
+                <rect x="-19" y="65" width="14" height="36" rx="1.5" fill="none" stroke="currentColor" stroke-width="0.6"/>
+                <rect x="5" y="65" width="14" height="36" rx="1.5" fill="none" stroke="currentColor" stroke-width="0.6"/>
+                <!-- Terminal caps -->
+                <rect x="-15" y="63" width="6" height="3" rx="0.5" fill="currentColor" opacity="0.3"/>
+                <rect x="9" y="63" width="6" height="3" rx="0.5" fill="currentColor" opacity="0.3"/>
+                <!-- Cell labels -->
+                <text x="-12" y="87" font-size="3.5" fill="currentColor" opacity="0.3" text-anchor="middle" font-family="'Space Mono', monospace">PC8</text>
+                <text x="12" y="87" font-size="3.5" fill="currentColor" opacity="0.3" text-anchor="middle" font-family="'Space Mono', monospace">PC8</text>
+              </g>
+
+              <!-- END CAP — wider like real flashlights -->
+              <rect x="-36" y="112" width="72" height="12" rx="1" fill="url(#hatch-dense)" stroke="currentColor" stroke-width="0.7"/>
+              <!-- Lanyard hole -->
+              <circle cx="0" cy="118" r="2" fill="none" stroke="currentColor" stroke-width="0.4" opacity="0.3"/>
+            </g>
+
+            <!-- ═══ CALLOUT LINES ═══ -->
+            <!-- Right side (dogleg leaders) -->
+            <g fill="currentColor" font-family="'Space Mono', monospace" font-size="6.5" opacity="0.55">
+              <!-- Protective Lens -->
+              <circle cx="216" cy="42" r="1" fill="currentColor"/>
+              <polyline points="217,42 250,42 260,42" fill="none" stroke="currentColor" stroke-width="0.4"/>
+              <line x1="260" y1="42" x2="260" y2="42" stroke="currentColor" stroke-width="0.4"/>
+              <text x="265" y="44">PROTECTIVE LENS</text>
+
+              <!-- Certified Bulb -->
+              <circle cx="186" cy="60" r="1" fill="currentColor"/>
+              <polyline points="187,60 240,72 260,72" fill="none" stroke="currentColor" stroke-width="0.4"/>
+              <text x="265" y="74">CERTIFIED BULB</text>
+
+              <!-- Neck Coupling -->
+              <circle cx="208" cy="102" r="1" fill="currentColor"/>
+              <polyline points="209,102 240,102 260,102" fill="none" stroke="currentColor" stroke-width="0.4"/>
+              <text x="265" y="104">NECK COUPLING</text>
+
+              <!-- Power Cells -->
+              <circle cx="202" cy="282" r="1" fill="currentColor"/>
+              <polyline points="203,282 240,282 260,282" fill="none" stroke="currentColor" stroke-width="0.4"/>
+              <text x="265" y="278">HOPE-ISSUE</text>
+              <text x="265" y="288">POWER CELLS</text>
+            </g>
+
+            <!-- Left side -->
+            <g fill="currentColor" font-family="'Space Mono', monospace" font-size="6.5" opacity="0.55">
+              <!-- Body Casing -->
+              <circle cx="138" cy="145" r="1" fill="currentColor"/>
+              <polyline points="137,145 100,145 80,145" fill="none" stroke="currentColor" stroke-width="0.4"/>
+              <text x="75" y="147" text-anchor="end">BODY CASING</text>
+
+              <!-- On/Off Switch -->
+              <circle cx="134" cy="178" r="1" fill="currentColor"/>
+              <polyline points="133,178 100,178 80,178" fill="none" stroke="currentColor" stroke-width="0.4"/>
+              <text x="75" y="180" text-anchor="end">ON/OFF SWITCH</text>
+
+              <!-- Power Indicator -->
+              <circle cx="143" cy="218" r="1" fill="currentColor"/>
+              <polyline points="142,218 100,218 80,218" fill="none" stroke="currentColor" stroke-width="0.4"/>
+              <text x="75" y="220" text-anchor="end">POWER INDICATOR</text>
+
+              <!-- End Cap -->
+              <circle cx="134" cy="318" r="1" fill="currentColor"/>
+              <polyline points="133,318 100,318 80,318" fill="none" stroke="currentColor" stroke-width="0.4"/>
+              <text x="75" y="320" text-anchor="end">END CAP</text>
+            </g>
+
+            <!-- ═══ DIMENSION LINES ═══ -->
+            <!-- Overall height -->
+            <g opacity="0.18" stroke="currentColor" font-family="'Space Mono', monospace">
+              <line x1="326" y1="25" x2="326" y2="324" stroke-width="0.35"/>
+              <!-- Arrows -->
+              <polygon points="326,25 323,31 329,31" fill="currentColor" stroke="none"/>
+              <polygon points="326,324 323,318 329,318" fill="currentColor" stroke="none"/>
+              <!-- Extension lines -->
+              <line x1="218" y1="25" x2="330" y2="25" stroke-width="0.25"/>
+              <line x1="218" y1="324" x2="330" y2="324" stroke-width="0.25"/>
+              <text x="328" y="178" font-size="5" fill="currentColor" transform="rotate(90, 328, 178)" text-anchor="middle">302mm</text>
+            </g>
+
+            <!-- Head width -->
+            <g opacity="0.18" stroke="currentColor" font-family="'Space Mono', monospace">
+              <line x1="124" y1="16" x2="216" y2="16" stroke-width="0.35"/>
+              <polygon points="124,16 130,13 130,19" fill="currentColor" stroke="none"/>
+              <polygon points="216,16 210,13 210,19" fill="currentColor" stroke="none"/>
+              <line x1="124" y1="22" x2="124" y2="12" stroke-width="0.25"/>
+              <line x1="216" y1="22" x2="216" y2="12" stroke-width="0.25"/>
+              <text x="170" y="12" font-size="5" fill="currentColor" text-anchor="middle">92mm</text>
+            </g>
+
+            <!-- Body width -->
+            <g opacity="0.12" stroke="currentColor" font-family="'Space Mono', monospace">
+              <line x1="138" y1="340" x2="202" y2="340" stroke-width="0.35"/>
+              <polygon points="138,340 142,338 142,342" fill="currentColor" stroke="none"/>
+              <polygon points="202,340 198,338 198,342" fill="currentColor" stroke="none"/>
+              <text x="170" y="350" font-size="4.5" fill="currentColor" text-anchor="middle">64mm</text>
+            </g>
+
+            <!-- ═══ TITLE BLOCK ═══ -->
+            <g transform="translate(0, 420)">
+              <line x1="10" y1="0" x2="330" y2="0" stroke="currentColor" stroke-width="0.3" opacity="0.25"/>
+              <text x="170" y="16" font-size="6" fill="currentColor" text-anchor="middle" font-family="'Space Mono', monospace" letter-spacing="3" opacity="0.35">WL-8 WATCHLIGHT UNIT — ASSEMBLY VIEW</text>
+              <text x="170" y="28" font-size="4.5" fill="currentColor" text-anchor="middle" font-family="'Space Mono', monospace" letter-spacing="2" opacity="0.2">H.O.P.E. CIVIL DEFENSE AUTHORITY — DWG NO. WL-8-001</text>
+            </g>
+          </svg>
+        </div>
+
+        <!-- Spec plate (separate from diagram) -->
+        <div class="watchlight-specs">
+          <table class="spec-table">
+            <tr><td class="spec-key">Model</td><td class="spec-val">WL-8 Watchlight Unit</td></tr>
+            <tr><td class="spec-key">Issued By</td><td class="spec-val">H.O.P.E. Civil Defense Authority</td></tr>
+            <tr><td class="spec-key">Power</td><td class="spec-val">HOPE-PC8 Phase Cells (x2)</td></tr>
+            <tr><td class="spec-key">Beam</td><td class="spec-val">Phase Identification, 25m radius</td></tr>
+            <tr><td class="spec-key">Runtime</td><td class="spec-val">12hr continuous use</td></tr>
+            <tr><td class="spec-key">Status</td><td class="spec-val">Citizen-Issue Equipment</td></tr>
+          </table>
+        </div>
+
+        <!-- Watchlight interactive prompt -->
+        <div class="watchlight-prompt">
+          <div class="watchlight-prompt__icon">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="12" cy="12" r="10"/>
+              <circle cx="12" cy="12" r="3"/>
+              <line x1="12" y1="2" x2="12" y2="5"/>
+              <line x1="12" y1="19" x2="12" y2="22"/>
+              <line x1="2" y1="12" x2="5" y2="12"/>
+              <line x1="19" y1="12" x2="22" y2="12"/>
+            </svg>
+          </div>
+          <p class="label">press and hold to activate watchlight</p>
+        </div>
+
+        <!-- Watchlight interactive scene (canvas + figures) -->
+        <div id="watchlight-scene" class="watchlight-scene">
+          <canvas id="watchlight-canvas" class="watchlight-canvas"></canvas>
+          <div class="watchlight-figures">
+            <!-- Figures to be revealed by the beam -->
+            <div class="wl-figure" data-class="unphased" style="--fx: 20%; --fy: 50%;">
+              <svg viewBox="0 0 60 110" width="54" height="99">
+                <!-- Clean human silhouette — solid -->
+                <circle cx="30" cy="12" r="8" fill="currentColor"/>
+                <rect x="28" y="20" width="4" height="4" fill="currentColor"/>
+                <path d="M 20,24 L 40,24 L 40,27 L 39,28 L 39,52 Q 39,54 37,54 L 23,54 Q 21,54 21,52 L 21,28 L 20,27 Z" fill="currentColor"/>
+                <path d="M 20,26 L 13,26 Q 12,26 12,28 L 12,44 Q 12,46 14,46 L 17,46 Q 18,46 18,44 L 18,32" fill="currentColor"/>
+                <path d="M 40,26 L 47,26 Q 48,26 48,28 L 48,44 Q 48,46 46,46 L 43,46 Q 42,46 42,44 L 42,32" fill="currentColor"/>
+                <path d="M 21,54 L 21,92 Q 21,94 23,94 L 28,94 Q 29,94 29,92 L 29,54" fill="currentColor"/>
+                <path d="M 31,54 L 31,92 Q 31,94 33,94 L 37,94 Q 39,94 39,92 L 39,54" fill="currentColor"/>
+                <rect x="20" y="92" width="10" height="3" rx="1.5" fill="currentColor"/>
+                <rect x="30" y="92" width="10" height="3" rx="1.5" fill="currentColor"/>
+              </svg>
+              <span class="wl-figure__label label">unphased</span>
+            </div>
+            <div class="wl-figure" data-class="lucid" style="--fx: 50%; --fy: 45%;">
+              <svg viewBox="0 0 60 110" width="54" height="99" class="wl-figure--lucid">
+                <!-- Outlined silhouette — beam passes through -->
+                <circle cx="30" cy="12" r="8" fill="none" stroke="currentColor" stroke-width="1"/>
+                <line x1="28" y1="20" x2="28" y2="24" stroke="currentColor" stroke-width="1"/>
+                <line x1="32" y1="20" x2="32" y2="24" stroke="currentColor" stroke-width="1"/>
+                <path d="M 20,24 L 40,24 L 40,27 L 39,28 L 39,52 Q 39,54 37,54 L 23,54 Q 21,54 21,52 L 21,28 L 20,27 Z" fill="none" stroke="currentColor" stroke-width="1"/>
+                <path d="M 20,26 L 13,26 Q 12,26 12,28 L 12,44 Q 12,46 14,46 L 17,46 Q 18,46 18,44 L 18,32" fill="none" stroke="currentColor" stroke-width="1"/>
+                <path d="M 40,26 L 47,26 Q 48,26 48,28 L 48,44 Q 48,46 46,46 L 43,46 Q 42,46 42,44 L 42,32" fill="none" stroke="currentColor" stroke-width="1"/>
+                <path d="M 21,54 L 21,92 Q 21,94 23,94 L 28,94 Q 29,94 29,92 L 29,54" fill="none" stroke="currentColor" stroke-width="1"/>
+                <path d="M 31,54 L 31,92 Q 31,94 33,94 L 37,94 Q 39,94 39,92 L 39,54" fill="none" stroke="currentColor" stroke-width="1"/>
+                <rect x="20" y="92" width="10" height="3" rx="1.5" fill="none" stroke="currentColor" stroke-width="1"/>
+                <rect x="30" y="92" width="10" height="3" rx="1.5" fill="none" stroke="currentColor" stroke-width="1"/>
+                <!-- Scan lines -->
+                <g opacity="0.12" stroke="currentColor" stroke-width="0.4">
+                  <line x1="22" y1="30" x2="38" y2="30"/>
+                  <line x1="22" y1="36" x2="38" y2="36"/>
+                  <line x1="22" y1="42" x2="38" y2="42"/>
+                  <line x1="22" y1="48" x2="38" y2="48"/>
+                </g>
+              </svg>
+              <span class="wl-figure__label label">lucid</span>
+            </div>
+            <div class="wl-figure" data-class="lost" style="--fx: 80%; --fy: 55%;">
+              <svg viewBox="0 0 60 110" width="54" height="99" class="wl-figure--lost">
+                <!-- Dissolving figure -->
+                <circle cx="30" cy="12" r="8" fill="currentColor" opacity="0.6"/>
+                <rect x="28" y="20" width="4" height="3" fill="currentColor" opacity="0.4"/>
+                <path d="M 22,24 L 38,24 L 38,27 L 37,28 L 37,38 L 23,38 L 23,28 L 22,27 Z" fill="currentColor" opacity="0.35"/>
+                <rect x="23" y="40" width="7" height="8" fill="currentColor" opacity="0.22" transform="translate(-2,1) rotate(-3,26,44)"/>
+                <rect x="32" y="39" width="6" height="9" fill="currentColor" opacity="0.18" transform="translate(3,0) rotate(4,35,43)"/>
+                <!-- Arm stubs -->
+                <path d="M 20,26 L 14,26 Q 12,26 12,28 L 12,38" fill="none" stroke="currentColor" stroke-width="1" opacity="0.25"/>
+                <path d="M 40,26 L 46,26 Q 48,26 48,28 L 48,34" fill="none" stroke="currentColor" stroke-width="1" opacity="0.18" stroke-dasharray="3,2"/>
+                <!-- Leg fragments -->
+                <rect x="22" y="54" width="7" height="10" fill="currentColor" opacity="0.14" transform="translate(-4,2) rotate(-5,25,59)"/>
+                <rect x="33" y="52" width="6" height="9" fill="currentColor" opacity="0.1" transform="translate(5,0) rotate(6,36,56)"/>
+                <rect x="20" y="68" width="5" height="6" fill="currentColor" opacity="0.06" transform="translate(-6,3) rotate(-8,22,71)"/>
+                <!-- Scatter particles -->
+                <circle cx="10" cy="32" r="1.6" fill="currentColor" opacity="0.16"/>
+                <circle cx="50" cy="30" r="1.2" fill="currentColor" opacity="0.14"/>
+                <circle cx="6" cy="48" r="1.5" fill="currentColor" opacity="0.1"/>
+                <circle cx="54" cy="44" r="1.3" fill="currentColor" opacity="0.09"/>
+                <circle cx="8" cy="62" r="1.2" fill="currentColor" opacity="0.06"/>
+                <circle cx="52" cy="58" r="1" fill="currentColor" opacity="0.05"/>
+                <circle cx="14" cy="76" r="0.8" fill="currentColor" opacity="0.04"/>
+                <circle cx="48" cy="72" r="0.7" fill="currentColor" opacity="0.03"/>
+              </svg>
+              <span class="wl-figure__label label">lost</span>
+            </div>
+          </div>
+          <!-- Dark overlay that beam cuts through -->
+          <div class="watchlight-darkness"></div>
+        </div>
+
+        <!-- Instruction steps -->
+        <div class="wl-steps">
+          <div class="wl-step">
+            <span class="wl-step__num">01</span>
+            <span class="wl-step__icon">&#9654;</span>
+            <div>
+              <h3 class="wl-step__title label">activate</h3>
+              <p class="wl-step__text body-text">Turn on the Watchlight while maintaining distance from the individual.</p>
+            </div>
+          </div>
+          <div class="wl-step">
+            <span class="wl-step__num">02</span>
+            <span class="wl-step__icon">&#9654;</span>
+            <div>
+              <h3 class="wl-step__title label">illuminate</h3>
+              <p class="wl-step__text body-text">Direct the beam toward the subject and observe the beam field.</p>
+            </div>
+          </div>
+          <div class="wl-step">
+            <span class="wl-step__num">03</span>
+            <span class="wl-step__icon">&#9654;</span>
+            <div>
+              <h3 class="wl-step__title label">confirm</h3>
+              <p class="wl-step__text body-text">If the subject remains in Lucid state, the beam will pass through portions of the figure.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- SECTION 6: LEGACY -->
+    <section id="section-legacy" class="section section--legacy" data-section="legacy">
+      <div class="section__inner">
+        <div class="section-header">
+          <span class="section-header__num">6</span>
+          <h2 class="section-header__title heading">legacy</h2>
+        </div>
+
+        <p class="body-text section-intro">
+          The Atmospheric Obscuration phenomenon was first recorded in Year 001 A.Dk.
+          In the centuries since, H.O.P.E. has maintained order through structured response
+          and citizen compliance.
+        </p>
+
+        <!-- Timeline visualization -->
+        <div class="legacy-timeline">
+          <div class="legacy-event">
+            <span class="legacy-event__year label">001 A.Dk.</span>
+            <div class="legacy-event__line"></div>
+            <div class="legacy-event__content">
+              <h3 class="label">first surge</h3>
+              <p class="body-text">Total darkness descends without warning. 23% of population classified as Lost within 48 hours.</p>
+            </div>
+          </div>
+          <div class="legacy-event">
+            <span class="legacy-event__year label">003 A.Dk.</span>
+            <div class="legacy-event__line"></div>
+            <div class="legacy-event__content">
+              <h3 class="label">H.O.P.E. established</h3>
+              <p class="body-text">Human Order and Phase Enforcement authority created by emergency decree.</p>
+            </div>
+          </div>
+          <div class="legacy-event">
+            <span class="legacy-event__year label">047 A.Dk.</span>
+            <div class="legacy-event__line"></div>
+            <div class="legacy-event__content">
+              <h3 class="label">watchlight program</h3>
+              <p class="body-text">Phase Identification Beam technology deployed. Citizens issued WL-1 units.</p>
+            </div>
+          </div>
+          <div class="legacy-event">
+            <span class="legacy-event__year label">312 A.Dk.</span>
+            <div class="legacy-event__line"></div>
+            <div class="legacy-event__content">
+              <h3 class="label">containment threshold</h3>
+              <p class="body-text">Lost population exceeds 40% in southern sectors. Permanent Surge zones established.</p>
+            </div>
+          </div>
+          <div class="legacy-event">
+            <span class="legacy-event__year label">845 A.Dk.</span>
+            <div class="legacy-event__line"></div>
+            <div class="legacy-event__content">
+              <h3 class="label">72-hour surge</h3>
+              <p class="body-text">Longest recorded Surge event. Morning Signal delayed three days. Casualty figures remain classified.</p>
+            </div>
+          </div>
+          <div class="legacy-event legacy-event--current">
+            <span class="legacy-event__year label">888 A.Dk.</span>
+            <div class="legacy-event__line"></div>
+            <div class="legacy-event__content">
+              <h3 class="label">current year</h3>
+              <p class="body-text">You are here. Compliance rate: 94.2%. Surge frequency: increasing.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Population bar chart -->
+        <div class="legacy-chart">
+          <h3 class="label" style="margin-bottom: var(--space-sm); color: var(--mid);">lost population by century</h3>
+          <div class="chart-bars">
+            <div class="chart-bar"><span class="chart-bar__label label">100</span><div class="chart-bar__fill" style="--pct: 12%"></div><span class="chart-bar__val label">12%</span></div>
+            <div class="chart-bar"><span class="chart-bar__label label">200</span><div class="chart-bar__fill" style="--pct: 18%"></div><span class="chart-bar__val label">18%</span></div>
+            <div class="chart-bar"><span class="chart-bar__label label">300</span><div class="chart-bar__fill" style="--pct: 28%"></div><span class="chart-bar__val label">28%</span></div>
+            <div class="chart-bar"><span class="chart-bar__label label">400</span><div class="chart-bar__fill" style="--pct: 35%"></div><span class="chart-bar__val label">35%</span></div>
+            <div class="chart-bar"><span class="chart-bar__label label">500</span><div class="chart-bar__fill" style="--pct: 31%"></div><span class="chart-bar__val label">31%</span></div>
+            <div class="chart-bar"><span class="chart-bar__label label">600</span><div class="chart-bar__fill" style="--pct: 38%"></div><span class="chart-bar__val label">38%</span></div>
+            <div class="chart-bar"><span class="chart-bar__label label">700</span><div class="chart-bar__fill" style="--pct: 42%"></div><span class="chart-bar__val label">42%</span></div>
+            <div class="chart-bar"><span class="chart-bar__label label">800</span><div class="chart-bar__fill" style="--pct: 47%"></div><span class="chart-bar__val label">47%</span></div>
+          </div>
+          <!-- Threshold line -->
+          <div class="chart-threshold">
+            <span class="label">containment threshold — 50%</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 7: CITIZEN REGISTRATION -->
+    <section id="section-register" class="section section--register" data-section="register">
+      <div class="section__inner">
+        <div class="section-header">
+          <span class="section-header__num">&mdash;</span>
+          <h2 class="section-header__title heading">citizen registration</h2>
+        </div>
+
+        <p class="body-text section-intro">
+          All citizens must be registered with H.O.P.E. to receive sector assignments,
+          Surge alerts, and Watchlight equipment authorization.
+        </p>
+
+        <form id="citizen-form" class="citizen-form" autocomplete="off">
+          <div class="form-field">
+            <label class="form-field__label label" for="citizen-name">citizen name</label>
+            <input class="form-field__input" type="text" id="citizen-name" placeholder="Enter full name" maxlength="40" required>
+          </div>
+
+          <div class="form-field">
+            <label class="form-field__label label" for="citizen-sector">sector assignment</label>
+            <select class="form-field__input form-field__select" id="citizen-sector" required>
+              <option value="" disabled selected>Select sector</option>
+              <option value="north-01">North-01</option>
+              <option value="north-02">North-02</option>
+              <option value="east-01">East-01</option>
+              <option value="east-02">East-02</option>
+              <option value="south-01">South-01</option>
+              <option value="south-02">South-02</option>
+              <option value="west-01">West-01</option>
+              <option value="west-02">West-02</option>
+              <option value="central">Central</option>
+            </select>
+          </div>
+
+          <div class="form-field form-field--checkbox">
+            <input class="form-field__checkbox" type="checkbox" id="citizen-acknowledge" required>
+            <label class="form-field__label label" for="citizen-acknowledge">
+              I acknowledge the procedures outlined in this manual and accept responsibility for compliance.
+            </label>
+          </div>
+
+          <button class="form-submit" type="submit">
+            <span class="form-submit__text label">register</span>
+          </button>
+        </form>
+
+        <!-- Citizen card (shown after registration) -->
+        <div id="citizen-card" class="citizen-card" hidden>
+          <div class="citizen-card__inner">
+            <div class="citizen-card__header">
+              <span class="label">H.O.P.E. — CITIZEN IDENTIFICATION</span>
+            </div>
+            <div class="citizen-card__body">
+              <div class="citizen-card__field">
+                <span class="label" style="color: var(--mid);">name</span>
+                <span class="citizen-card__value" id="card-name"></span>
+              </div>
+              <div class="citizen-card__field">
+                <span class="label" style="color: var(--mid);">sector</span>
+                <span class="citizen-card__value" id="card-sector"></span>
+              </div>
+              <div class="citizen-card__field">
+                <span class="label" style="color: var(--mid);">classification</span>
+                <span class="citizen-card__value" id="card-class">UNPHASED</span>
+              </div>
+              <div class="citizen-card__field">
+                <span class="label" style="color: var(--mid);">issued</span>
+                <span class="citizen-card__value" id="card-date">Year 888 A.Dk.</span>
+              </div>
+            </div>
+            <div class="citizen-card__footer">
+              <span class="label" style="color: var(--dim);">Cooperation secures a bright morning.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
