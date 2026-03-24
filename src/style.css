@@ -276,7 +276,9 @@ body {
   mix-blend-mode: normal;
 }
 
-/* The SVG arc creates the curved sphere illusion — only visible in dark states */
+/* The SVG arc masks the lower globe area — always visible.
+   Day: filled with bg color (hides dots, clean text area).
+   Night: filled with black (sphere illusion). */
 .globe-arc {
   position: absolute;
   bottom: 0;
@@ -284,13 +286,6 @@ body {
   width: 100%;
   height: 90%;
   z-index: 2;
-  opacity: 0;
-  transition: opacity 3s ease;
-}
-
-[data-state='night'] .globe-arc,
-[data-state='approaching'] .globe-arc {
-  opacity: 1;
 }
 
 /* Gradient stops transition between states */
