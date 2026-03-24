@@ -537,23 +537,23 @@ body {
 
 @keyframes notificationGlitch {
   0% {
-    transform: translate(-30%, -50%) skewX(0deg);
+    transform: translate(-50%, -50%) skewX(0deg);
   }
 
   25% {
-    transform: translate(-28%, -52%) skewX(-2deg);
+    transform: translate(-48%, -52%) skewX(-2deg);
   }
 
   50% {
-    transform: translate(-32%, -48%) skewX(2deg);
+    transform: translate(-52%, -48%) skewX(2deg);
   }
 
   75% {
-    transform: translate(-29%, -51%) skewX(-1deg);
+    transform: translate(-49%, -51%) skewX(-1deg);
   }
 
   100% {
-    transform: translate(-30%, -50%) skewX(0deg);
+    transform: translate(-50%, -50%) skewX(0deg);
   }
 }
 
