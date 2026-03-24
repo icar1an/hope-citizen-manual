@@ -110,10 +110,7 @@ html, body {
   pointer-events: none;
 }
 
-.loader.intro-scroll .loader-globe {
-  bottom: 0;
-  transform: translateX(-50%) translateY(-20vh);
-}
+/* loader-globe intro-scroll override is in the .loader-globe block */
 
 /* Phase 3: fade-out — loader disappears */
 .loader.fade-out {
@@ -162,20 +159,31 @@ html, body {
 
 .loader-globe {
   position: absolute;
-  bottom: -5%;
+  bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 120%;
-  max-width: 2000px;
+  width: 140%;
+  max-width: 2800px;
+  height: 45vh;
+  overflow: hidden;
   z-index: 1;
   opacity: 1;
-  transition: bottom 3s ease, transform 3s ease;
+  transition: bottom 3s ease, transform 3s ease, height 3s ease;
+}
+
+.loader.intro-scroll .loader-globe {
+  height: 55vh;
+  transform: translateX(-50%);
 }
 
 .loader-globe img {
   width: 100%;
   height: auto;
   display: block;
+  position: absolute;
+  bottom: -10%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 @keyframes loaderFadeIn {
@@ -207,17 +215,18 @@ html, body {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 60vh;
+  height: 50vh;
   pointer-events: none;
+  overflow: hidden;
 }
 
 .globe-map {
   position: absolute;
-  bottom: 0;
+  bottom: -10%;
   left: 50%;
   transform: translateX(-50%);
-  width: 110%;
-  max-width: 2200px;
+  width: 140%;
+  max-width: 2800px;
 }
 
 .globe-image {
@@ -285,10 +294,11 @@ html, body {
 [data-state="night"] .logo-dark,
 [data-state="approaching"] .logo-dark { opacity: 1; }
 
-/* --- Status Info (left side, visible after intro) --- */
+/* --- Status Info (left side, mid-height) --- */
 .status-info {
   position: absolute;
-  bottom: clamp(80px, 12vh, 160px);
+  top: 50%;
+  transform: translateY(-50%);
   left: 3vw;
   z-index: 10;
   font-family: var(--font-body);
