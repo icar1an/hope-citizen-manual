@@ -213,7 +213,7 @@ html, body {
   bottom: 0;
   left: -15%;
   right: -15%;
-  height: 85vh;
+  height: 70vh;
   background: #000000;
   clip-path: ellipse(68% 100% at 50% 100%);
   pointer-events: none;
@@ -229,12 +229,12 @@ html, body {
 /* --- Globe Map (transparent PNG with dots, covers full viewport) --- */
 .globe-map {
   position: absolute;
-  top: 0;
+  top: -5%;
   left: 50%;
   transform: translateX(-50%);
   width: 110%;
   pointer-events: none;
-  z-index: 0;
+  z-index: 1;
 }
 
 .globe-image {
@@ -278,10 +278,10 @@ html, body {
 [data-state="night"] .logo-dark,
 [data-state="approaching"] .logo-dark { opacity: 1; }
 
-/* --- Status Info (left side, mid-height) --- */
+/* --- Status Info (left side, below globe) --- */
 .status-info {
   position: absolute;
-  top: 55%;
+  bottom: 18vh;
   left: 3vw;
   z-index: 10;
   font-family: var(--font-body);
@@ -309,7 +309,7 @@ html, body {
 /* --- Countdown Section (BOTTOM) --- */
 .countdown-section {
   position: absolute;
-  bottom: 2vh;
+  bottom: 1vh;
   left: 3vw;
   right: 3vw;
   z-index: 10;
@@ -320,7 +320,7 @@ html, body {
 
 .countdown {
   font-family: var(--font-display);
-  font-size: clamp(50px, 12vw, 200px);
+  font-size: clamp(50px, 14vw, 240px);
   font-weight: 400;
   line-height: 0.85;
   color: var(--fg);
