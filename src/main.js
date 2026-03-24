@@ -56,6 +56,7 @@ function randomSector() {
 }
 
 const NOTIFICATIONS = [
+  // Green — safe / cleared
   {
     template: () => `Sector ${randomSector()} cleared.\nAll Phased have returned to registered households`,
     type: 'green',
@@ -70,29 +71,39 @@ const NOTIFICATIONS = [
     type: 'green',
   },
   { template: () => `Sector ${randomSector()} cleared again.`, type: 'green' },
-  { template: () => 'Siren systems do not malfunction.', type: 'yellow' },
+  { template: () => 'Siren systems do not malfunction.', type: 'green' },
+  // Yellow — minor warnings
+  {
+    template: () =>
+      `Report logged. This sector [${randomSector()}] has existing missing records.`,
+    type: 'yellow',
+  },
+  // Dark — serious warnings
   {
     template: () =>
       `Missing Phased recorded in Sector ${randomSector()}. Do not attempt verification outside the household.`,
-    type: 'yellow',
+    type: 'dark',
   },
   {
     template: () => `Missing Phased recorded [${randomSector()}]. Do not attempt verification outside the household.`,
-    type: 'yellow',
+    type: 'dark',
   },
   {
     template: () =>
       `Return data unavailable for Sector ${Math.floor(Math.random() * 9)}*${Math.floor(Math.random() * 99)}ver.#.`,
-    type: 'yellow',
+    type: 'dark',
   },
-  { template: () => 'Return verification pending // pending // pending', type: 'yellow' },
-  { template: () => 'Do not open the door.', type: 'red' },
+  { template: () => 'Return verification pending // pending // pending', type: 'dark' },
+  { template: () => 'Do not open the door.', type: 'dark' },
+  // Red — danger / Lost
   { template: () => 'The Lost is present. Do not engage.', type: 'red' },
   {
     template: () =>
       'The Lost may resemble a known individual. Do not approach. The Lost may use a familiar voice. Do not answer. The Lost may call your name. Do not respond.',
     type: 'red',
   },
+  { template: () => 'Recognition of the Lost does not indicate recovery.', type: 'red' },
+  { template: () => 'This Lost has been recorded before.', type: 'red' },
 ]
 
 // ─── Countdown Engine ────────────────────────────────────────
@@ -211,8 +222,10 @@ function showNotification() {
   const activeState = isWarningFlash ? 'night' : currentState
   let pool
   if (activeState === 'night') {
-    pool = NOTIFICATIONS.filter((n) => n.type === 'red' || n.type === 'yellow')
+    pool = NOTIFICATIONS.filter((n) => n.type === 'red' || n.type === 'dark')
   } else if (activeState === 'approaching') {
+    pool = NOTIFICATIONS.filter((n) => n.type === 'dark' || n.type === 'yellow')
+  } else if (activeState === 'transition') {
     pool = NOTIFICATIONS.filter((n) => n.type === 'yellow' || n.type === 'green')
   } else {
     pool = NOTIFICATIONS.filter((n) => n.type === 'green')

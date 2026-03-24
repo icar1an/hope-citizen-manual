@@ -490,8 +490,9 @@ body {
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.5s ease;
-  min-width: 300px;
-  max-width: 550px;
+  width: clamp(400px, 40vw, 680px);
+  height: auto;
+  aspect-ratio: 683 / 179;
 }
 
 .notification.visible {
@@ -523,22 +524,34 @@ body {
   fill: var(--red);
 }
 
+.notification.type-dark .notification-bg {
+  fill: #2a2a2a;
+}
+
+.notification.type-dark .notification-text {
+  color: var(--yellow);
+}
+
 .notification-inner {
   position: relative;
   z-index: 1;
   display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  padding: 16px 44px;
+  align-items: center;
+  height: 100%;
+  padding: 0 44px 0 0;
 }
 
 .notification-icon {
   flex-shrink: 0;
-  width: 36px;
+  width: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
 }
 
 .agent-icon {
-  width: 100%;
+  width: 40px;
   height: auto;
 }
 
@@ -590,8 +603,8 @@ body {
   transform: translate(-30%, -50%);
   z-index: 20;
   pointer-events: none;
-  min-width: 350px;
-  max-width: 550px;
+  width: clamp(400px, 40vw, 680px);
+  aspect-ratio: 683 / 179;
   opacity: 0;
   transition: opacity 0.5s ease;
 }
