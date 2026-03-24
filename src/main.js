@@ -40,7 +40,7 @@ const cycleDuration = isExhibition ? CONFIG.exhibitionDuration : CONFIG.cycleDur
 
 // ─── DOM References ──────────────────────────────────────────
 const loader = document.getElementById('loader')
-const dashboard = document.getElementById('dashboard') // eslint-disable-line no-unused-vars
+const dashboard = document.getElementById('dashboard')
 const countdownEl = document.getElementById('countdown')
 const obscurationEl = document.getElementById('obscuration')
 const notificationEl = document.getElementById('notification')
@@ -291,7 +291,8 @@ async function init() {
   // Run dark landing → auto-scroll intro
   await runIntroSequence()
 
-  // Set initial state and show dashboard elements
+  // Reveal dashboard and show elements
+  dashboard.classList.add('visible')
   updateState()
   logo.classList.add('visible')
   statusInfo.classList.add('visible')

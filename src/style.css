@@ -191,6 +191,11 @@ body {
   overflow: hidden;
   background: var(--bg);
   transition: background-color 3s ease;
+  visibility: hidden;
+}
+
+.dashboard.visible {
+  visibility: visible;
 }
 
 /* --- State Colors --- */
