@@ -410,7 +410,7 @@ body {
   font-weight: 400;
   line-height: 0.85;
   color: var(--fg);
-  letter-spacing: 0.39em;
+  letter-spacing: 0.15em;
   transition:
     color 2s ease,
     -webkit-text-stroke-color 2s ease;
@@ -428,8 +428,7 @@ body {
 
 /* Night state: outlined countdown digits + pulse */
 [data-state='night'] .countdown,
-[data-state='approaching'] .countdown,
-[data-state='transition'] .countdown {
+[data-state='approaching'] .countdown {
   -webkit-text-fill-color: transparent;
   -webkit-text-stroke: 2px var(--fg);
 }
