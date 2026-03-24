@@ -229,12 +229,12 @@ html, body {
 /* --- Globe Map (transparent PNG with dots, covers full viewport) --- */
 .globe-map {
   position: absolute;
-  top: -8%;
+  top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 115%;
+  width: 110%;
   pointer-events: none;
-  z-index: 1;
+  z-index: 0;
 }
 
 .globe-image {
