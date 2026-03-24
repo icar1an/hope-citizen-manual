@@ -149,24 +149,7 @@ body {
 }
 
 .loader-globe {
-  position: absolute;
-  bottom: -130%;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 200%;
-  max-width: 3500px;
-  z-index: 1;
-  border-radius: 50%;
-  overflow: hidden;
-  aspect-ratio: 1;
-}
-
-.loader-globe img {
-  width: 100%;
-  height: 100%;
-  display: block;
-  object-fit: cover;
-  object-position: center 20%;
+  display: none;
 }
 
 @keyframes loaderFadeIn {
