@@ -234,7 +234,7 @@ body {
 }
 
 [data-state='transition'] .dashboard {
-  background: linear-gradient(to bottom, #8a8889 0%, var(--bg-day) 100%);
+  background: linear-gradient(to bottom, var(--bg-day) 0%, #8a8889 50%, #2a2a2a 100%);
 }
 
 [data-state='approaching'] {
@@ -268,6 +268,7 @@ body {
   width: 100%;
   height: auto;
   display: block;
+  mix-blend-mode: screen;
 }
 
 /* The SVG arc creates the curved sphere illusion */
@@ -276,11 +277,11 @@ body {
   bottom: 0;
   left: 0;
   width: 100%;
-  height: 65%;
+  height: 90%;
   z-index: 2;
 }
 
-/* Transition gradient stops for night mode */
+/* Gradient stops transition between states */
 .grad-stop-1 {
   transition: stop-color 3s ease;
 }
@@ -293,20 +294,37 @@ body {
   transition: stop-color 3s ease;
 }
 
+/* Day state: arc invisible (all stops match background) — default in HTML */
+
+/* Transition: arc partially darkens the lower area */
+[data-state='transition'] .grad-stop-1 {
+  stop-color: #e9e7e8;
+}
+
 [data-state='transition'] .grad-stop-2 {
-  stop-color: #555;
+  stop-color: #999;
 }
 
 [data-state='transition'] .grad-stop-3 {
-  stop-color: #8a8889;
+  stop-color: #333;
+}
+
+/* Approaching: arc mostly dark */
+[data-state='approaching'] .grad-stop-1 {
+  stop-color: #444;
 }
 
 [data-state='approaching'] .grad-stop-2 {
-  stop-color: #1a1a1a;
+  stop-color: #111;
 }
 
 [data-state='approaching'] .grad-stop-3 {
-  stop-color: #2a2a2a;
+  stop-color: #000;
+}
+
+/* Night: arc solid black (matches Figma Vector 149 fill=#000) */
+[data-state='night'] .grad-stop-1 {
+  stop-color: #000;
 }
 
 [data-state='night'] .grad-stop-2 {
@@ -402,7 +420,6 @@ body {
   right: 0;
   z-index: 10;
   text-align: center;
-  overflow: hidden;
 }
 
 .countdown {
@@ -411,7 +428,7 @@ body {
   font-weight: 400;
   line-height: 0.85;
   color: var(--fg);
-  letter-spacing: 0.15em;
+  letter-spacing: 0.25em;
   transition:
     color 2s ease,
     -webkit-text-stroke-color 2s ease;
