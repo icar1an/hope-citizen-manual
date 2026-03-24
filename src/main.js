@@ -9,11 +9,11 @@ import './style.css'
 
 // ─── Configuration ───────────────────────────────────────────
 const CONFIG = {
-  cycleDuration: 12 * 60 * 60 * 1000,       // 12 hours
-  exhibitionDuration: 20 * 60 * 1000,        // 20 minutes
+  cycleDuration: 12 * 60 * 60 * 1000, // 12 hours
+  exhibitionDuration: 20 * 60 * 1000, // 20 minutes
 
   // Intro timing
-  introHold: 3000,          // Hold landing text for 3s
+  introHold: 3000, // Hold landing text for 3s
   introScrollDuration: 3000, // Auto-scroll transition duration
 
   notificationInterval: { min: 10000, max: 30000 },
@@ -40,7 +40,7 @@ const cycleDuration = isExhibition ? CONFIG.exhibitionDuration : CONFIG.cycleDur
 
 // ─── DOM References ──────────────────────────────────────────
 const loader = document.getElementById('loader')
-const dashboard = document.getElementById('dashboard')
+const dashboard = document.getElementById('dashboard') // eslint-disable-line no-unused-vars
 const countdownEl = document.getElementById('countdown')
 const obscurationEl = document.getElementById('obscuration')
 const notificationEl = document.getElementById('notification')
@@ -56,18 +56,43 @@ function randomSector() {
 }
 
 const NOTIFICATIONS = [
-  { template: () => `Sector ${randomSector()} cleared.\nAll Phased have returned to registered households`, type: 'green' },
-  { template: () => `Watchlight HOPE-PC8 Phase Cell distribution complete in Sector ${randomSector()}.`, type: 'green' },
-  { template: () => `Morning Return verification completed [Sector ${randomSector()}]. Identification discrepancies not recorded.`, type: 'green' },
+  {
+    template: () => `Sector ${randomSector()} cleared.\nAll Phased have returned to registered households`,
+    type: 'green',
+  },
+  {
+    template: () => `Watchlight HOPE-PC8 Phase Cell distribution complete in Sector ${randomSector()}.`,
+    type: 'green',
+  },
+  {
+    template: () =>
+      `Morning Return verification completed [Sector ${randomSector()}]. Identification discrepancies not recorded.`,
+    type: 'green',
+  },
   { template: () => `Sector ${randomSector()} cleared again.`, type: 'green' },
   { template: () => 'Siren systems do not malfunction.', type: 'yellow' },
-  { template: () => `Missing Phased recorded in Sector ${randomSector()}. Do not attempt verification outside the household.`, type: 'yellow' },
-  { template: () => `Missing Phased recorded [${randomSector()}]. Do not attempt verification outside the household.`, type: 'yellow' },
-  { template: () => `Return data unavailable for Sector ${Math.floor(Math.random() * 9)}*${Math.floor(Math.random() * 99)}ver.#.`, type: 'yellow' },
+  {
+    template: () =>
+      `Missing Phased recorded in Sector ${randomSector()}. Do not attempt verification outside the household.`,
+    type: 'yellow',
+  },
+  {
+    template: () => `Missing Phased recorded [${randomSector()}]. Do not attempt verification outside the household.`,
+    type: 'yellow',
+  },
+  {
+    template: () =>
+      `Return data unavailable for Sector ${Math.floor(Math.random() * 9)}*${Math.floor(Math.random() * 99)}ver.#.`,
+    type: 'yellow',
+  },
   { template: () => 'Return verification pending // pending // pending', type: 'yellow' },
   { template: () => 'Do not open the door.', type: 'red' },
   { template: () => 'The Lost is present. Do not engage.', type: 'red' },
-  { template: () => 'The Lost may resemble a known individual. Do not approach. The Lost may use a familiar voice. Do not answer. The Lost may call your name. Do not respond.', type: 'red' },
+  {
+    template: () =>
+      'The Lost may resemble a known individual. Do not approach. The Lost may use a familiar voice. Do not answer. The Lost may call your name. Do not respond.',
+    type: 'red',
+  },
 ]
 
 // ─── Countdown Engine ────────────────────────────────────────
@@ -87,7 +112,7 @@ function formatTime(ms) {
 
 function getProgress() {
   const remaining = getTimeRemaining()
-  return 1 - (remaining / cycleDuration)
+  return 1 - remaining / cycleDuration
 }
 
 // ─── State Engine ────────────────────────────────────────────
@@ -131,7 +156,7 @@ function updateState() {
 
 // ─── Alert Banner ────────────────────────────────────────────
 function showAlertBanner() {
-  const alerts = NOTIFICATIONS.filter(n => n.type === 'red')
+  const alerts = NOTIFICATIONS.filter((n) => n.type === 'red')
   const alert = alerts[Math.floor(Math.random() * alerts.length)]
   alertText.textContent = alert.template()
   alertBanner.hidden = false
@@ -142,7 +167,9 @@ function showAlertBanner() {
 
 function hideAlertBanner() {
   alertBanner.classList.remove('visible')
-  setTimeout(() => { alertBanner.hidden = true }, 500)
+  setTimeout(() => {
+    alertBanner.hidden = true
+  }, 500)
 }
 
 // ─── Warning Flash Engine ────────────────────────────────────
@@ -167,9 +194,7 @@ function triggerWarningFlash() {
 }
 
 function scheduleWarningFlash() {
-  const interval = isExhibition
-    ? CONFIG.warningFlashIntervalExhibition
-    : CONFIG.warningFlashInterval
+  const interval = isExhibition ? CONFIG.warningFlashIntervalExhibition : CONFIG.warningFlashInterval
   const delay = interval.min + Math.random() * (interval.max - interval.min)
   setTimeout(() => {
     triggerWarningFlash()
@@ -186,11 +211,11 @@ function showNotification() {
   const activeState = isWarningFlash ? 'night' : currentState
   let pool
   if (activeState === 'night') {
-    pool = NOTIFICATIONS.filter(n => n.type === 'red' || n.type === 'yellow')
+    pool = NOTIFICATIONS.filter((n) => n.type === 'red' || n.type === 'yellow')
   } else if (activeState === 'approaching') {
-    pool = NOTIFICATIONS.filter(n => n.type === 'yellow' || n.type === 'green')
+    pool = NOTIFICATIONS.filter((n) => n.type === 'yellow' || n.type === 'green')
   } else {
-    pool = NOTIFICATIONS.filter(n => n.type === 'green')
+    pool = NOTIFICATIONS.filter((n) => n.type === 'green')
   }
 
   const notification = pool[Math.floor(Math.random() * pool.length)]
@@ -237,10 +262,7 @@ function tick() {
 function runIntroSequence() {
   return new Promise((resolve) => {
     // Wait for fonts to load, then hold landing
-    Promise.all([
-      document.fonts.ready,
-      new Promise(r => setTimeout(r, CONFIG.introHold))
-    ]).then(() => {
+    Promise.all([document.fonts.ready, new Promise((r) => setTimeout(r, CONFIG.introHold))]).then(() => {
       // Phase C: trigger auto-scroll transition
       loader.classList.add('intro-scroll')
 

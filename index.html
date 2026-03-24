@@ -1,97 +1,115 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
-  <meta name="theme-color" content="#000000">
-  <meta name="description" content="H.O.P.E. — Human Order and Phase Enforcement. Cooperation secures a bright morning.">
-  <title>WATCHLIGHT</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="H.O.P.E. — Human Order and Phase Enforcement. Cooperation secures a bright morning."
+    />
+    <title>WATCHLIGHT</title>
 
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔦</text></svg>">
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔦</text></svg>"
+    />
 
-  <link rel="stylesheet" href="/src/style.css">
-</head>
-<body data-state="day">
-
-  <!-- ═══ LOADING / DAWN ANIMATION ═══ -->
-  <div class="loader" id="loader">
-    <div class="loader-content">
-      <img src="./assets/logo-dark.png" alt="H.O.P.E." class="loader-logo">
-      <p class="loader-text">H.O.P.E. operates to ensure the continued safety of remaining population centers.<br>Adhere to all Siren Procedures and remember:</p>
-      <p class="loader-tagline">Cooperation secures a bright morning.</p>
-    </div>
-    <div class="loader-globe">
-      <img src="./assets/globe.png" alt="" draggable="false">
-    </div>
-  </div>
-
-  <!-- ═══ MAIN DASHBOARD ═══ -->
-  <main class="dashboard" id="dashboard">
-
-    <!-- Globe Background Layer (bottom hemisphere) -->
-    <div class="globe-container">
-      <div class="globe-map">
-        <img src="./assets/globe.png" alt="" class="globe-image" draggable="false">
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body data-state="day">
+    <!-- ═══ LOADING / DAWN ANIMATION ═══ -->
+    <div class="loader" id="loader">
+      <div class="loader-content">
+        <img src="./assets/logo-dark.png" alt="H.O.P.E." class="loader-logo" />
+        <p class="loader-text">
+          H.O.P.E. operates to ensure the continued safety of remaining population centers.<br />Adhere to all Siren
+          Procedures and remember:
+        </p>
+        <p class="loader-tagline">Cooperation secures a bright morning.</p>
       </div>
-      <!-- Arc-shaped gradient overlay for 3D sphere effect -->
-      <svg class="globe-arc" viewBox="0 0 1728 659" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M1728 372.554C1452 -136.448 265.231 -111.768 0 372.554V658.052H1728V372.554Z" fill="url(#globe-gradient)"/>
-        <defs>
-          <linearGradient id="globe-gradient" x1="864" y1="0" x2="864" y2="658.052" gradientUnits="userSpaceOnUse">
-            <stop class="grad-stop-1" stop-color="#E9E7E8"/>
-            <stop class="grad-stop-2" offset="0.356" stop-color="#8D8C8D"/>
-            <stop class="grad-stop-3" offset="0.784" stop-color="#000000"/>
-          </linearGradient>
-        </defs>
-      </svg>
+      <div class="loader-globe">
+        <img src="./assets/globe.png" alt="" draggable="false" />
+      </div>
     </div>
 
-    <!-- H.O.P.E. Logo (top-left, hidden on landing, visible on later states) -->
-    <div class="logo" id="logo">
-      <img src="./assets/logo-light.png" alt="H.O.P.E." class="logo-img logo-light">
-      <img src="./assets/logo-dark.png" alt="H.O.P.E." class="logo-img logo-dark">
-    </div>
-
-    <!-- Status Info (left side, hidden on landing) -->
-    <div class="status-info" id="status-info">
-      <p class="status-line">System Status: Maintained</p>
-      <p class="status-line">Atmospheric Obscuration Status: <span id="obscuration">0</span>%</p>
-      <p class="status-line">Self Report: <span id="self-report">30</span>% Completed</p>
-      <p class="siren-label">NEXT SIREN ACTIVATION</p>
-    </div>
-
-    <!-- Notification Ticker (overlays on globe area) -->
-    <div class="notification" id="notification" aria-live="polite">
-      <svg class="notification-shape" viewBox="0 0 684 179" preserveAspectRatio="none" aria-hidden="true">
-        <path class="notification-bg" d="M683.026 177.43H645.343V142.886H37.6846V179H0V1.57031H37.6846V25.123H645.343V0H683.026V177.43Z"/>
-      </svg>
-      <div class="notification-inner">
-        <div class="notification-icon">
-          <img src="./assets/agent.svg" alt="" class="agent-icon">
+    <!-- ═══ MAIN DASHBOARD ═══ -->
+    <main class="dashboard" id="dashboard">
+      <!-- Globe Background Layer (bottom hemisphere) -->
+      <div class="globe-container">
+        <div class="globe-map">
+          <img src="./assets/globe.png" alt="" class="globe-image" draggable="false" />
         </div>
-        <div class="notification-text" id="notification-text"></div>
-      </div>
-    </div>
-
-    <!-- Warning Alert (flashes periodically + during night state) -->
-    <div class="alert-banner" id="alert-banner" hidden>
-      <span class="alert-icon">
-        <svg width="24" height="22" viewBox="0 0 24 22" fill="none">
-          <path d="M12 0L24 22H0L12 0Z" fill="currentColor"/>
-          <text x="12" y="18" text-anchor="middle" font-size="14" font-weight="bold" fill="#000">!</text>
+        <!-- Arc-shaped gradient overlay for 3D sphere effect -->
+        <svg class="globe-arc" viewBox="0 0 1728 659" preserveAspectRatio="none" aria-hidden="true">
+          <path
+            d="M1728 372.554C1452 -136.448 265.231 -111.768 0 372.554V658.052H1728V372.554Z"
+            fill="url(#globe-gradient)"
+          />
+          <defs>
+            <linearGradient id="globe-gradient" x1="864" y1="0" x2="864" y2="658.052" gradientUnits="userSpaceOnUse">
+              <stop class="grad-stop-1" stop-color="#E9E7E8" />
+              <stop class="grad-stop-2" offset="0.356" stop-color="#8D8C8D" />
+              <stop class="grad-stop-3" offset="0.784" stop-color="#000000" />
+            </linearGradient>
+          </defs>
         </svg>
-      </span>
-      <span class="alert-text" id="alert-text">The Lost is present. Do not engage.</span>
-    </div>
+      </div>
 
-    <!-- Bottom: Countdown + Tagline -->
-    <div class="countdown-section">
-      <div class="countdown" id="countdown">00:00:00</div>
-      <p class="tagline">cooperation secures a bright morning.</p>
-    </div>
+      <!-- H.O.P.E. Logo (top-left, hidden on landing, visible on later states) -->
+      <div class="logo" id="logo">
+        <img src="./assets/logo-light.png" alt="H.O.P.E." class="logo-img logo-light" />
+        <img src="./assets/logo-dark.png" alt="H.O.P.E." class="logo-img logo-dark" />
+      </div>
 
-  </main>
+      <!-- Status Info (left side, hidden on landing) -->
+      <div class="status-info" id="status-info">
+        <p class="status-line">System Status: Maintained</p>
+        <p class="status-line">Atmospheric Obscuration Status: <span id="obscuration">0</span>%</p>
+        <p class="status-line">Self Report: <span id="self-report">30</span>% Completed</p>
+        <p class="siren-label">NEXT SIREN ACTIVATION</p>
+      </div>
 
-  <script type="module" src="/src/main.js"></script>
-</body>
+      <!-- Notification Ticker (overlays on globe area) -->
+      <div class="notification" id="notification" aria-live="polite">
+        <svg class="notification-shape" viewBox="0 0 684 179" preserveAspectRatio="none" aria-hidden="true">
+          <path
+            class="notification-bg"
+            d="M683.026 177.43H645.343V142.886H37.6846V179H0V1.57031H37.6846V25.123H645.343V0H683.026V177.43Z"
+          />
+        </svg>
+        <div class="notification-inner">
+          <div class="notification-icon">
+            <img src="./assets/agent.svg" alt="" class="agent-icon" />
+          </div>
+          <div class="notification-text" id="notification-text"></div>
+        </div>
+      </div>
+
+      <!-- Warning Alert (flashes periodically + during night state) -->
+      <div class="alert-banner" id="alert-banner" hidden>
+        <svg class="alert-shape" viewBox="0 0 684 179" preserveAspectRatio="none" aria-hidden="true">
+          <path
+            class="alert-bg"
+            d="M683.026 177.43H645.343V142.886H37.6846V179H0V1.57031H37.6846V25.123H645.343V0H683.026V177.43Z"
+          />
+        </svg>
+        <div class="alert-inner">
+          <span class="alert-icon">
+            <img src="./assets/warning.svg" alt="" />
+          </span>
+          <span class="alert-text" id="alert-text">The Lost is present. Do not engage.</span>
+        </div>
+      </div>
+
+      <!-- Bottom: Countdown + Tagline -->
+      <div class="countdown-section">
+        <div class="countdown" id="countdown">00:00:00</div>
+        <p class="tagline">cooperation secures a bright morning.</p>
+      </div>
+    </main>
+
+    <script type="module" src="/src/main.js"></script>
+  </body>
 </html>

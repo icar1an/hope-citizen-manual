@@ -48,30 +48,30 @@
 :root {
   --font-display: 'Technik Mono', 'Space Mono', 'Courier New', monospace;
   --font-body: '35-FTR', 'Space Grotesk', 'Helvetica Neue', sans-serif;
-
   --bg-day: #e9e7e8;
-  --bg-night: #000000;
-  --fg-day: #000000;
+  --bg-night: #000;
+  --fg-day: #000;
   --fg-night: #cbbf65;
-
   --yellow: #ebda62;
   --gold: #cbbf65;
   --red: #bb0003;
   --green: #079100;
   --alert-yellow: #ffe744;
-
   --bg: var(--bg-day);
   --fg: var(--fg-day);
 }
 
 /* --- Reset & Base --- */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -91,7 +91,7 @@ html, body {
   position: fixed;
   inset: 0;
   z-index: 100;
-  background: #000000;
+  background: #000;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -126,7 +126,9 @@ html, body {
   opacity: 0;
   transform: translateY(10px);
   animation: loaderFadeIn 1.5s ease 0.5s forwards;
-  transition: opacity 2s ease, transform 2s ease;
+  transition:
+    opacity 2s ease,
+    transform 2s ease;
 }
 
 .loader-logo {
@@ -145,6 +147,7 @@ html, body {
   margin: 0 auto 1rem;
   opacity: 0;
   animation: loaderFadeIn 1s ease 1s forwards;
+  transition: color 2s ease;
 }
 
 .loader-tagline {
@@ -155,6 +158,12 @@ html, body {
   color: #e9e7e8;
   opacity: 0;
   animation: loaderFadeIn 1s ease 1.5s forwards;
+  transition: color 2s ease;
+}
+
+.loader.intro-scroll .loader-text,
+.loader.intro-scroll .loader-tagline {
+  color: #000;
 }
 
 .loader-globe {
@@ -168,7 +177,10 @@ html, body {
   overflow: hidden;
   z-index: 1;
   opacity: 1;
-  transition: bottom 3s ease, transform 3s ease, height 3s ease;
+  transition:
+    bottom 3s ease,
+    transform 3s ease,
+    height 3s ease;
 }
 
 .loader.intro-scroll .loader-globe {
@@ -187,8 +199,15 @@ html, body {
 }
 
 @keyframes loaderFadeIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* ═══════════════════════════════════════
@@ -204,25 +223,41 @@ html, body {
 }
 
 /* --- State Colors --- */
-[data-state="day"] { --bg: #e9e7e8; --fg: #000000; }
-[data-state="transition"] { --bg: #8a8889; --fg: #ffffff; }
-[data-state="approaching"] { --bg: #2a2a2a; --fg: #ffffff; }
-[data-state="night"] { --bg: #000000; --fg: #cbbf65; }
+[data-state='day'] {
+  --bg: #e9e7e8;
+  --fg: #000;
+}
 
-/* --- Globe (bottom hemisphere) --- */
+[data-state='transition'] {
+  --bg: #8a8889;
+  --fg: #fff;
+}
+
+[data-state='transition'] .dashboard {
+  background: linear-gradient(to bottom, var(--bg-day) 0%, #8a8889 45%, #2a2a2a 100%);
+}
+
+[data-state='approaching'] {
+  --bg: #2a2a2a;
+  --fg: #fff;
+}
+
+[data-state='night'] {
+  --bg: #000;
+  --fg: #cbbf65;
+}
+
+/* --- Globe (fills viewport, arc creates sphere illusion) --- */
 .globe-container {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 50vh;
+  inset: 0;
   pointer-events: none;
   overflow: hidden;
 }
 
 .globe-map {
   position: absolute;
-  bottom: -10%;
+  top: 0;
   left: 50%;
   transform: translateX(-50%);
   width: 140%;
@@ -238,26 +273,49 @@ html, body {
 /* The SVG arc creates the curved sphere illusion */
 .globe-arc {
   position: absolute;
-  top: 0;
+  bottom: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 65%;
   z-index: 2;
 }
 
 /* Transition gradient stops for night mode */
-.grad-stop-1 { transition: stop-color 3s ease; }
-.grad-stop-2 { transition: stop-color 3s ease; }
-.grad-stop-3 { transition: stop-color 3s ease; }
+.grad-stop-1 {
+  transition: stop-color 3s ease;
+}
 
-[data-state="transition"] .grad-stop-1 { stop-color: #8a8889; }
-[data-state="transition"] .grad-stop-2 { stop-color: #555; }
+.grad-stop-2 {
+  transition: stop-color 3s ease;
+}
 
-[data-state="approaching"] .grad-stop-1 { stop-color: #2a2a2a; }
-[data-state="approaching"] .grad-stop-2 { stop-color: #1a1a1a; }
+.grad-stop-3 {
+  transition: stop-color 3s ease;
+}
 
-[data-state="night"] .grad-stop-1 { stop-color: #000000; }
-[data-state="night"] .grad-stop-2 { stop-color: #000000; }
+[data-state='transition'] .grad-stop-1 {
+  stop-color: #8a8889;
+}
+
+[data-state='transition'] .grad-stop-2 {
+  stop-color: #555;
+}
+
+[data-state='approaching'] .grad-stop-1 {
+  stop-color: #2a2a2a;
+}
+
+[data-state='approaching'] .grad-stop-2 {
+  stop-color: #1a1a1a;
+}
+
+[data-state='night'] .grad-stop-1 {
+  stop-color: #000;
+}
+
+[data-state='night'] .grad-stop-2 {
+  stop-color: #000;
+}
 
 /* --- H.O.P.E. Logo (top-left corner) --- */
 .logo {
@@ -281,24 +339,31 @@ html, body {
   transition: opacity 0.8s ease;
 }
 
-.logo-light { opacity: 1; }
-.logo-dark {
+.logo-light {
   position: absolute;
   top: 0;
   left: 0;
   opacity: 0;
 }
 
-[data-state="night"] .logo-light,
-[data-state="approaching"] .logo-light { opacity: 0; }
-[data-state="night"] .logo-dark,
-[data-state="approaching"] .logo-dark { opacity: 1; }
+.logo-dark {
+  opacity: 1;
+}
 
-/* --- Status Info (left side, mid-height) --- */
+[data-state='night'] .logo-light,
+[data-state='approaching'] .logo-light {
+  opacity: 1;
+}
+
+[data-state='night'] .logo-dark,
+[data-state='approaching'] .logo-dark {
+  opacity: 0;
+}
+
+/* --- Status Info (left side, lower area above countdown) --- */
 .status-info {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  bottom: 28vh;
   left: 3vw;
   z-index: 10;
   font-family: var(--font-body);
@@ -307,7 +372,9 @@ html, body {
   line-height: 1.5;
   color: var(--fg);
   opacity: 0;
-  transition: opacity 1s ease, color 2s ease;
+  transition:
+    opacity 1s ease,
+    color 2s ease;
 }
 
 .status-info.visible {
@@ -323,26 +390,25 @@ html, body {
   color: var(--fg);
 }
 
-/* --- Countdown Section (BOTTOM) --- */
+/* --- Countdown Section (BOTTOM, stacked) --- */
 .countdown-section {
   position: absolute;
   bottom: 2vh;
   left: 3vw;
   right: 3vw;
   z-index: 10;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
 }
 
 .countdown {
   font-family: var(--font-display);
-  font-size: clamp(50px, 12vw, 200px);
+  font-size: clamp(60px, 14vw, 250px);
   font-weight: 400;
   line-height: 0.85;
   color: var(--fg);
   letter-spacing: 0.02em;
-  transition: color 2s ease;
+  transition:
+    color 2s ease,
+    -webkit-text-stroke-color 2s ease;
 }
 
 .tagline {
@@ -350,19 +416,31 @@ html, body {
   font-size: clamp(12px, 1.4vw, 24px);
   font-weight: 300;
   color: var(--fg);
-  text-align: right;
-  padding-bottom: 0.5em;
+  text-align: center;
+  margin-top: 0.5em;
   transition: color 2s ease;
 }
 
-/* Pulsing effect on countdown during night state */
-[data-state="night"] .countdown {
+/* Night state: outlined countdown digits + pulse */
+[data-state='night'] .countdown,
+[data-state='approaching'] .countdown {
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 2px var(--fg);
+}
+
+[data-state='night'] .countdown {
   animation: pulse 3s ease-in-out infinite;
 }
 
 @keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
 }
 
 /* --- Notification Ticker (Union bracket shape) --- */
@@ -396,9 +474,17 @@ html, body {
   transition: fill 0.3s ease;
 }
 
-.notification.type-green .notification-bg { fill: var(--green); }
-.notification.type-yellow .notification-bg { fill: var(--yellow); }
-.notification.type-red .notification-bg { fill: var(--red); }
+.notification.type-green .notification-bg {
+  fill: var(--green);
+}
+
+.notification.type-yellow .notification-bg {
+  fill: var(--yellow);
+}
+
+.notification.type-red .notification-bg {
+  fill: var(--red);
+}
 
 .notification-inner {
   position: relative;
@@ -423,38 +509,52 @@ html, body {
   font-family: var(--font-body);
   font-size: clamp(13px, 1.1vw, 20px);
   font-weight: 400;
+  font-style: italic;
   line-height: 1.4;
   color: #000;
   padding: 2px 0;
 }
 
-.notification.type-red .notification-text { color: var(--alert-yellow); }
+.notification.type-red .notification-text {
+  color: var(--alert-yellow);
+}
 
 .notification.glitch {
   animation: notificationGlitch 0.3s steps(2) 3;
 }
 
 @keyframes notificationGlitch {
-  0% { transform: translate(-30%, -50%) skewX(0deg); }
-  25% { transform: translate(-28%, -52%) skewX(-2deg); }
-  50% { transform: translate(-32%, -48%) skewX(2deg); }
-  75% { transform: translate(-29%, -51%) skewX(-1deg); }
-  100% { transform: translate(-30%, -50%) skewX(0deg); }
+  0% {
+    transform: translate(-30%, -50%) skewX(0deg);
+  }
+
+  25% {
+    transform: translate(-28%, -52%) skewX(-2deg);
+  }
+
+  50% {
+    transform: translate(-32%, -48%) skewX(2deg);
+  }
+
+  75% {
+    transform: translate(-29%, -51%) skewX(-1deg);
+  }
+
+  100% {
+    transform: translate(-30%, -50%) skewX(0deg);
+  }
 }
 
-/* --- Alert Banner (red warning — night state + periodic flash) --- */
+/* --- Alert Banner (red warning — bracket shape, night state + periodic flash) --- */
 .alert-banner {
   position: absolute;
   top: 42%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-30%, -50%);
   z-index: 20;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: var(--red);
-  padding: 12px 28px;
+  pointer-events: none;
   min-width: 350px;
+  max-width: 550px;
   opacity: 0;
   transition: opacity 0.5s ease;
 }
@@ -467,21 +567,49 @@ html, body {
   display: none;
 }
 
+.alert-shape {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.alert-bg {
+  fill: var(--red);
+}
+
+.alert-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 44px;
+}
+
 .alert-icon {
-  color: var(--alert-yellow);
   flex-shrink: 0;
+  width: 24px;
+}
+
+.alert-icon img {
+  width: 100%;
+  height: auto;
 }
 
 .alert-text {
   font-family: var(--font-body);
   font-size: clamp(14px, 1.2vw, 20px);
   font-weight: 900;
+  font-style: italic;
   color: var(--alert-yellow);
 }
 
 /* --- Reduced Motion --- */
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }

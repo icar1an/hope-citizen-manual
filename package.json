@@ -5,11 +5,31 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "lint": "eslint src/ && stylelint 'src/**/*.css'",
+    "lint:fix": "eslint src/ --fix && stylelint 'src/**/*.css' --fix",
+    "format": "prettier --write 'src/**/*.{js,css}' index.html",
+    "format:check": "prettier --check 'src/**/*.{js,css}' index.html",
+    "quality": "npm run format && npm run lint:fix",
+    "screenshot": "node tests/visual/screenshot.spec.js",
+    "visual-diff": "node tests/visual/compare.js",
+    "check-all": "npm run quality && npm run build && npm run screenshot && npm run visual-diff"
   },
   "dependencies": {
     "gsap": "^3.14.2",
-    "suncalc": "^1.9.0",
+    "suncalc": "^1.9.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.1.0",
+    "eslint-config-prettier": "^10.1.8",
+    "pixelmatch": "^7.1.0",
+    "playwright": "^1.58.2",
+    "pngjs": "^7.0.0",
+    "prettier": "^3.8.1",
+    "stylelint": "^17.5.0",
+    "stylelint-config-standard": "^40.0.0",
+    "stylelint-prettier": "^5.0.3",
     "vite": "^7.3.1"
   }
 }
