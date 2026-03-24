@@ -228,11 +228,11 @@ body {
 
 .globe-map {
   position: absolute;
-  top: -15%;
+  top: -10%;
   left: 50%;
   transform: translateX(-50%);
-  width: 140%;
-  max-width: 2800px;
+  width: 115%;
+  max-width: 2200px;
 }
 
 .globe-image {
@@ -431,7 +431,8 @@ body {
 
 /* Night state: outlined countdown digits + pulse */
 [data-state='night'] .countdown,
-[data-state='approaching'] .countdown {
+[data-state='approaching'] .countdown,
+[data-state='transition'] .countdown {
   -webkit-text-fill-color: transparent;
   -webkit-text-stroke: 2px var(--fg);
 }
