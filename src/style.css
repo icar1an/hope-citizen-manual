@@ -132,7 +132,7 @@ body {
 }
 
 .loader-logo {
-  width: clamp(80px, 10vw, 140px);
+  width: clamp(120px, 16.5vw, 285px);
   height: auto;
   margin-bottom: 2rem;
 }
@@ -323,7 +323,7 @@ body {
   top: 3vh;
   left: 3vw;
   z-index: 10;
-  width: clamp(50px, 5vw, 90px);
+  width: clamp(90px, 11.5vw, 200px);
   opacity: 0;
   transition: opacity 1s ease;
 }
@@ -363,7 +363,7 @@ body {
 /* --- Status Info (left side, lower area above countdown) --- */
 .status-info {
   position: absolute;
-  bottom: 28vh;
+  bottom: 30vh;
   left: 3vw;
   z-index: 10;
   font-family: var(--font-body);
@@ -385,18 +385,23 @@ body {
   font-family: var(--font-body);
   font-size: clamp(14px, 1.6vw, 30px);
   font-weight: 400;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.23em;
   margin-top: 1.5vh;
   color: var(--fg);
+}
+
+[data-state='night'] .status-info {
+  color: var(--yellow);
 }
 
 /* --- Countdown Section (BOTTOM, stacked) --- */
 .countdown-section {
   position: absolute;
-  bottom: 2vh;
-  left: 3vw;
-  right: 3vw;
+  bottom: 5vh;
+  left: 0;
+  right: 0;
   z-index: 10;
+  text-align: center;
 }
 
 .countdown {
@@ -405,7 +410,7 @@ body {
   font-weight: 400;
   line-height: 0.85;
   color: var(--fg);
-  letter-spacing: 0.02em;
+  letter-spacing: 0.39em;
   transition:
     color 2s ease,
     -webkit-text-stroke-color 2s ease;
@@ -423,7 +428,8 @@ body {
 
 /* Night state: outlined countdown digits + pulse */
 [data-state='night'] .countdown,
-[data-state='approaching'] .countdown {
+[data-state='approaching'] .countdown,
+[data-state='transition'] .countdown {
   -webkit-text-fill-color: transparent;
   -webkit-text-stroke: 2px var(--fg);
 }
