@@ -150,24 +150,23 @@ body {
 
 .loader-globe {
   position: absolute;
-  bottom: 0;
+  bottom: -5%;
   left: 50%;
   transform: translateX(-50%);
-  width: 140%;
-  max-width: 2800px;
-  height: 50vh;
-  overflow: hidden;
+  width: 120%;
+  max-width: 2400px;
   z-index: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  aspect-ratio: 1;
 }
 
 .loader-globe img {
   width: 100%;
-  height: auto;
+  height: 100%;
   display: block;
-  position: absolute;
-  bottom: -10%;
-  left: 50%;
-  transform: translateX(-50%);
+  object-fit: cover;
+  object-position: center top;
 }
 
 @keyframes loaderFadeIn {
