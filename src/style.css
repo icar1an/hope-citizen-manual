@@ -510,20 +510,22 @@ body {
   display: flex;
   align-items: center;
   height: 100%;
-  padding: 0 44px 0 0;
+  padding: 3.7% 6% 5.3% 12%;
 }
 
 .notification-icon {
-  flex-shrink: 0;
-  width: 76px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 11%;
   display: flex;
   align-items: center;
   justify-content: center;
-  align-self: stretch;
 }
 
 .agent-icon {
-  width: 40px;
+  width: 60%;
   height: auto;
 }
 
@@ -606,7 +608,8 @@ body {
   display: flex;
   align-items: center;
   gap: 16px;
-  padding: 16px 44px;
+  height: 100%;
+  padding: 3.7% 6% 5.3% 12%;
 }
 
 .alert-icon {
