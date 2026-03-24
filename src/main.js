@@ -49,6 +49,7 @@ const alertBanner = document.getElementById('alert-banner')
 const alertText = document.getElementById('alert-text')
 const logo = document.getElementById('logo')
 const statusInfo = document.getElementById('status-info')
+const selfReportEl = document.getElementById('self-report')
 
 // ─── Notification Messages ───────────────────────────────────
 function randomSector() {
@@ -149,9 +150,13 @@ function updateState() {
     }
   }
 
-  // Update obscuration percentage
+  // Update obscuration percentage (increases as countdown decreases)
   const obscuration = Math.round(progress * 100)
   obscurationEl.textContent = obscuration
+
+  // Update self-report percentage (increases as countdown decreases, offset slightly)
+  const selfReport = Math.min(100, Math.round(progress * 70 + 30))
+  selfReportEl.textContent = selfReport
 }
 
 // ─── Alert Banner ────────────────────────────────────────────
@@ -255,9 +260,9 @@ function tick() {
 }
 
 // ─── Intro Sequence ──────────────────────────────────────────
-// Phase A: Dark landing — globe visible, text fades in (CSS animations)
+// Phase A: Light landing — globe dome visible at bottom, logo + text fade in
 // Phase B: Hold for introHold duration
-// Phase C: Auto-scroll — globe rises, bg transitions dark→light, text fades out
+// Phase C: Auto-scroll — globe rises, text fades out
 // Phase D: Dashboard revealed
 function runIntroSequence() {
   return new Promise((resolve) => {
@@ -272,7 +277,7 @@ function runIntroSequence() {
         setTimeout(() => {
           loader.style.display = 'none'
           resolve()
-        }, 800) // match fade-out transition
+        }, 800)
       }, CONFIG.introScrollDuration)
     })
   })
@@ -280,7 +285,7 @@ function runIntroSequence() {
 
 // ─── Initialize ──────────────────────────────────────────────
 async function init() {
-  // Run dark landing → auto-scroll intro
+  // Run light landing → auto-scroll intro
   await runIntroSequence()
 
   // Set initial state and show dashboard elements

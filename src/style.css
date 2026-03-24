@@ -84,7 +84,7 @@ body {
 
 /* ═══════════════════════════════════════
    LOADING / INTRO SEQUENCE
-   Dark landing → auto-scroll → dashboard
+   Light landing → auto-scroll → dashboard
    ═══════════════════════════════════════ */
 
 .loader {
@@ -96,21 +96,14 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  transition: background-color 3s ease;
 }
 
-/* Phase 2: intro-scroll — bg goes light, content fades, globe rises */
-.loader.intro-scroll {
-  background: var(--bg-day);
-}
-
+/* Phase 2: intro-scroll — content fades, globe rises */
 .loader.intro-scroll .loader-content {
   opacity: 0;
   transform: translateY(-30px);
   pointer-events: none;
 }
-
-/* loader-globe intro-scroll override is in the .loader-globe block */
 
 /* Phase 3: fade-out — loader disappears */
 .loader.fade-out {
@@ -123,6 +116,7 @@ body {
   text-align: center;
   z-index: 2;
   padding: 0 2rem;
+  margin-bottom: 45vh;
   opacity: 0;
   transform: translateY(10px);
   animation: loaderFadeIn 1.5s ease 0.5s forwards;
@@ -132,7 +126,7 @@ body {
 }
 
 .loader-logo {
-  width: clamp(80px, 10vw, 140px);
+  width: clamp(120px, 16vw, 285px);
   height: auto;
   margin-bottom: 2rem;
 }
@@ -142,8 +136,8 @@ body {
   font-size: clamp(14px, 1.2vw, 20px);
   font-weight: 400;
   line-height: 1.6;
-  color: #e9e7e8;
-  max-width: 500px;
+  color: #000000;
+  max-width: 600px;
   margin: 0 auto 1rem;
   opacity: 0;
   animation: loaderFadeIn 1s ease 1s forwards;
@@ -155,7 +149,7 @@ body {
   font-size: clamp(14px, 1.2vw, 20px);
   font-weight: 300;
   font-style: italic;
-  color: #e9e7e8;
+  color: #000000;
   opacity: 0;
   animation: loaderFadeIn 1s ease 1.5s forwards;
   transition: color 2s ease;
@@ -169,11 +163,9 @@ body {
 .loader-globe {
   position: absolute;
   bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 140%;
-  max-width: 2800px;
-  height: 45vh;
+  left: -15%;
+  right: -15%;
+  height: 50vh;
   overflow: hidden;
   z-index: 1;
   opacity: 1;
@@ -184,18 +176,18 @@ body {
 }
 
 .loader.intro-scroll .loader-globe {
-  height: 55vh;
-  transform: translateX(-50%);
+  height: 70vh;
 }
 
 .loader-globe img {
-  width: 100%;
+  width: 110%;
   height: auto;
   display: block;
   position: absolute;
-  bottom: -10%;
+  top: -30%;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 1;
 }
 
 @keyframes loaderFadeIn {
@@ -252,16 +244,18 @@ body {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  overflow: hidden;
+  transition: opacity 3s ease;
 }
 
+/* --- Globe Map (transparent PNG with dots, covers full viewport) --- */
 .globe-map {
   position: absolute;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 140%;
-  max-width: 2800px;
+  width: 110%;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .globe-image {
@@ -323,7 +317,7 @@ body {
   top: 3vh;
   left: 3vw;
   z-index: 10;
-  width: clamp(50px, 5vw, 90px);
+  width: clamp(60px, 7vw, 120px);
   opacity: 0;
   transition: opacity 1s ease;
 }
@@ -393,7 +387,7 @@ body {
 /* --- Countdown Section (BOTTOM, stacked) --- */
 .countdown-section {
   position: absolute;
-  bottom: 2vh;
+  bottom: 1vh;
   left: 3vw;
   right: 3vw;
   z-index: 10;
@@ -446,9 +440,9 @@ body {
 /* --- Notification Ticker (Union bracket shape) --- */
 .notification {
   position: absolute;
-  top: 45%;
+  top: 40%;
   left: 50%;
-  transform: translate(-30%, -50%);
+  transform: translate(-50%, -50%);
   z-index: 15;
   pointer-events: none;
   opacity: 0;
@@ -525,32 +519,32 @@ body {
 
 @keyframes notificationGlitch {
   0% {
-    transform: translate(-30%, -50%) skewX(0deg);
+    transform: translate(-50%, -50%) skewX(0deg);
   }
 
   25% {
-    transform: translate(-28%, -52%) skewX(-2deg);
+    transform: translate(-48%, -52%) skewX(-2deg);
   }
 
   50% {
-    transform: translate(-32%, -48%) skewX(2deg);
+    transform: translate(-52%, -48%) skewX(2deg);
   }
 
   75% {
-    transform: translate(-29%, -51%) skewX(-1deg);
+    transform: translate(-49%, -51%) skewX(-1deg);
   }
 
   100% {
-    transform: translate(-30%, -50%) skewX(0deg);
+    transform: translate(-50%, -50%) skewX(0deg);
   }
 }
 
 /* --- Alert Banner (red warning — bracket shape, night state + periodic flash) --- */
 .alert-banner {
   position: absolute;
-  top: 42%;
+  top: 36%;
   left: 50%;
-  transform: translate(-30%, -50%);
+  transform: translate(-50%, -50%);
   z-index: 20;
   pointer-events: none;
   min-width: 350px;
