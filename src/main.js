@@ -274,19 +274,14 @@ function tick() {
 // Phase D: Dashboard revealed
 function runIntroSequence() {
   return new Promise((resolve) => {
-    // Wait for fonts to load, then hold landing
+    // Wait for fonts to load, then hold the landing screen
     Promise.all([document.fonts.ready, new Promise((r) => setTimeout(r, CONFIG.introHold))]).then(() => {
-      // Phase C: trigger auto-scroll transition
-      loader.classList.add('intro-scroll')
-
-      // After scroll transition completes, fade out loader
+      // Fade out the loader to reveal dashboard
+      loader.classList.add('fade-out')
       setTimeout(() => {
-        loader.classList.add('fade-out')
-        setTimeout(() => {
-          loader.style.display = 'none'
-          resolve()
-        }, 800) // match fade-out transition
-      }, CONFIG.introScrollDuration)
+        loader.style.display = 'none'
+        resolve()
+      }, 800)
     })
   })
 }

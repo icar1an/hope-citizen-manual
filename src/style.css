@@ -91,23 +91,21 @@ body {
   position: fixed;
   inset: 0;
   z-index: 100;
-  background: #000;
+  background: var(--bg-day);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  transition: background-color 3s ease;
 }
 
-/* Phase 2: intro-scroll — bg goes light, content fades, globe rises */
-.loader.intro-scroll {
-  background: var(--bg-day);
-}
-
+/* Phase 2: intro-scroll — content fades, globe rises */
 .loader.intro-scroll .loader-content {
   opacity: 0;
   transform: translateY(-30px);
   pointer-events: none;
+  transition:
+    opacity 2s ease,
+    transform 2s ease;
 }
 
 /* loader-globe intro-scroll override is in the .loader-globe block */
@@ -123,12 +121,7 @@ body {
   text-align: center;
   z-index: 2;
   padding: 0 2rem;
-  opacity: 0;
-  transform: translateY(10px);
-  animation: loaderFadeIn 1.5s ease 0.5s forwards;
-  transition:
-    opacity 2s ease,
-    transform 2s ease;
+  opacity: 1;
 }
 
 .loader-logo {
@@ -142,12 +135,9 @@ body {
   font-size: clamp(14px, 1.2vw, 20px);
   font-weight: 400;
   line-height: 1.6;
-  color: #e9e7e8;
+  color: #000;
   max-width: 500px;
   margin: 0 auto 1rem;
-  opacity: 0;
-  animation: loaderFadeIn 1s ease 1s forwards;
-  transition: color 2s ease;
 }
 
 .loader-tagline {
@@ -155,14 +145,6 @@ body {
   font-size: clamp(14px, 1.2vw, 20px);
   font-weight: 300;
   font-style: italic;
-  color: #e9e7e8;
-  opacity: 0;
-  animation: loaderFadeIn 1s ease 1.5s forwards;
-  transition: color 2s ease;
-}
-
-.loader.intro-scroll .loader-text,
-.loader.intro-scroll .loader-tagline {
   color: #000;
 }
 
@@ -173,19 +155,9 @@ body {
   transform: translateX(-50%);
   width: 140%;
   max-width: 2800px;
-  height: 45vh;
+  height: 50vh;
   overflow: hidden;
   z-index: 1;
-  opacity: 1;
-  transition:
-    bottom 3s ease,
-    transform 3s ease,
-    height 3s ease;
-}
-
-.loader.intro-scroll .loader-globe {
-  height: 55vh;
-  transform: translateX(-50%);
 }
 
 .loader-globe img {
