@@ -130,7 +130,7 @@ html, body {
 }
 
 .loader-logo {
-  width: clamp(80px, 10vw, 140px);
+  width: clamp(120px, 16vw, 285px);
   height: auto;
   margin-bottom: 2rem;
 }
@@ -141,7 +141,7 @@ html, body {
   font-weight: 400;
   line-height: 1.6;
   color: #e9e7e8;
-  max-width: 500px;
+  max-width: 600px;
   margin: 0 auto 1rem;
   opacity: 0;
   animation: loaderFadeIn 1s ease 1s forwards;
@@ -172,7 +172,7 @@ html, body {
 }
 
 .loader.intro-scroll .loader-globe {
-  height: 55vh;
+  height: 65vh;
   transform: translateX(-50%);
 }
 
@@ -258,6 +258,10 @@ html, body {
 
 [data-state="night"] .grad-stop-1 { stop-color: #000000; }
 [data-state="night"] .grad-stop-2 { stop-color: #000000; }
+[data-state="night"] .grad-stop-3 { stop-color: #000000; }
+
+[data-state="night"] .globe-image { opacity: 0.15; transition: opacity 3s ease; }
+[data-state="approaching"] .globe-image { opacity: 0.3; transition: opacity 3s ease; }
 
 /* --- H.O.P.E. Logo (top-left corner) --- */
 .logo {
@@ -368,9 +372,9 @@ html, body {
 /* --- Notification Ticker (Union bracket shape) --- */
 .notification {
   position: absolute;
-  top: 45%;
-  left: 50%;
-  transform: translate(-30%, -50%);
+  top: 42%;
+  left: 35%;
+  transform: translate(-50%, -50%);
   z-index: 15;
   pointer-events: none;
   opacity: 0;
@@ -435,26 +439,22 @@ html, body {
 }
 
 @keyframes notificationGlitch {
-  0% { transform: translate(-30%, -50%) skewX(0deg); }
-  25% { transform: translate(-28%, -52%) skewX(-2deg); }
-  50% { transform: translate(-32%, -48%) skewX(2deg); }
-  75% { transform: translate(-29%, -51%) skewX(-1deg); }
-  100% { transform: translate(-30%, -50%) skewX(0deg); }
+  0% { transform: translate(-50%, -50%) skewX(0deg); }
+  25% { transform: translate(-48%, -52%) skewX(-2deg); }
+  50% { transform: translate(-52%, -48%) skewX(2deg); }
+  75% { transform: translate(-49%, -51%) skewX(-1deg); }
+  100% { transform: translate(-50%, -50%) skewX(0deg); }
 }
 
-/* --- Alert Banner (red warning — night state + periodic flash) --- */
+/* --- Alert Banner (red warning — Union bracket shape, night state + periodic flash) --- */
 .alert-banner {
   position: absolute;
-  top: 42%;
-  left: 50%;
-  transform: translateX(-50%);
+  top: 38%;
+  left: 35%;
+  transform: translate(-50%, -50%);
   z-index: 20;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: var(--red);
-  padding: 12px 28px;
-  min-width: 350px;
+  min-width: 300px;
+  max-width: 550px;
   opacity: 0;
   transition: opacity 0.5s ease;
 }
@@ -467,9 +467,35 @@ html, body {
   display: none;
 }
 
+.alert-shape {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.alert-bg {
+  fill: var(--red);
+}
+
+.alert-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 44px;
+}
+
 .alert-icon {
   color: var(--alert-yellow);
   flex-shrink: 0;
+  width: 50px;
+}
+
+.alert-icon svg {
+  width: 100%;
+  height: auto;
 }
 
 .alert-text {

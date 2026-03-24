@@ -49,6 +49,7 @@ const alertBanner = document.getElementById('alert-banner')
 const alertText = document.getElementById('alert-text')
 const logo = document.getElementById('logo')
 const statusInfo = document.getElementById('status-info')
+const selfReportEl = document.getElementById('self-report')
 
 // ─── Notification Messages ───────────────────────────────────
 function randomSector() {
@@ -124,9 +125,13 @@ function updateState() {
     }
   }
 
-  // Update obscuration percentage
+  // Update obscuration percentage (increases as countdown decreases)
   const obscuration = Math.round(progress * 100)
   obscurationEl.textContent = obscuration
+
+  // Update self-report percentage (increases as countdown decreases, offset slightly)
+  const selfReport = Math.min(100, Math.round(progress * 70 + 30))
+  selfReportEl.textContent = selfReport
 }
 
 // ─── Alert Banner ────────────────────────────────────────────

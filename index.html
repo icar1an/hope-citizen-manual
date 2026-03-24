@@ -17,7 +17,7 @@
   <div class="loader" id="loader">
     <div class="loader-content">
       <img src="./assets/logo-dark.png" alt="H.O.P.E." class="loader-logo">
-      <p class="loader-text">H.O.P.E. operates to ensure the continued safety of remaining population centers.<br>Adhere to all Siren Procedures and remember:</p>
+      <p class="loader-text">H.O.P.E.operates to ensure the continued safety of remaining population centers.<br>Adhere to all Siren Procedures and remember:</p>
       <p class="loader-tagline">Cooperation secures a bright morning.</p>
     </div>
     <div class="loader-globe">
@@ -73,15 +73,20 @@
       </div>
     </div>
 
-    <!-- Warning Alert (flashes periodically + during night state) -->
+    <!-- Warning Alert (flashes periodically + during night state) — Union bracket shape -->
     <div class="alert-banner" id="alert-banner" hidden>
-      <span class="alert-icon">
-        <svg width="24" height="22" viewBox="0 0 24 22" fill="none">
-          <path d="M12 0L24 22H0L12 0Z" fill="currentColor"/>
-          <text x="12" y="18" text-anchor="middle" font-size="14" font-weight="bold" fill="#000">!</text>
-        </svg>
-      </span>
-      <span class="alert-text" id="alert-text">The Lost is present. Do not engage.</span>
+      <svg class="alert-shape" viewBox="0 0 684 179" preserveAspectRatio="none" aria-hidden="true">
+        <path class="alert-bg" d="M683.026 177.43H645.343V142.886H37.6846V179H0V1.57031H37.6846V25.123H645.343V0H683.026V177.43Z"/>
+      </svg>
+      <div class="alert-inner">
+        <div class="alert-icon">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+            <polygon points="40,0 80,80 0,80" fill="currentColor"/>
+            <text x="40" y="65" text-anchor="middle" font-size="40" font-weight="bold" fill="#ebda62">!</text>
+          </svg>
+        </div>
+        <div class="alert-text" id="alert-text">The Lost is present. Do not engage.</div>
+      </div>
     </div>
 
     <!-- Bottom: Countdown + Tagline -->
