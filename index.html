@@ -89,13 +89,18 @@
 
       <!-- Warning Alert (flashes periodically + during night state) -->
       <div class="alert-banner" id="alert-banner" hidden>
-        <span class="alert-icon">
-          <svg width="24" height="22" viewBox="0 0 24 22" fill="none">
-            <path d="M12 0L24 22H0L12 0Z" fill="currentColor" />
-            <text x="12" y="18" text-anchor="middle" font-size="14" font-weight="bold" fill="#000">!</text>
-          </svg>
-        </span>
-        <span class="alert-text" id="alert-text">The Lost is present. Do not engage.</span>
+        <svg class="alert-shape" viewBox="0 0 684 179" preserveAspectRatio="none" aria-hidden="true">
+          <path
+            class="alert-bg"
+            d="M683.026 177.43H645.343V142.886H37.6846V179H0V1.57031H37.6846V25.123H645.343V0H683.026V177.43Z"
+          />
+        </svg>
+        <div class="alert-inner">
+          <span class="alert-icon">
+            <img src="./assets/warning.svg" alt="" />
+          </span>
+          <span class="alert-text" id="alert-text">The Lost is present. Do not engage.</span>
+        </div>
       </div>
 
       <!-- Bottom: Countdown + Tagline -->

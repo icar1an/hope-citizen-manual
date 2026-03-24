@@ -147,6 +147,7 @@ body {
   margin: 0 auto 1rem;
   opacity: 0;
   animation: loaderFadeIn 1s ease 1s forwards;
+  transition: color 2s ease;
 }
 
 .loader-tagline {
@@ -157,6 +158,12 @@ body {
   color: #e9e7e8;
   opacity: 0;
   animation: loaderFadeIn 1s ease 1.5s forwards;
+  transition: color 2s ease;
+}
+
+.loader.intro-scroll .loader-text,
+.loader.intro-scroll .loader-tagline {
+  color: #000;
 }
 
 .loader-globe {
@@ -226,6 +233,10 @@ body {
   --fg: #fff;
 }
 
+[data-state='transition'] .dashboard {
+  background: linear-gradient(to bottom, var(--bg-day) 0%, #8a8889 45%, #2a2a2a 100%);
+}
+
 [data-state='approaching'] {
   --bg: #2a2a2a;
   --fg: #fff;
@@ -236,20 +247,17 @@ body {
   --fg: #cbbf65;
 }
 
-/* --- Globe (bottom hemisphere) --- */
+/* --- Globe (fills viewport, arc creates sphere illusion) --- */
 .globe-container {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 50vh;
+  inset: 0;
   pointer-events: none;
   overflow: hidden;
 }
 
 .globe-map {
   position: absolute;
-  bottom: -10%;
+  top: 0;
   left: 50%;
   transform: translateX(-50%);
   width: 140%;
@@ -265,10 +273,10 @@ body {
 /* The SVG arc creates the curved sphere illusion */
 .globe-arc {
   position: absolute;
-  top: 0;
+  bottom: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 65%;
   z-index: 2;
 }
 
@@ -332,31 +340,30 @@ body {
 }
 
 .logo-light {
-  opacity: 1;
-}
-
-.logo-dark {
   position: absolute;
   top: 0;
   left: 0;
   opacity: 0;
 }
 
+.logo-dark {
+  opacity: 1;
+}
+
 [data-state='night'] .logo-light,
 [data-state='approaching'] .logo-light {
-  opacity: 0;
+  opacity: 1;
 }
 
 [data-state='night'] .logo-dark,
 [data-state='approaching'] .logo-dark {
-  opacity: 1;
+  opacity: 0;
 }
 
-/* --- Status Info (left side, mid-height) --- */
+/* --- Status Info (left side, lower area above countdown) --- */
 .status-info {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  bottom: 28vh;
   left: 3vw;
   z-index: 10;
   font-family: var(--font-body);
@@ -383,26 +390,25 @@ body {
   color: var(--fg);
 }
 
-/* --- Countdown Section (BOTTOM) --- */
+/* --- Countdown Section (BOTTOM, stacked) --- */
 .countdown-section {
   position: absolute;
   bottom: 2vh;
   left: 3vw;
   right: 3vw;
   z-index: 10;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
 }
 
 .countdown {
   font-family: var(--font-display);
-  font-size: clamp(50px, 12vw, 200px);
+  font-size: clamp(60px, 14vw, 250px);
   font-weight: 400;
   line-height: 0.85;
   color: var(--fg);
   letter-spacing: 0.02em;
-  transition: color 2s ease;
+  transition:
+    color 2s ease,
+    -webkit-text-stroke-color 2s ease;
 }
 
 .tagline {
@@ -410,12 +416,18 @@ body {
   font-size: clamp(12px, 1.4vw, 24px);
   font-weight: 300;
   color: var(--fg);
-  text-align: right;
-  padding-bottom: 0.5em;
+  text-align: center;
+  margin-top: 0.5em;
   transition: color 2s ease;
 }
 
-/* Pulsing effect on countdown during night state */
+/* Night state: outlined countdown digits + pulse */
+[data-state='night'] .countdown,
+[data-state='approaching'] .countdown {
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 2px var(--fg);
+}
+
 [data-state='night'] .countdown {
   animation: pulse 3s ease-in-out infinite;
 }
@@ -497,6 +509,7 @@ body {
   font-family: var(--font-body);
   font-size: clamp(13px, 1.1vw, 20px);
   font-weight: 400;
+  font-style: italic;
   line-height: 1.4;
   color: #000;
   padding: 2px 0;
@@ -532,19 +545,16 @@ body {
   }
 }
 
-/* --- Alert Banner (red warning — night state + periodic flash) --- */
+/* --- Alert Banner (red warning — bracket shape, night state + periodic flash) --- */
 .alert-banner {
   position: absolute;
   top: 42%;
   left: 50%;
-  transform: translateX(-50%);
+  transform: translate(-30%, -50%);
   z-index: 20;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  background: var(--red);
-  padding: 12px 28px;
+  pointer-events: none;
   min-width: 350px;
+  max-width: 550px;
   opacity: 0;
   transition: opacity 0.5s ease;
 }
@@ -557,15 +567,41 @@ body {
   display: none;
 }
 
+.alert-shape {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.alert-bg {
+  fill: var(--red);
+}
+
+.alert-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 44px;
+}
+
 .alert-icon {
-  color: var(--alert-yellow);
   flex-shrink: 0;
+  width: 24px;
+}
+
+.alert-icon img {
+  width: 100%;
+  height: auto;
 }
 
 .alert-text {
   font-family: var(--font-body);
   font-size: clamp(14px, 1.2vw, 20px);
   font-weight: 900;
+  font-style: italic;
   color: var(--alert-yellow);
 }
 
