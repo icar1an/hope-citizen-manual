@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
-  <meta name="theme-color" content="#e9e7e8">
+  <meta name="theme-color" content="#000000">
   <meta name="description" content="H.O.P.E. — Human Order and Phase Enforcement. Cooperation secures a bright morning.">
   <title>WATCHLIGHT</title>
 
@@ -16,7 +16,7 @@
   <!-- ═══ LOADING / DAWN ANIMATION ═══ -->
   <div class="loader" id="loader">
     <div class="loader-content">
-      <img src="./assets/logo-light.png" alt="H.O.P.E." class="loader-logo">
+      <img src="./assets/logo-dark.png" alt="H.O.P.E." class="loader-logo">
       <p class="loader-text">H.O.P.E. operates to ensure the continued safety of remaining population centers.<br>Adhere to all Siren Procedures and remember:</p>
       <p class="loader-tagline">Cooperation secures a bright morning.</p>
     </div>
@@ -52,13 +52,7 @@
       <img src="./assets/logo-dark.png" alt="H.O.P.E." class="logo-img logo-dark">
     </div>
 
-    <!-- Top Section: Label + Countdown -->
-    <div class="top-section">
-      <p class="countdown-label" id="countdown-label">NIGHT SIREN LAUNCH IN</p>
-      <div class="countdown" id="countdown">00:00:00</div>
-    </div>
-
-    <!-- Status Info (bottom-left, hidden on landing) -->
+    <!-- Status Info (left side, hidden on landing) -->
     <div class="status-info" id="status-info">
       <p class="status-line">System Status: Maintained</p>
       <p class="status-line">Atmospheric Obscuration Status: <span id="obscuration">0</span>%</p>
@@ -68,6 +62,9 @@
 
     <!-- Notification Ticker (overlays on globe area) -->
     <div class="notification" id="notification" aria-live="polite">
+      <svg class="notification-shape" viewBox="0 0 684 179" preserveAspectRatio="none" aria-hidden="true">
+        <path class="notification-bg" d="M683.026 177.43H645.343V142.886H37.6846V179H0V1.57031H37.6846V25.123H645.343V0H683.026V177.43Z"/>
+      </svg>
       <div class="notification-inner">
         <div class="notification-icon">
           <img src="./assets/agent.svg" alt="" class="agent-icon">
@@ -76,12 +73,7 @@
       </div>
     </div>
 
-    <!-- Bottom: Tagline + cooperation message -->
-    <div class="bottom-section">
-      <p class="tagline">cooperation secures a bright morning.</p>
-    </div>
-
-    <!-- Warning Alert (only visible during night/siren state) -->
+    <!-- Warning Alert (flashes periodically + during night state) -->
     <div class="alert-banner" id="alert-banner" hidden>
       <span class="alert-icon">
         <svg width="24" height="22" viewBox="0 0 24 22" fill="none">
@@ -90,6 +82,12 @@
         </svg>
       </span>
       <span class="alert-text" id="alert-text">The Lost is present. Do not engage.</span>
+    </div>
+
+    <!-- Bottom: Countdown + Tagline -->
+    <div class="countdown-section">
+      <div class="countdown" id="countdown">00:00:00</div>
+      <p class="tagline">cooperation secures a bright morning.</p>
     </div>
 
   </main>

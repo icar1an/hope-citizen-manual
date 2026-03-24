@@ -11,10 +11,18 @@ import './style.css'
 const CONFIG = {
   cycleDuration: 12 * 60 * 60 * 1000,       // 12 hours
   exhibitionDuration: 20 * 60 * 1000,        // 20 minutes
-  loaderDuration: 4000,                       // 4 seconds for dawn animation
+
+  // Intro timing
+  introHold: 3000,          // Hold landing text for 3s
+  introScrollDuration: 3000, // Auto-scroll transition duration
 
   notificationInterval: { min: 10000, max: 30000 },
   notificationDuration: 6000,
+
+  // Warning flash (periodic black flash with alert)
+  warningFlashInterval: { min: 60000, max: 180000 },
+  warningFlashIntervalExhibition: { min: 20000, max: 45000 },
+  warningFlashDuration: 5000,
 
   // State thresholds (percentage of cycle remaining)
   states: {
@@ -34,7 +42,6 @@ const cycleDuration = isExhibition ? CONFIG.exhibitionDuration : CONFIG.cycleDur
 const loader = document.getElementById('loader')
 const dashboard = document.getElementById('dashboard')
 const countdownEl = document.getElementById('countdown')
-const countdownLabel = document.getElementById('countdown-label')
 const obscurationEl = document.getElementById('obscuration')
 const notificationEl = document.getElementById('notification')
 const notificationTextEl = document.getElementById('notification-text')
@@ -42,7 +49,6 @@ const alertBanner = document.getElementById('alert-banner')
 const alertText = document.getElementById('alert-text')
 const logo = document.getElementById('logo')
 const statusInfo = document.getElementById('status-info')
-const tagline = document.querySelector('.tagline')
 
 // ─── Notification Messages ───────────────────────────────────
 function randomSector() {
@@ -86,6 +92,7 @@ function getProgress() {
 
 // ─── State Engine ────────────────────────────────────────────
 let currentState = 'day'
+let isWarningFlash = false
 
 function getState(progress) {
   const remaining = 1 - progress
@@ -96,6 +103,8 @@ function getState(progress) {
 }
 
 function updateState() {
+  if (isWarningFlash) return // Don't override during warning flash
+
   const progress = getProgress()
   const newState = getState(progress)
 
@@ -103,18 +112,9 @@ function updateState() {
     currentState = newState
     document.body.setAttribute('data-state', newState)
 
-    // Update label based on state
-    if (newState === 'day') {
-      countdownLabel.textContent = 'NIGHT SIREN LAUNCH IN'
-      logo.classList.remove('visible')
-      statusInfo.classList.remove('visible')
-      tagline.classList.remove('visible')
-    } else {
-      countdownLabel.textContent = ''  // Hide top label, show in status area
-      logo.classList.add('visible')
-      statusInfo.classList.add('visible')
-      tagline.classList.add('visible')
-    }
+    // Show logo + status in all states after intro
+    logo.classList.add('visible')
+    statusInfo.classList.add('visible')
 
     // Show alert in night state
     if (newState === 'night') {
@@ -145,16 +145,49 @@ function hideAlertBanner() {
   setTimeout(() => { alertBanner.hidden = true }, 500)
 }
 
+// ─── Warning Flash Engine ────────────────────────────────────
+// Periodically flash screen to night/black with yellow globe + red alert
+function triggerWarningFlash() {
+  if (isWarningFlash) return
+  if (currentState === 'night' || currentState === 'approaching') return
+
+  const savedState = currentState
+  isWarningFlash = true
+
+  // Flash to night state
+  document.body.setAttribute('data-state', 'night')
+  showAlertBanner()
+
+  // Restore after duration
+  setTimeout(() => {
+    isWarningFlash = false
+    document.body.setAttribute('data-state', savedState)
+    hideAlertBanner()
+  }, CONFIG.warningFlashDuration)
+}
+
+function scheduleWarningFlash() {
+  const interval = isExhibition
+    ? CONFIG.warningFlashIntervalExhibition
+    : CONFIG.warningFlashInterval
+  const delay = interval.min + Math.random() * (interval.max - interval.min)
+  setTimeout(() => {
+    triggerWarningFlash()
+    scheduleWarningFlash()
+  }, delay)
+}
+
 // ─── Notification Engine ─────────────────────────────────────
 let isNotificationVisible = false
 
 function showNotification() {
   if (isNotificationVisible) return
 
+  const activeState = isWarningFlash ? 'night' : currentState
   let pool
-  if (currentState === 'night') {
+  if (activeState === 'night') {
     pool = NOTIFICATIONS.filter(n => n.type === 'red' || n.type === 'yellow')
-  } else if (currentState === 'approaching') {
+  } else if (activeState === 'approaching') {
     pool = NOTIFICATIONS.filter(n => n.type === 'yellow' || n.type === 'green')
   } else {
     pool = NOTIFICATIONS.filter(n => n.type === 'green')
@@ -196,30 +229,43 @@ function tick() {
   requestAnimationFrame(tick)
 }
 
-// ─── Loading / Dawn Animation ────────────────────────────────
-function startLoader() {
+// ─── Intro Sequence ──────────────────────────────────────────
+// Phase A: Dark landing — globe visible, text fades in (CSS animations)
+// Phase B: Hold for introHold duration
+// Phase C: Auto-scroll — globe rises, bg transitions dark→light, text fades out
+// Phase D: Dashboard revealed
+function runIntroSequence() {
   return new Promise((resolve) => {
-    // Wait for fonts + minimum display time
+    // Wait for fonts to load, then hold landing
     Promise.all([
       document.fonts.ready,
-      new Promise(r => setTimeout(r, CONFIG.loaderDuration))
+      new Promise(r => setTimeout(r, CONFIG.introHold))
     ]).then(() => {
-      loader.classList.add('fade-out')
+      // Phase C: trigger auto-scroll transition
+      loader.classList.add('intro-scroll')
+
+      // After scroll transition completes, fade out loader
       setTimeout(() => {
-        loader.style.display = 'none'
-        resolve()
-      }, 1000) // match the CSS fade-out transition
+        loader.classList.add('fade-out')
+        setTimeout(() => {
+          loader.style.display = 'none'
+          resolve()
+        }, 800) // match fade-out transition
+      }, CONFIG.introScrollDuration)
     })
   })
 }
 
 // ─── Initialize ──────────────────────────────────────────────
 async function init() {
-  // Show loading animation
-  await startLoader()
+  // Run dark landing → auto-scroll intro
+  await runIntroSequence()
 
-  // Set initial state
+  // Set initial state and show dashboard elements
   updateState()
+  logo.classList.add('visible')
+  statusInfo.classList.add('visible')
+
   const remaining = getTimeRemaining()
   countdownEl.textContent = formatTime(remaining)
 
@@ -228,6 +274,9 @@ async function init() {
 
   // Start notifications after a short delay
   setTimeout(() => scheduleNextNotification(), 5000)
+
+  // Start periodic warning flashes
+  setTimeout(() => scheduleWarningFlash(), 15000)
 
   if (isExhibition) {
     console.log('[WATCHLIGHT] Exhibition mode: 20-minute cycle')

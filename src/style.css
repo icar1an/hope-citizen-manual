@@ -83,38 +83,59 @@ html, body {
 }
 
 /* ═══════════════════════════════════════
-   LOADING / DAWN ANIMATION
+   LOADING / INTRO SEQUENCE
+   Dark landing → auto-scroll → dashboard
    ═══════════════════════════════════════ */
 
 .loader {
   position: fixed;
   inset: 0;
   z-index: 100;
-  background: var(--bg-day);
+  background: #000000;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  transition: opacity 1s ease;
+  transition: background-color 3s ease;
 }
 
+/* Phase 2: intro-scroll — bg goes light, content fades, globe rises */
+.loader.intro-scroll {
+  background: var(--bg-day);
+}
+
+.loader.intro-scroll .loader-content {
+  opacity: 0;
+  transform: translateY(-30px);
+  pointer-events: none;
+}
+
+.loader.intro-scroll .loader-globe {
+  bottom: 0;
+  transform: translateX(-50%) translateY(-20vh);
+}
+
+/* Phase 3: fade-out — loader disappears */
 .loader.fade-out {
   opacity: 0;
   pointer-events: none;
+  transition: opacity 0.8s ease;
 }
 
 .loader-content {
   text-align: center;
   z-index: 2;
   padding: 0 2rem;
-  animation: loaderFadeIn 1.5s ease forwards;
+  opacity: 0;
+  transform: translateY(10px);
+  animation: loaderFadeIn 1.5s ease 0.5s forwards;
+  transition: opacity 2s ease, transform 2s ease;
 }
 
 .loader-logo {
   width: clamp(80px, 10vw, 140px);
   height: auto;
   margin-bottom: 2rem;
-  animation: loaderFadeIn 1s ease forwards;
 }
 
 .loader-text {
@@ -122,11 +143,11 @@ html, body {
   font-size: clamp(14px, 1.2vw, 20px);
   font-weight: 400;
   line-height: 1.6;
-  color: #000;
+  color: #e9e7e8;
   max-width: 500px;
   margin: 0 auto 1rem;
   opacity: 0;
-  animation: loaderFadeIn 1s ease 0.5s forwards;
+  animation: loaderFadeIn 1s ease 1s forwards;
 }
 
 .loader-tagline {
@@ -134,9 +155,9 @@ html, body {
   font-size: clamp(14px, 1.2vw, 20px);
   font-weight: 300;
   font-style: italic;
-  color: #000;
+  color: #e9e7e8;
   opacity: 0;
-  animation: loaderFadeIn 1s ease 1s forwards;
+  animation: loaderFadeIn 1s ease 1.5s forwards;
 }
 
 .loader-globe {
@@ -147,8 +168,8 @@ html, body {
   width: 120%;
   max-width: 2000px;
   z-index: 1;
-  opacity: 0;
-  animation: loaderGlobeRise 2s ease 0.8s forwards;
+  opacity: 1;
+  transition: bottom 3s ease, transform 3s ease;
 }
 
 .loader-globe img {
@@ -160,11 +181,6 @@ html, body {
 @keyframes loaderFadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
-}
-
-@keyframes loaderGlobeRise {
-  from { opacity: 0; transform: translateX(-50%) translateY(30px); }
-  to { opacity: 0.3; transform: translateX(-50%) translateY(0); }
 }
 
 /* ═══════════════════════════════════════
@@ -234,7 +250,7 @@ html, body {
 [data-state="night"] .grad-stop-1 { stop-color: #000000; }
 [data-state="night"] .grad-stop-2 { stop-color: #000000; }
 
-/* --- H.O.P.E. Logo (top-left) --- */
+/* --- H.O.P.E. Logo (top-left corner) --- */
 .logo {
   position: absolute;
   top: 3vh;
@@ -269,42 +285,7 @@ html, body {
 [data-state="night"] .logo-dark,
 [data-state="approaching"] .logo-dark { opacity: 1; }
 
-/* --- Top Section: Label + Countdown ---
-   Figma Screen 1: label top-left, timer top-right, both in upper 40%
-*/
-.top-section {
-  position: absolute;
-  top: 5vh;
-  left: 3vw;
-  right: 3vw;
-  z-index: 10;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-}
-
-.countdown-label {
-  font-family: var(--font-body);
-  font-size: clamp(12px, 1.2vw, 20px);
-  font-weight: 600;
-  letter-spacing: 0.14em;
-  color: var(--fg);
-  padding-top: 1vh;
-  transition: color 2s ease;
-}
-
-.countdown {
-  font-family: var(--font-display);
-  font-size: clamp(50px, 12vw, 200px);
-  font-weight: 400;
-  line-height: 0.85;
-  color: var(--fg);
-  letter-spacing: 0.02em;
-  text-align: right;
-  transition: color 2s ease;
-}
-
-/* --- Status Info (bottom-left, visible in later states) --- */
+/* --- Status Info (left side, visible after intro) --- */
 .status-info {
   position: absolute;
   bottom: clamp(80px, 12vh, 160px);
@@ -332,12 +313,26 @@ html, body {
   color: var(--fg);
 }
 
-/* --- Bottom Section: Tagline --- */
-.bottom-section {
+/* --- Countdown Section (BOTTOM) --- */
+.countdown-section {
   position: absolute;
   bottom: 2vh;
+  left: 3vw;
   right: 3vw;
   z-index: 10;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.countdown {
+  font-family: var(--font-display);
+  font-size: clamp(50px, 12vw, 200px);
+  font-weight: 400;
+  line-height: 0.85;
+  color: var(--fg);
+  letter-spacing: 0.02em;
+  transition: color 2s ease;
 }
 
 .tagline {
@@ -345,12 +340,9 @@ html, body {
   font-size: clamp(12px, 1.4vw, 24px);
   font-weight: 300;
   color: var(--fg);
-  opacity: 0;
-  transition: opacity 1s ease, color 2s ease;
-}
-
-.tagline.visible {
-  opacity: 0.8;
+  text-align: right;
+  padding-bottom: 0.5em;
+  transition: color 2s ease;
 }
 
 /* Pulsing effect on countdown during night state */
@@ -363,7 +355,7 @@ html, body {
   50% { opacity: 0.7; }
 }
 
-/* --- Notification Ticker --- */
+/* --- Notification Ticker (Union bracket shape) --- */
 .notification {
   position: absolute;
   top: 45%;
@@ -373,19 +365,38 @@ html, body {
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.5s ease;
+  min-width: 300px;
+  max-width: 550px;
 }
 
 .notification.visible {
   opacity: 1;
 }
 
+/* SVG Union bracket shape background */
+.notification-shape {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.notification-bg {
+  fill: var(--green);
+  transition: fill 0.3s ease;
+}
+
+.notification.type-green .notification-bg { fill: var(--green); }
+.notification.type-yellow .notification-bg { fill: var(--yellow); }
+.notification.type-red .notification-bg { fill: var(--red); }
+
 .notification-inner {
+  position: relative;
+  z-index: 1;
   display: flex;
   align-items: flex-start;
   gap: 16px;
-  padding: 12px 24px;
-  min-width: 300px;
-  max-width: 550px;
+  padding: 16px 44px;
 }
 
 .notification-icon {
@@ -404,12 +415,9 @@ html, body {
   font-weight: 400;
   line-height: 1.4;
   color: #000;
-  padding: 6px 0;
+  padding: 2px 0;
 }
 
-.notification.type-green .notification-inner { background: var(--green); }
-.notification.type-yellow .notification-inner { background: var(--yellow); }
-.notification.type-red .notification-inner { background: var(--red); }
 .notification.type-red .notification-text { color: var(--alert-yellow); }
 
 .notification.glitch {
@@ -424,7 +432,7 @@ html, body {
   100% { transform: translate(-30%, -50%) skewX(0deg); }
 }
 
-/* --- Alert Banner (red warning during night) --- */
+/* --- Alert Banner (red warning — night state + periodic flash) --- */
 .alert-banner {
   position: absolute;
   top: 42%;
