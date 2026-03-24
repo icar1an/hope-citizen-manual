@@ -216,10 +216,10 @@ body {
 
 .globe-map {
   position: absolute;
-  top: -55%;
+  top: -40%;
   left: 50%;
   transform: translateX(-50%);
-  width: 115%;
+  width: 92%;
   max-width: 2200px;
 }
 
