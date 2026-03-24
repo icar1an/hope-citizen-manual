@@ -4,7 +4,6 @@
    ============================================ */
 
 /* --- Font Faces --- */
-/* Technik Mono — used for countdown timer */
 @font-face {
   font-family: 'Technik Mono';
   src: url('/fonts/TechnikMono-200.woff2') format('woff2');
@@ -13,7 +12,6 @@
   font-display: swap;
 }
 
-/* 35-FTR (Ilott Type) — used for all body/UI text */
 @font-face {
   font-family: '35-FTR';
   src: url('/fonts/ilott-type-35-ftr-light.otf') format('opentype');
@@ -54,7 +52,6 @@
   --bg-day: #e9e7e8;
   --bg-night: #000000;
   --fg-day: #000000;
-  --fg-transition: #ffffff;
   --fg-night: #cbbf65;
 
   --yellow: #ebda62;
@@ -65,7 +62,6 @@
 
   --bg: var(--bg-day);
   --fg: var(--fg-day);
-  --fg-secondary: var(--fg-day);
 }
 
 /* --- Reset & Base --- */
@@ -82,45 +78,121 @@ html, body {
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font-body);
-  transition: background-color 2s ease, color 1s ease;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* --- State-Driven Colors --- */
-[data-state="day"] {
-  --bg: #e9e7e8;
-  --fg: #000000;
-  --fg-secondary: #000000;
-}
+/* ═══════════════════════════════════════
+   LOADING / DAWN ANIMATION
+   ═══════════════════════════════════════ */
 
-[data-state="transition"] {
-  --bg: #6b6a6b;
-  --fg: #ffffff;
-  --fg-secondary: #ffffff;
-}
-
-[data-state="approaching"] {
-  --bg: #2a2a2a;
-  --fg: #ffffff;
-  --fg-secondary: #ffffff;
-}
-
-[data-state="night"] {
-  --bg: #000000;
-  --fg: #cbbf65;
-  --fg-secondary: #ebda62;
-}
-
-/* --- Globe Background --- */
-.globe-container {
+.loader {
   position: fixed;
+  inset: 0;
+  z-index: 100;
+  background: var(--bg-day);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 1s ease;
+}
+
+.loader.fade-out {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loader-content {
+  text-align: center;
+  z-index: 2;
+  padding: 0 2rem;
+  animation: loaderFadeIn 1.5s ease forwards;
+}
+
+.loader-logo {
+  width: clamp(80px, 10vw, 140px);
+  height: auto;
+  margin-bottom: 2rem;
+  animation: loaderFadeIn 1s ease forwards;
+}
+
+.loader-text {
+  font-family: var(--font-body);
+  font-size: clamp(14px, 1.2vw, 20px);
+  font-weight: 400;
+  line-height: 1.6;
+  color: #000;
+  max-width: 500px;
+  margin: 0 auto 1rem;
+  opacity: 0;
+  animation: loaderFadeIn 1s ease 0.5s forwards;
+}
+
+.loader-tagline {
+  font-family: var(--font-body);
+  font-size: clamp(14px, 1.2vw, 20px);
+  font-weight: 300;
+  font-style: italic;
+  color: #000;
+  opacity: 0;
+  animation: loaderFadeIn 1s ease 1s forwards;
+}
+
+.loader-globe {
+  position: absolute;
+  bottom: -5%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 120%;
+  max-width: 2000px;
+  z-index: 1;
+  opacity: 0;
+  animation: loaderGlobeRise 2s ease 0.8s forwards;
+}
+
+.loader-globe img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+@keyframes loaderFadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes loaderGlobeRise {
+  from { opacity: 0; transform: translateX(-50%) translateY(30px); }
+  to { opacity: 0.3; transform: translateX(-50%) translateY(0); }
+}
+
+/* ═══════════════════════════════════════
+   MAIN DASHBOARD
+   ═══════════════════════════════════════ */
+
+.dashboard {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  background: var(--bg);
+  transition: background-color 3s ease;
+}
+
+/* --- State Colors --- */
+[data-state="day"] { --bg: #e9e7e8; --fg: #000000; }
+[data-state="transition"] { --bg: #8a8889; --fg: #ffffff; }
+[data-state="approaching"] { --bg: #2a2a2a; --fg: #ffffff; }
+[data-state="night"] { --bg: #000000; --fg: #cbbf65; }
+
+/* --- Globe (bottom hemisphere) --- */
+.globe-container {
+  position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 65vh;
+  height: 60vh;
   pointer-events: none;
-  z-index: 1;
 }
 
 .globe-map {
@@ -128,77 +200,53 @@ html, body {
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 130%;
-  max-width: 2400px;
-  z-index: 1;
+  width: 110%;
+  max-width: 2200px;
 }
 
 .globe-image {
   width: 100%;
   height: auto;
   display: block;
-  opacity: 0.95;
 }
 
-.globe-overlay {
+/* The SVG arc creates the curved sphere illusion */
+.globe-arc {
   position: absolute;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
+  width: 100%;
+  height: 100%;
   z-index: 2;
-  transition: background 2s ease;
 }
 
-[data-state="day"] .globe-overlay {
-  background: linear-gradient(
-    to bottom,
-    #e9e7e8 0%,
-    rgba(233, 231, 232, 0.92) 10%,
-    rgba(141, 140, 141, 0.7) 35%,
-    rgba(0, 0, 0, 0.15) 65%,
-    transparent 80%
-  );
-}
+/* Transition gradient stops for night mode */
+.grad-stop-1 { transition: stop-color 3s ease; }
+.grad-stop-2 { transition: stop-color 3s ease; }
+.grad-stop-3 { transition: stop-color 3s ease; }
 
-[data-state="transition"] .globe-overlay {
-  background: linear-gradient(
-    to bottom,
-    #6b6a6b 0%,
-    rgba(107, 106, 107, 0.85) 15%,
-    rgba(60, 60, 60, 0.5) 40%,
-    transparent 70%
-  );
-}
+[data-state="transition"] .grad-stop-1 { stop-color: #8a8889; }
+[data-state="transition"] .grad-stop-2 { stop-color: #555; }
 
-[data-state="approaching"] .globe-overlay {
-  background: linear-gradient(
-    to bottom,
-    #2a2a2a 0%,
-    rgba(42, 42, 42, 0.85) 15%,
-    rgba(0, 0, 0, 0.5) 40%,
-    transparent 70%
-  );
-}
+[data-state="approaching"] .grad-stop-1 { stop-color: #2a2a2a; }
+[data-state="approaching"] .grad-stop-2 { stop-color: #1a1a1a; }
 
-[data-state="night"] .globe-overlay {
-  background: linear-gradient(
-    to bottom,
-    #000000 0%,
-    rgba(0, 0, 0, 0.88) 15%,
-    rgba(0, 0, 0, 0.5) 40%,
-    transparent 70%
-  );
-}
+[data-state="night"] .grad-stop-1 { stop-color: #000000; }
+[data-state="night"] .grad-stop-2 { stop-color: #000000; }
 
-/* --- H.O.P.E. Logo --- */
+/* --- H.O.P.E. Logo (top-left) --- */
 .logo {
-  position: fixed;
+  position: absolute;
   top: 3vh;
   left: 3vw;
   z-index: 10;
-  width: clamp(60px, 6vw, 110px);
-  height: auto;
+  width: clamp(50px, 5vw, 90px);
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+.logo.visible {
+  opacity: 1;
 }
 
 .logo-img {
@@ -208,10 +256,7 @@ html, body {
   transition: opacity 0.8s ease;
 }
 
-.logo-light {
-  opacity: 1;
-}
-
+.logo-light { opacity: 1; }
 .logo-dark {
   position: absolute;
   top: 0;
@@ -220,60 +265,79 @@ html, body {
 }
 
 [data-state="night"] .logo-light,
-[data-state="approaching"] .logo-light {
-  opacity: 0;
-}
-
+[data-state="approaching"] .logo-light { opacity: 0; }
 [data-state="night"] .logo-dark,
-[data-state="approaching"] .logo-dark {
-  opacity: 1;
-}
+[data-state="approaching"] .logo-dark { opacity: 1; }
 
-/* --- Status Info --- */
-.status-info {
-  position: fixed;
-  bottom: clamp(180px, 22vh, 280px);
-  left: 3vw;
-  z-index: 10;
-  font-family: var(--font-body);
-  font-size: clamp(12px, 1.2vw, 20px);
-  font-weight: 300;
-  line-height: 1.5;
-  color: var(--fg-secondary);
-  transition: color 1s ease;
-}
-
-.status-line {
-  opacity: 0.85;
-}
-
-/* --- Countdown Section --- */
-.countdown-section {
-  position: fixed;
-  bottom: 2vh;
+/* --- Top Section: Label + Countdown ---
+   Figma Screen 1: label top-left, timer top-right, both in upper 40%
+*/
+.top-section {
+  position: absolute;
+  top: 5vh;
   left: 3vw;
   right: 3vw;
   z-index: 10;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
 }
 
 .countdown-label {
   font-family: var(--font-body);
-  font-size: clamp(16px, 1.8vw, 30px);
-  font-weight: 400;
+  font-size: clamp(12px, 1.2vw, 20px);
+  font-weight: 600;
   letter-spacing: 0.14em;
   color: var(--fg);
-  margin-bottom: 0.5vh;
-  transition: color 1s ease;
+  padding-top: 1vh;
+  transition: color 2s ease;
 }
 
 .countdown {
   font-family: var(--font-display);
-  font-size: clamp(60px, 12vw, 200px);
+  font-size: clamp(50px, 12vw, 200px);
   font-weight: 400;
-  line-height: 0.9;
+  line-height: 0.85;
   color: var(--fg);
   letter-spacing: 0.02em;
-  transition: color 1s ease;
+  text-align: right;
+  transition: color 2s ease;
+}
+
+/* --- Status Info (bottom-left, visible in later states) --- */
+.status-info {
+  position: absolute;
+  bottom: clamp(80px, 12vh, 160px);
+  left: 3vw;
+  z-index: 10;
+  font-family: var(--font-body);
+  font-size: clamp(11px, 1.1vw, 20px);
+  font-weight: 300;
+  line-height: 1.5;
+  color: var(--fg);
+  opacity: 0;
+  transition: opacity 1s ease, color 2s ease;
+}
+
+.status-info.visible {
+  opacity: 1;
+}
+
+.siren-label {
+  font-family: var(--font-body);
+  font-size: clamp(14px, 1.6vw, 30px);
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  margin-top: 1.5vh;
+  color: var(--fg);
+}
+
+/* --- Bottom Section: Tagline --- */
+.bottom-section {
+  position: absolute;
+  bottom: 2vh;
+  right: 3vw;
+  z-index: 10;
 }
 
 .tagline {
@@ -281,9 +345,12 @@ html, body {
   font-size: clamp(12px, 1.4vw, 24px);
   font-weight: 300;
   color: var(--fg);
+  opacity: 0;
+  transition: opacity 1s ease, color 2s ease;
+}
+
+.tagline.visible {
   opacity: 0.8;
-  margin-top: 0.5vh;
-  transition: color 1s ease;
 }
 
 /* Pulsing effect on countdown during night state */
@@ -298,10 +365,10 @@ html, body {
 
 /* --- Notification Ticker --- */
 .notification {
-  position: fixed;
+  position: absolute;
   top: 45%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-30%, -50%);
   z-index: 15;
   pointer-events: none;
   opacity: 0;
@@ -318,12 +385,12 @@ html, body {
   gap: 16px;
   padding: 12px 24px;
   min-width: 300px;
-  max-width: 600px;
+  max-width: 550px;
 }
 
 .notification-icon {
   flex-shrink: 0;
-  width: 40px;
+  width: 36px;
 }
 
 .agent-icon {
@@ -333,47 +400,34 @@ html, body {
 
 .notification-text {
   font-family: var(--font-body);
-  font-size: clamp(14px, 1.2vw, 20px);
+  font-size: clamp(13px, 1.1vw, 20px);
   font-weight: 400;
   line-height: 1.4;
   color: #000;
-  padding: 8px 0;
+  padding: 6px 0;
 }
 
-/* Notification color variants */
-.notification.type-green .notification-inner {
-  background: var(--green);
-}
+.notification.type-green .notification-inner { background: var(--green); }
+.notification.type-yellow .notification-inner { background: var(--yellow); }
+.notification.type-red .notification-inner { background: var(--red); }
+.notification.type-red .notification-text { color: var(--alert-yellow); }
 
-.notification.type-yellow .notification-inner {
-  background: var(--yellow);
-}
-
-.notification.type-red .notification-inner {
-  background: var(--red);
-}
-
-.notification.type-red .notification-text {
-  color: var(--alert-yellow);
-}
-
-/* Notification glitch animation */
 .notification.glitch {
   animation: notificationGlitch 0.3s steps(2) 3;
 }
 
 @keyframes notificationGlitch {
-  0% { transform: translate(-50%, -50%) skewX(0deg); }
-  25% { transform: translate(-48%, -52%) skewX(-2deg); }
-  50% { transform: translate(-52%, -48%) skewX(2deg); }
-  75% { transform: translate(-49%, -51%) skewX(-1deg); }
-  100% { transform: translate(-50%, -50%) skewX(0deg); }
+  0% { transform: translate(-30%, -50%) skewX(0deg); }
+  25% { transform: translate(-28%, -52%) skewX(-2deg); }
+  50% { transform: translate(-32%, -48%) skewX(2deg); }
+  75% { transform: translate(-29%, -51%) skewX(-1deg); }
+  100% { transform: translate(-30%, -50%) skewX(0deg); }
 }
 
 /* --- Alert Banner (red warning during night) --- */
 .alert-banner {
-  position: fixed;
-  top: 40%;
+  position: absolute;
+  top: 42%;
   left: 50%;
   transform: translateX(-50%);
   z-index: 20;

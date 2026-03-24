@@ -9,31 +9,30 @@ import './style.css'
 
 // ─── Configuration ───────────────────────────────────────────
 const CONFIG = {
-  // Countdown cycle duration in milliseconds
-  // Real mode: 12 hours (43200000ms)
-  // Exhibition mode: 20 minutes (1200000ms)
-  cycleDuration: 12 * 60 * 60 * 1000,
-  exhibitionDuration: 20 * 60 * 1000,
+  cycleDuration: 12 * 60 * 60 * 1000,       // 12 hours
+  exhibitionDuration: 20 * 60 * 1000,        // 20 minutes
+  loaderDuration: 4000,                       // 4 seconds for dawn animation
 
-  // Notification timing
-  notificationInterval: { min: 8000, max: 25000 },
+  notificationInterval: { min: 10000, max: 30000 },
   notificationDuration: 6000,
 
   // State thresholds (percentage of cycle remaining)
   states: {
-    day: 0.6,        // 60%+ remaining = day
-    transition: 0.3, // 30-60% = transition
-    approaching: 0.1, // 10-30% = approaching
-    night: 0,        // <10% = night/siren
+    day: 0.6,
+    transition: 0.3,
+    approaching: 0.1,
+    night: 0,
   },
 }
 
-// Check for exhibition mode via URL param
+// Check for exhibition mode
 const params = new URLSearchParams(window.location.search)
 const isExhibition = params.has('exhibition') || params.get('zone') === 'exhibition'
 const cycleDuration = isExhibition ? CONFIG.exhibitionDuration : CONFIG.cycleDuration
 
 // ─── DOM References ──────────────────────────────────────────
+const loader = document.getElementById('loader')
+const dashboard = document.getElementById('dashboard')
 const countdownEl = document.getElementById('countdown')
 const countdownLabel = document.getElementById('countdown-label')
 const obscurationEl = document.getElementById('obscuration')
@@ -41,6 +40,9 @@ const notificationEl = document.getElementById('notification')
 const notificationTextEl = document.getElementById('notification-text')
 const alertBanner = document.getElementById('alert-banner')
 const alertText = document.getElementById('alert-text')
+const logo = document.getElementById('logo')
+const statusInfo = document.getElementById('status-info')
+const tagline = document.querySelector('.tagline')
 
 // ─── Notification Messages ───────────────────────────────────
 function randomSector() {
@@ -48,54 +50,18 @@ function randomSector() {
 }
 
 const NOTIFICATIONS = [
-  {
-    template: () => `Sector ${randomSector()} cleared.\nAll Phased have returned to registered households`,
-    type: 'green',
-  },
-  {
-    template: () => `Watchlight HOPE-PC8 Phase Cell distribution complete in Sector ${randomSector()}.`,
-    type: 'green',
-  },
-  {
-    template: () => `Morning Return verification completed [Sector ${randomSector()}]. Identification discrepancies not recorded.`,
-    type: 'green',
-  },
-  {
-    template: () => `Sector ${randomSector()} cleared again.`,
-    type: 'green',
-  },
-  {
-    template: () => 'Siren systems do not malfunction.',
-    type: 'yellow',
-  },
-  {
-    template: () => `Missing Phased recorded in Sector ${randomSector()}. Do not attempt verification outside the household.`,
-    type: 'yellow',
-  },
-  {
-    template: () => `Missing Phased recorded [${randomSector()}]. Do not attempt verification outside the household.`,
-    type: 'yellow',
-  },
-  {
-    template: () => `Return data unavailable for Sector ${Math.floor(Math.random() * 9)}*${Math.floor(Math.random() * 99)}ver.#.`,
-    type: 'yellow',
-  },
-  {
-    template: () => 'Return verification pending // pending // pending',
-    type: 'yellow',
-  },
-  {
-    template: () => 'Do not open the door.',
-    type: 'red',
-  },
-  {
-    template: () => 'The Lost is present. Do not engage.',
-    type: 'red',
-  },
-  {
-    template: () => 'The Lost may resemble a known individual. Do not approach. The Lost may use a familiar voice. Do not answer. The Lost may call your name. Do not respond.',
-    type: 'red',
-  },
+  { template: () => `Sector ${randomSector()} cleared.\nAll Phased have returned to registered households`, type: 'green' },
+  { template: () => `Watchlight HOPE-PC8 Phase Cell distribution complete in Sector ${randomSector()}.`, type: 'green' },
+  { template: () => `Morning Return verification completed [Sector ${randomSector()}]. Identification discrepancies not recorded.`, type: 'green' },
+  { template: () => `Sector ${randomSector()} cleared again.`, type: 'green' },
+  { template: () => 'Siren systems do not malfunction.', type: 'yellow' },
+  { template: () => `Missing Phased recorded in Sector ${randomSector()}. Do not attempt verification outside the household.`, type: 'yellow' },
+  { template: () => `Missing Phased recorded [${randomSector()}]. Do not attempt verification outside the household.`, type: 'yellow' },
+  { template: () => `Return data unavailable for Sector ${Math.floor(Math.random() * 9)}*${Math.floor(Math.random() * 99)}ver.#.`, type: 'yellow' },
+  { template: () => 'Return verification pending // pending // pending', type: 'yellow' },
+  { template: () => 'Do not open the door.', type: 'red' },
+  { template: () => 'The Lost is present. Do not engage.', type: 'red' },
+  { template: () => 'The Lost may resemble a known individual. Do not approach. The Lost may use a familiar voice. Do not answer. The Lost may call your name. Do not respond.', type: 'red' },
 ]
 
 // ─── Countdown Engine ────────────────────────────────────────
@@ -114,7 +80,6 @@ function formatTime(ms) {
 }
 
 function getProgress() {
-  // Returns 0 (just reset/day) to 1 (siren imminent)
   const remaining = getTimeRemaining()
   return 1 - (remaining / cycleDuration)
 }
@@ -138,14 +103,20 @@ function updateState() {
     currentState = newState
     document.body.setAttribute('data-state', newState)
 
-    // Update countdown label
+    // Update label based on state
     if (newState === 'day') {
       countdownLabel.textContent = 'NIGHT SIREN LAUNCH IN'
+      logo.classList.remove('visible')
+      statusInfo.classList.remove('visible')
+      tagline.classList.remove('visible')
     } else {
-      countdownLabel.textContent = 'NEXT SIREN ACTIVATION'
+      countdownLabel.textContent = ''  // Hide top label, show in status area
+      logo.classList.add('visible')
+      statusInfo.classList.add('visible')
+      tagline.classList.add('visible')
     }
 
-    // Show/hide alert banner in night state
+    // Show alert in night state
     if (newState === 'night') {
       showAlertBanner()
     } else {
@@ -153,7 +124,7 @@ function updateState() {
     }
   }
 
-  // Update obscuration percentage (0% at day start, 100% at siren)
+  // Update obscuration percentage
   const obscuration = Math.round(progress * 100)
   obscurationEl.textContent = obscuration
 }
@@ -171,19 +142,15 @@ function showAlertBanner() {
 
 function hideAlertBanner() {
   alertBanner.classList.remove('visible')
-  setTimeout(() => {
-    alertBanner.hidden = true
-  }, 500)
+  setTimeout(() => { alertBanner.hidden = true }, 500)
 }
 
 // ─── Notification Engine ─────────────────────────────────────
-let notificationTimeout = null
 let isNotificationVisible = false
 
 function showNotification() {
   if (isNotificationVisible) return
 
-  // Pick a notification based on current state
   let pool
   if (currentState === 'night') {
     pool = NOTIFICATIONS.filter(n => n.type === 'red' || n.type === 'yellow')
@@ -196,21 +163,15 @@ function showNotification() {
   const notification = pool[Math.floor(Math.random() * pool.length)]
   const text = notification.template()
 
-  // Update notification element
   notificationTextEl.textContent = text
   notificationEl.className = `notification type-${notification.type}`
 
-  // Show with glitch effect
   requestAnimationFrame(() => {
     notificationEl.classList.add('visible', 'glitch')
     isNotificationVisible = true
 
-    // Remove glitch class after animation
-    setTimeout(() => {
-      notificationEl.classList.remove('glitch')
-    }, 900)
+    setTimeout(() => notificationEl.classList.remove('glitch'), 900)
 
-    // Hide after duration
     setTimeout(() => {
       notificationEl.classList.remove('visible')
       isNotificationVisible = false
@@ -221,7 +182,7 @@ function showNotification() {
 function scheduleNextNotification() {
   const { min, max } = CONFIG.notificationInterval
   const delay = min + Math.random() * (max - min)
-  notificationTimeout = setTimeout(() => {
+  setTimeout(() => {
     showNotification()
     scheduleNextNotification()
   }, delay)
@@ -235,20 +196,39 @@ function tick() {
   requestAnimationFrame(tick)
 }
 
+// ─── Loading / Dawn Animation ────────────────────────────────
+function startLoader() {
+  return new Promise((resolve) => {
+    // Wait for fonts + minimum display time
+    Promise.all([
+      document.fonts.ready,
+      new Promise(r => setTimeout(r, CONFIG.loaderDuration))
+    ]).then(() => {
+      loader.classList.add('fade-out')
+      setTimeout(() => {
+        loader.style.display = 'none'
+        resolve()
+      }, 1000) // match the CSS fade-out transition
+    })
+  })
+}
+
 // ─── Initialize ──────────────────────────────────────────────
-function init() {
+async function init() {
+  // Show loading animation
+  await startLoader()
+
   // Set initial state
   updateState()
   const remaining = getTimeRemaining()
   countdownEl.textContent = formatTime(remaining)
 
-  // Start the countdown loop
+  // Start countdown
   requestAnimationFrame(tick)
 
-  // Start notification ticker
-  scheduleNextNotification()
+  // Start notifications after a short delay
+  setTimeout(() => scheduleNextNotification(), 5000)
 
-  // Log mode
   if (isExhibition) {
     console.log('[WATCHLIGHT] Exhibition mode: 20-minute cycle')
   } else {
