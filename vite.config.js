@@ -4,6 +4,7 @@ export default defineConfig({
   base: './',
   root: '.',
   publicDir: 'public',
+  plugins: [],
   build: {
     outDir: 'dist',
     assetsInlineLimit: 0,
