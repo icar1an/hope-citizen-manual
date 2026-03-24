@@ -153,14 +153,13 @@ html, body {
 .loader-globe {
   position: absolute;
   bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 140%;
-  max-width: 2800px;
+  left: -10%;
+  right: -10%;
+  width: 120%;
   height: 45vh;
   overflow: hidden;
   z-index: 1;
-  clip-path: url(#dome-clip);
+  clip-path: ellipse(72% 100% at 50% 100%);
   transition: height 3s ease;
 }
 
@@ -169,11 +168,11 @@ html, body {
 }
 
 .loader-globe img {
-  width: 100%;
+  width: 90%;
   height: auto;
   display: block;
   position: absolute;
-  bottom: -10%;
+  top: 0;
   left: 50%;
   transform: translateX(-50%);
 }
@@ -201,25 +200,24 @@ html, body {
 [data-state="approaching"] { --bg: #2a2a2a; --fg: #ffffff; }
 [data-state="night"] { --bg: #000000; --fg: #cbbf65; }
 
-/* --- Globe (dome clipped by arc curve) --- */
+/* --- Globe (dome clipped by ellipse curve) --- */
 .globe-container {
   position: absolute;
   bottom: 0;
-  left: 0;
-  right: 0;
-  height: 62vh;
+  left: -10%;
+  right: -10%;
+  height: 70vh;
   pointer-events: none;
   overflow: hidden;
-  clip-path: url(#dome-clip);
+  clip-path: ellipse(72% 100% at 50% 100%);
 }
 
 .globe-map {
   position: absolute;
-  top: -15%;
+  top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 140%;
-  max-width: 2800px;
+  width: 110%;
 }
 
 .globe-image {
