@@ -153,14 +153,19 @@ html, body {
 .loader-globe {
   position: absolute;
   bottom: 0;
-  left: -10%;
-  right: -10%;
-  width: 120%;
+  left: -15%;
+  right: -15%;
   height: 45vh;
   overflow: hidden;
   z-index: 1;
-  clip-path: ellipse(72% 100% at 50% 100%);
+  clip-path: ellipse(68% 100% at 50% 100%);
   transition: height 3s ease;
+}
+
+.loader-dome {
+  position: absolute;
+  inset: 0;
+  background: #000000;
 }
 
 .loader.intro-scroll .loader-globe {
@@ -168,13 +173,14 @@ html, body {
 }
 
 .loader-globe img {
-  width: 90%;
+  width: 85%;
   height: auto;
   display: block;
   position: absolute;
-  top: 0;
+  top: -5%;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 1;
 }
 
 @keyframes loaderFadeIn {
@@ -200,24 +206,34 @@ html, body {
 [data-state="approaching"] { --bg: #2a2a2a; --fg: #ffffff; }
 [data-state="night"] { --bg: #000000; --fg: #cbbf65; }
 
-/* --- Globe (dome clipped by ellipse curve) --- */
-.globe-container {
+/* --- Globe Dome (black background, clipped to ellipse) --- */
+.globe-dome {
   position: absolute;
   bottom: 0;
-  left: -10%;
-  right: -10%;
-  height: 70vh;
+  left: -15%;
+  right: -15%;
+  height: 85vh;
+  background: #000000;
+  clip-path: ellipse(68% 100% at 50% 100%);
   pointer-events: none;
-  overflow: hidden;
-  clip-path: ellipse(72% 100% at 50% 100%);
+  transition: opacity 3s ease;
 }
 
+/* Day state: dome is invisible (no black background needed) */
+[data-state="day"] .globe-dome { opacity: 0; }
+[data-state="transition"] .globe-dome { opacity: 0.7; }
+[data-state="approaching"] .globe-dome { opacity: 0.95; }
+[data-state="night"] .globe-dome { opacity: 1; }
+
+/* --- Globe Map (transparent PNG with dots, covers full viewport) --- */
 .globe-map {
   position: absolute;
-  top: 0;
+  top: -8%;
   left: 50%;
   transform: translateX(-50%);
-  width: 110%;
+  width: 115%;
+  pointer-events: none;
+  z-index: 1;
 }
 
 .globe-image {
