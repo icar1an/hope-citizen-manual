@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
-  <meta name="theme-color" content="#000000">
+  <meta name="theme-color" content="#e9e7e8">
   <meta name="description" content="H.O.P.E. — Human Order and Phase Enforcement. Cooperation secures a bright morning.">
   <title>WATCHLIGHT</title>
 
@@ -13,10 +13,19 @@
 </head>
 <body data-state="day">
 
+  <!-- SVG clip-path definition for dome shape -->
+  <svg width="0" height="0" style="position:absolute">
+    <defs>
+      <clipPath id="dome-clip" clipPathUnits="objectBoundingBox">
+        <path d="M1,0.565 C0.84,-0.207 0.153,-0.17 0,0.565 L0,1 L1,1 Z"/>
+      </clipPath>
+    </defs>
+  </svg>
+
   <!-- ═══ LOADING / DAWN ANIMATION ═══ -->
   <div class="loader" id="loader">
     <div class="loader-content">
-      <img src="./assets/logo-dark.png" alt="H.O.P.E." class="loader-logo">
+      <img src="./assets/logo-light.png" alt="H.O.P.E." class="loader-logo">
       <p class="loader-text">H.O.P.E.operates to ensure the continued safety of remaining population centers.<br>Adhere to all Siren Procedures and remember:</p>
       <p class="loader-tagline">Cooperation secures a bright morning.</p>
     </div>
@@ -28,22 +37,11 @@
   <!-- ═══ MAIN DASHBOARD ═══ -->
   <main class="dashboard" id="dashboard">
 
-    <!-- Globe Background Layer (bottom hemisphere) -->
+    <!-- Globe Background Layer (dome clipped by arc curve) -->
     <div class="globe-container">
       <div class="globe-map">
         <img src="./assets/globe.png" alt="" class="globe-image" draggable="false">
       </div>
-      <!-- Arc-shaped gradient overlay for 3D sphere effect -->
-      <svg class="globe-arc" viewBox="0 0 1728 659" preserveAspectRatio="none" aria-hidden="true">
-        <path d="M1728 372.554C1452 -136.448 265.231 -111.768 0 372.554V658.052H1728V372.554Z" fill="url(#globe-gradient)"/>
-        <defs>
-          <linearGradient id="globe-gradient" x1="864" y1="0" x2="864" y2="658.052" gradientUnits="userSpaceOnUse">
-            <stop class="grad-stop-1" stop-color="#E9E7E8"/>
-            <stop class="grad-stop-2" offset="0.356" stop-color="#8D8C8D"/>
-            <stop class="grad-stop-3" offset="0.784" stop-color="#000000"/>
-          </linearGradient>
-        </defs>
-      </svg>
     </div>
 
     <!-- H.O.P.E. Logo (top-left, hidden on landing, visible on later states) -->

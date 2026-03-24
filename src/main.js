@@ -235,9 +235,9 @@ function tick() {
 }
 
 // ─── Intro Sequence ──────────────────────────────────────────
-// Phase A: Dark landing — globe visible, text fades in (CSS animations)
+// Phase A: Light landing — globe dome visible at bottom, logo + text fade in
 // Phase B: Hold for introHold duration
-// Phase C: Auto-scroll — globe rises, bg transitions dark→light, text fades out
+// Phase C: Auto-scroll — globe rises, text fades out
 // Phase D: Dashboard revealed
 function runIntroSequence() {
   return new Promise((resolve) => {
@@ -246,7 +246,7 @@ function runIntroSequence() {
       document.fonts.ready,
       new Promise(r => setTimeout(r, CONFIG.introHold))
     ]).then(() => {
-      // Phase C: trigger auto-scroll transition
+      // Phase C: trigger auto-scroll transition (globe rises, text fades)
       loader.classList.add('intro-scroll')
 
       // After scroll transition completes, fade out loader
@@ -255,7 +255,7 @@ function runIntroSequence() {
         setTimeout(() => {
           loader.style.display = 'none'
           resolve()
-        }, 800) // match fade-out transition
+        }, 800)
       }, CONFIG.introScrollDuration)
     })
   })
@@ -263,7 +263,7 @@ function runIntroSequence() {
 
 // ─── Initialize ──────────────────────────────────────────────
 async function init() {
-  // Run dark landing → auto-scroll intro
+  // Run light landing → auto-scroll intro
   await runIntroSequence()
 
   // Set initial state and show dashboard elements

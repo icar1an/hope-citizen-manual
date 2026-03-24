@@ -84,33 +84,26 @@ html, body {
 
 /* ═══════════════════════════════════════
    LOADING / INTRO SEQUENCE
-   Dark landing → auto-scroll → dashboard
+   Light landing → auto-scroll → dashboard
    ═══════════════════════════════════════ */
 
 .loader {
   position: fixed;
   inset: 0;
   z-index: 100;
-  background: #000000;
+  background: #e9e7e8;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  transition: background-color 3s ease;
 }
 
-/* Phase 2: intro-scroll — bg goes light, content fades, globe rises */
-.loader.intro-scroll {
-  background: var(--bg-day);
-}
-
+/* Phase 2: intro-scroll — content fades, globe rises */
 .loader.intro-scroll .loader-content {
   opacity: 0;
   transform: translateY(-30px);
   pointer-events: none;
 }
-
-/* loader-globe intro-scroll override is in the .loader-globe block */
 
 /* Phase 3: fade-out — loader disappears */
 .loader.fade-out {
@@ -140,7 +133,7 @@ html, body {
   font-size: clamp(14px, 1.2vw, 20px);
   font-weight: 400;
   line-height: 1.6;
-  color: #e9e7e8;
+  color: #000000;
   max-width: 600px;
   margin: 0 auto 1rem;
   opacity: 0;
@@ -152,7 +145,7 @@ html, body {
   font-size: clamp(14px, 1.2vw, 20px);
   font-weight: 300;
   font-style: italic;
-  color: #e9e7e8;
+  color: #000000;
   opacity: 0;
   animation: loaderFadeIn 1s ease 1.5s forwards;
 }
@@ -167,13 +160,12 @@ html, body {
   height: 45vh;
   overflow: hidden;
   z-index: 1;
-  opacity: 1;
-  transition: bottom 3s ease, transform 3s ease, height 3s ease;
+  clip-path: url(#dome-clip);
+  transition: height 3s ease;
 }
 
 .loader.intro-scroll .loader-globe {
   height: 65vh;
-  transform: translateX(-50%);
 }
 
 .loader-globe img {
@@ -209,20 +201,21 @@ html, body {
 [data-state="approaching"] { --bg: #2a2a2a; --fg: #ffffff; }
 [data-state="night"] { --bg: #000000; --fg: #cbbf65; }
 
-/* --- Globe (bottom hemisphere) --- */
+/* --- Globe (dome clipped by arc curve) --- */
 .globe-container {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
-  height: 50vh;
+  height: 62vh;
   pointer-events: none;
   overflow: hidden;
+  clip-path: url(#dome-clip);
 }
 
 .globe-map {
   position: absolute;
-  bottom: -10%;
+  top: -15%;
   left: 50%;
   transform: translateX(-50%);
   width: 140%;
@@ -235,41 +228,13 @@ html, body {
   display: block;
 }
 
-/* The SVG arc creates the curved sphere illusion */
-.globe-arc {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 2;
-}
-
-/* Transition gradient stops for night mode */
-.grad-stop-1 { transition: stop-color 3s ease; }
-.grad-stop-2 { transition: stop-color 3s ease; }
-.grad-stop-3 { transition: stop-color 3s ease; }
-
-[data-state="transition"] .grad-stop-1 { stop-color: #8a8889; }
-[data-state="transition"] .grad-stop-2 { stop-color: #555; }
-
-[data-state="approaching"] .grad-stop-1 { stop-color: #2a2a2a; }
-[data-state="approaching"] .grad-stop-2 { stop-color: #1a1a1a; }
-
-[data-state="night"] .grad-stop-1 { stop-color: #000000; }
-[data-state="night"] .grad-stop-2 { stop-color: #000000; }
-[data-state="night"] .grad-stop-3 { stop-color: #000000; }
-
-[data-state="night"] .globe-image { opacity: 0.15; transition: opacity 3s ease; }
-[data-state="approaching"] .globe-image { opacity: 0.3; transition: opacity 3s ease; }
-
 /* --- H.O.P.E. Logo (top-left corner) --- */
 .logo {
   position: absolute;
   top: 3vh;
   left: 3vw;
   z-index: 10;
-  width: clamp(50px, 5vw, 90px);
+  width: clamp(60px, 7vw, 120px);
   opacity: 0;
   transition: opacity 1s ease;
 }
@@ -301,8 +266,7 @@ html, body {
 /* --- Status Info (left side, mid-height) --- */
 .status-info {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 55%;
   left: 3vw;
   z-index: 10;
   font-family: var(--font-body);
@@ -372,8 +336,8 @@ html, body {
 /* --- Notification Ticker (Union bracket shape) --- */
 .notification {
   position: absolute;
-  top: 42%;
-  left: 35%;
+  top: 40%;
+  left: 50%;
   transform: translate(-50%, -50%);
   z-index: 15;
   pointer-events: none;
@@ -449,8 +413,8 @@ html, body {
 /* --- Alert Banner (red warning — Union bracket shape, night state + periodic flash) --- */
 .alert-banner {
   position: absolute;
-  top: 38%;
-  left: 35%;
+  top: 36%;
+  left: 50%;
   transform: translate(-50%, -50%);
   z-index: 20;
   min-width: 300px;
