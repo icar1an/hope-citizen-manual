@@ -257,7 +257,7 @@ body {
 
 .globe-map {
   position: absolute;
-  top: 0;
+  top: -15%;
   left: 50%;
   transform: translateX(-50%);
   width: 140%;
