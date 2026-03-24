@@ -234,7 +234,7 @@ body {
 }
 
 [data-state='transition'] .dashboard {
-  background: linear-gradient(to bottom, var(--bg-day) 0%, #8a8889 45%, #2a2a2a 100%);
+  background: linear-gradient(to bottom, #8a8889 0%, var(--bg-day) 100%);
 }
 
 [data-state='approaching'] {
@@ -293,35 +293,35 @@ body {
   transition: stop-color 3s ease;
 }
 
-[data-state='transition'] .grad-stop-1 {
-  stop-color: #8a8889;
-}
-
 [data-state='transition'] .grad-stop-2 {
   stop-color: #555;
 }
 
-[data-state='approaching'] .grad-stop-1 {
-  stop-color: #2a2a2a;
+[data-state='transition'] .grad-stop-3 {
+  stop-color: #8a8889;
 }
 
 [data-state='approaching'] .grad-stop-2 {
   stop-color: #1a1a1a;
 }
 
-[data-state='night'] .grad-stop-1 {
-  stop-color: #000;
+[data-state='approaching'] .grad-stop-3 {
+  stop-color: #2a2a2a;
 }
 
 [data-state='night'] .grad-stop-2 {
   stop-color: #000;
 }
 
+[data-state='night'] .grad-stop-3 {
+  stop-color: #000;
+}
+
 /* --- H.O.P.E. Logo (top-left corner) --- */
 .logo {
   position: absolute;
-  top: 3vh;
-  left: 3vw;
+  top: 2.5vh;
+  left: 2vw;
   z-index: 10;
   width: clamp(90px, 11.5vw, 200px);
   opacity: 0;
@@ -363,8 +363,8 @@ body {
 /* --- Status Info (left side, lower area above countdown) --- */
 .status-info {
   position: absolute;
-  bottom: 30vh;
-  left: 3vw;
+  bottom: 38vh;
+  left: 7vw;
   z-index: 10;
   font-family: var(--font-body);
   font-size: clamp(11px, 1.1vw, 20px);
@@ -397,11 +397,12 @@ body {
 /* --- Countdown Section (BOTTOM, stacked) --- */
 .countdown-section {
   position: absolute;
-  bottom: 5vh;
+  bottom: 3vh;
   left: 0;
   right: 0;
   z-index: 10;
   text-align: center;
+  overflow: hidden;
 }
 
 .countdown {
@@ -420,8 +421,10 @@ body {
   font-family: var(--font-body);
   font-size: clamp(12px, 1.4vw, 24px);
   font-weight: 300;
+  font-style: italic;
   color: var(--fg);
   text-align: center;
+  letter-spacing: 0.1em;
   margin-top: 0.5em;
   transition: color 2s ease;
 }
