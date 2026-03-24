@@ -228,7 +228,7 @@ function showNotification() {
   } else if (activeState === 'transition') {
     pool = NOTIFICATIONS.filter((n) => n.type === 'yellow' || n.type === 'green')
   } else {
-    pool = NOTIFICATIONS.filter((n) => n.type === 'green')
+    pool = NOTIFICATIONS.filter((n) => n.type === 'green' || n.type === 'yellow')
   }
 
   const notification = pool[Math.floor(Math.random() * pool.length)]
