@@ -150,11 +150,11 @@ body {
 
 .loader-globe {
   position: absolute;
-  bottom: -65%;
+  bottom: -130%;
   left: 50%;
   transform: translateX(-50%);
-  width: 150%;
-  max-width: 2800px;
+  width: 200%;
+  max-width: 3500px;
   z-index: 1;
   border-radius: 50%;
   overflow: hidden;
