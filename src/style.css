@@ -75,30 +75,11 @@ body {
   width: 100%;
   height: 100%;
   overflow: hidden;
-  background: #000;
+  background: var(--bg);
   color: var(--fg);
   font-family: var(--font-body);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-/* --- Scaling Stage: 1728×1117 Figma canvas, letterboxed to fit viewport --- */
-/* Fixed-position centering ensures the scaled stage fits both 16" and 14" screens.
-   transform:scale doesn't change layout box, so we pin via top/left 50% + negative
-   margins equal to half the design size, then scale about center. */
-.stage {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  width: 1728px;
-  height: 1117px;
-  margin-left: -864px;
-  margin-top: -558.5px;
-  transform: scale(min(100vw / 1728, 100vh / 1117));
-  transform-origin: center center;
-  background: var(--bg);
-  overflow: hidden;
-  transition: background-color 3s ease;
 }
 
 /* ═══════════════════════════════════════
@@ -107,7 +88,7 @@ body {
    ═══════════════════════════════════════ */
 
 .loader {
-  position: absolute;
+  position: fixed;
   inset: 0;
   z-index: 100;
   background: var(--bg-day);
@@ -144,25 +125,24 @@ body {
 }
 
 .loader-logo {
-  width: 285px;
+  width: clamp(120px, 16.5vw, 285px);
   height: auto;
-  margin-bottom: 32px;
+  margin-bottom: 2rem;
 }
 
 .loader-text {
   font-family: var(--font-body);
-  font-size: 20px;
+  font-size: clamp(14px, 1.2vw, 20px);
   font-weight: 400;
   line-height: 1.6;
   color: #000;
-  max-width: 800px;
-  margin: 0 auto 16px;
-  text-align: center;
+  max-width: 500px;
+  margin: 0 auto 1rem;
 }
 
 .loader-tagline {
   font-family: var(--font-body);
-  font-size: 20px;
+  font-size: clamp(14px, 1.2vw, 20px);
   font-weight: 300;
   font-style: italic;
   color: #000;
@@ -189,9 +169,11 @@ body {
    ═══════════════════════════════════════ */
 
 .dashboard {
-  position: absolute;
+  position: fixed;
   inset: 0;
   overflow: hidden;
+  background: var(--bg);
+  transition: background-color 3s ease;
   visibility: hidden;
 }
 
@@ -210,7 +192,7 @@ body {
   --fg: #fff;
 }
 
-[data-state='transition'] .stage {
+[data-state='transition'] .dashboard {
   background: linear-gradient(to bottom, var(--bg-day) 0%, #8a8889 50%, #2a2a2a 100%);
 }
 
@@ -224,7 +206,7 @@ body {
   --fg: #cbbf65;
 }
 
-/* --- Globe (Figma: Artboard 1 1 at -13, -104, 1725×970) --- */
+/* --- Globe (fills viewport, arc creates sphere illusion) --- */
 .globe-container {
   position: absolute;
   inset: 0;
@@ -234,9 +216,11 @@ body {
 
 .globe-map {
   position: absolute;
-  top: -104px;
-  left: -13px;
-  width: 1725px;
+  top: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 92%;
+  max-width: 2200px;
 }
 
 .globe-image {
@@ -251,13 +235,13 @@ body {
   mix-blend-mode: normal;
 }
 
-/* SVG arc — Figma Vector 149 at -13, -39, 1728×1089 — creates sphere illusion in dark states */
+/* The SVG arc creates the curved sphere illusion — only visible in dark states */
 .globe-arc {
   position: absolute;
-  top: -39px;
-  left: -13px;
-  width: 1728px;
-  height: 1089px;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 90%;
   z-index: 2;
   opacity: 0;
   transition: opacity 3s ease;
@@ -322,13 +306,13 @@ body {
   stop-color: #000;
 }
 
-/* --- H.O.P.E. Logo (Figma: 33, 28, 200×190) --- */
+/* --- H.O.P.E. Logo (top-left corner) --- */
 .logo {
   position: absolute;
-  top: 28px;
-  left: 33px;
+  top: 2.5vh;
+  left: 2vw;
   z-index: 10;
-  width: 200px;
+  width: clamp(90px, 11.5vw, 200px);
   opacity: 0;
   transition: opacity 1s ease;
 }
@@ -365,15 +349,14 @@ body {
   opacity: 0;
 }
 
-/* --- Status Info (Figma: block at 125, 657, 378×72; siren-label at 122, 741) --- */
+/* --- Status Info (left side, lower area above countdown) --- */
 .status-info {
   position: absolute;
-  top: 657px;
-  left: 125px;
-  width: 378px;
+  bottom: 38vh;
+  left: 7vw;
   z-index: 10;
   font-family: var(--font-body);
-  font-size: 20px;
+  font-size: clamp(11px, 1.1vw, 20px);
   font-weight: 300;
   line-height: 1.5;
   color: var(--fg);
@@ -389,11 +372,10 @@ body {
 
 .siren-label {
   font-family: var(--font-body);
-  font-size: 30px;
+  font-size: clamp(14px, 1.6vw, 30px);
   font-weight: 400;
   letter-spacing: 0.23em;
-  margin-top: 20px;
-  margin-left: -3px;
+  margin-top: 1.5vh;
   color: var(--fg);
 }
 
@@ -401,10 +383,10 @@ body {
   color: var(--yellow);
 }
 
-/* --- Countdown Section (Figma: countdown centered @ top 825, line-height 239; tagline @ 1049) --- */
+/* --- Countdown Section (BOTTOM, stacked) --- */
 .countdown-section {
   position: absolute;
-  top: 825px;
+  bottom: 3vh;
   left: 0;
   right: 0;
   z-index: 10;
@@ -413,9 +395,9 @@ body {
 
 .countdown {
   font-family: var(--font-display);
-  font-size: 210px;
+  font-size: clamp(60px, 14vw, 250px);
   font-weight: 400;
-  line-height: 1;
+  line-height: 0.85;
   color: var(--fg);
   letter-spacing: 0.25em;
   transition:
@@ -425,13 +407,13 @@ body {
 
 .tagline {
   font-family: var(--font-body);
-  font-size: 24px;
+  font-size: clamp(12px, 1.4vw, 24px);
   font-weight: 300;
   font-style: italic;
   color: var(--fg);
   text-align: center;
   letter-spacing: 0.1em;
-  margin-top: 14px;
+  margin-top: 0.5em;
   transition: color 2s ease;
 }
 
@@ -440,7 +422,7 @@ body {
 [data-state='approaching'] .countdown,
 [data-state='transition'] .countdown {
   -webkit-text-fill-color: transparent;
-  -webkit-text-stroke: 3px var(--fg);
+  -webkit-text-stroke: 2px var(--fg);
 }
 
 [data-state='night'] .countdown {
@@ -458,17 +440,19 @@ body {
   }
 }
 
-/* --- Notification Ticker (Figma: Union at 522, 469, 683×179) --- */
+/* --- Notification Ticker (Union bracket shape) --- */
 .notification {
   position: absolute;
-  top: 469px;
-  left: 522px;
-  width: 683px;
-  height: 179px;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 15;
   pointer-events: none;
   opacity: 0;
   transition: opacity 0.5s ease;
+  width: clamp(400px, 40vw, 680px);
+  height: auto;
+  aspect-ratio: 683 / 179;
 }
 
 .notification.visible {
@@ -535,7 +519,7 @@ body {
 
 .notification-text {
   font-family: var(--font-body);
-  font-size: 20px;
+  font-size: clamp(13px, 1.1vw, 20px);
   font-weight: 400;
   font-style: italic;
   line-height: 1.4;
@@ -553,35 +537,36 @@ body {
 
 @keyframes notificationGlitch {
   0% {
-    transform: translate(0, 0) skewX(0deg);
+    transform: translate(-50%, -50%) skewX(0deg);
   }
 
   25% {
-    transform: translate(12px, -7px) skewX(-2deg);
+    transform: translate(-48%, -52%) skewX(-2deg);
   }
 
   50% {
-    transform: translate(-12px, 7px) skewX(2deg);
+    transform: translate(-52%, -48%) skewX(2deg);
   }
 
   75% {
-    transform: translate(6px, -3px) skewX(-1deg);
+    transform: translate(-49%, -51%) skewX(-1deg);
   }
 
   100% {
-    transform: translate(0, 0) skewX(0deg);
+    transform: translate(-50%, -50%) skewX(0deg);
   }
 }
 
-/* --- Alert Banner (Figma: Union at 507, 326, 683×179 for night state) --- */
+/* --- Alert Banner (red warning — bracket shape, night state + periodic flash) --- */
 .alert-banner {
   position: absolute;
-  top: 326px;
-  left: 507px;
-  width: 683px;
-  height: 179px;
+  top: 42%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 20;
   pointer-events: none;
+  width: clamp(400px, 40vw, 680px);
+  aspect-ratio: 683 / 179;
   opacity: 0;
   transition: opacity 0.5s ease;
 }
@@ -627,7 +612,7 @@ body {
 
 .alert-text {
   font-family: var(--font-body);
-  font-size: 20px;
+  font-size: clamp(14px, 1.2vw, 20px);
   font-weight: 900;
   font-style: italic;
   color: var(--alert-yellow);
