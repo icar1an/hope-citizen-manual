@@ -613,9 +613,34 @@ body {
   filter: none;
 }
 
-.alert-banner[data-banner-level='yellow'] .alert-icon img,
-.alert-banner[data-banner-level='green'] .alert-icon img {
-  filter: brightness(0);
+/* Mobile-control banner: mirror the notification ticker style.
+   When data-banner-level is set, the alert-banner element is rendered as
+   a notification (agent icon, 400-weight italic, top: 45%) rather than
+   the heavy 900-weight warning style used for the night-state alert. */
+.alert-banner[data-banner-level] {
+  top: 45%;
+}
+
+.alert-banner[data-banner-level] .alert-icon {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 11%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: initial;
+}
+
+.alert-banner[data-banner-level] .alert-icon img {
+  width: 60%;
+  height: auto;
+}
+
+.alert-banner[data-banner-level] .alert-text {
+  font-size: clamp(13px, 1.1vw, 20px);
+  font-weight: 400;
 }
 
 .alert-inner {

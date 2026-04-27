@@ -52,6 +52,9 @@ const notificationEl = document.getElementById('notification')
 const notificationTextEl = document.getElementById('notification-text')
 const alertBanner = document.getElementById('alert-banner')
 const alertText = document.getElementById('alert-text')
+const alertIconImg = alertBanner?.querySelector('.alert-icon img')
+const ALERT_ICON_WARNING = './assets/warning.svg'
+const ALERT_ICON_AGENT = './assets/agent.svg'
 const logo = document.getElementById('logo')
 const statusInfo = document.getElementById('status-info')
 
@@ -184,6 +187,7 @@ function showAlertBanner() {
   const alert = alerts[Math.floor(Math.random() * alerts.length)]
   alertText.textContent = alert.template()
   alertBanner.removeAttribute('data-banner-level')
+  if (alertIconImg) alertIconImg.src = ALERT_ICON_WARNING
   alertBanner.hidden = false
   bannerSource = 'state'
   requestAnimationFrame(() => {
@@ -204,6 +208,7 @@ function showControlledBanner(level, message) {
   clearTimeout(controlClearTimer)
   alertText.textContent = message
   alertBanner.dataset.bannerLevel = level
+  if (alertIconImg) alertIconImg.src = ALERT_ICON_AGENT
   alertBanner.hidden = false
   bannerSource = 'control'
   alertBanner.classList.remove('glitch')
@@ -219,6 +224,7 @@ function clearControlledBanner() {
   bannerSource = null
   controlClearTimer = setTimeout(() => {
     alertBanner.removeAttribute('data-banner-level')
+    if (alertIconImg) alertIconImg.src = ALERT_ICON_WARNING
     alertBanner.hidden = true
     if (currentState === 'night') showAlertBanner()
   }, 500)
