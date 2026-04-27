@@ -216,11 +216,12 @@ body {
 
 .globe-map {
   position: absolute;
-  top: -20%;
+  top: -12%;
   left: 50%;
   transform: translateX(-50%);
-  width: 92%;
+  width: 110%;
   max-width: 2200px;
+  z-index: 3;
 }
 
 .globe-image {
@@ -235,21 +236,17 @@ body {
   mix-blend-mode: normal;
 }
 
-/* The SVG arc creates the curved sphere illusion — only visible in dark states */
+/* SVG arc is the sphere base — always mounted; visibility is driven by
+   the gradient stop-colors (gray in day → gradient in transition/approaching
+   → solid black in night). Animating stop-color is what gives the smooth
+   gray→gradient→black fade. */
 .globe-arc {
   position: absolute;
-  bottom: 0;
+  bottom: 1%;
   left: 0;
   width: 100%;
   height: 90%;
   z-index: 2;
-  opacity: 0;
-  transition: opacity 3s ease;
-}
-
-[data-state='night'] .globe-arc,
-[data-state='approaching'] .globe-arc {
-  opacity: 1;
 }
 
 /* Gradient stops transition between states */
@@ -579,6 +576,10 @@ body {
   display: none;
 }
 
+.alert-banner.glitch {
+  animation: notificationGlitch 0.3s steps(2) 3;
+}
+
 .alert-shape {
   position: absolute;
   inset: 0;
@@ -588,6 +589,33 @@ body {
 
 .alert-bg {
   fill: var(--red);
+  transition: fill 0.3s ease;
+}
+
+.alert-banner[data-banner-level='red'] .alert-bg {
+  fill: var(--red);
+}
+
+.alert-banner[data-banner-level='yellow'] .alert-bg {
+  fill: var(--yellow);
+}
+
+.alert-banner[data-banner-level='green'] .alert-bg {
+  fill: var(--green);
+}
+
+.alert-banner[data-banner-level='yellow'] .alert-text,
+.alert-banner[data-banner-level='green'] .alert-text {
+  color: #000;
+}
+
+.alert-banner[data-banner-level] .alert-icon img {
+  filter: none;
+}
+
+.alert-banner[data-banner-level='yellow'] .alert-icon img,
+.alert-banner[data-banner-level='green'] .alert-icon img {
+  filter: brightness(0);
 }
 
 .alert-inner {

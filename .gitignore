@@ -2,6 +2,8 @@ node_modules
 dist
 .DS_Store
 *.local
+.npm-cache
+.wrangler
 
 # Visual test artifacts (screenshots and diffs are generated, not tracked)
 tests/visual/screenshots/

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+    <meta name="theme-color" content="#e9e7e8" />
+    <meta name="description" content="H.O.P.E. Citizen Report — field controller" />
+    <title>H.O.P.E. Citizen Report</title>
+
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔦</text></svg>"
+    />
+
+    <link rel="stylesheet" href="/src/control.css" />
+  </head>
+  <body>
+    <main class="control">
+      <header class="control-header">
+        <div class="sector-badge">
+          <svg class="pin-icon" viewBox="0 0 19 28" aria-hidden="true">
+            <path
+              d="M9.5 0C4.25 0 0 4.25 0 9.5C0 16.625 9.5 28 9.5 28C9.5 28 19 16.625 19 9.5C19 4.25 14.75 0 9.5 0ZM9.5 13C7.57 13 6 11.43 6 9.5C6 7.57 7.57 6 9.5 6C11.43 6 13 7.57 13 9.5C13 11.43 11.43 13 9.5 13Z"
+              fill="currentColor"
+            />
+          </svg>
+          <span class="sector-name">sector 88</span>
+        </div>
+        <div class="status-dot" aria-hidden="true"></div>
+      </header>
+
+      <h1 class="title">H.O.P.E. Citizen Report</h1>
+
+      <div class="logo-mark">
+        <img src="/assets/logo-dark.png" alt="H.O.P.E." />
+      </div>
+
+      <div class="buttons">
+        <button class="report-btn report-btn--green" data-level="green" type="button">
+          <span class="report-btn-label">Phased Returned Confirmation</span>
+        </button>
+        <button class="report-btn report-btn--yellow" data-level="yellow" type="button">
+          <span class="report-btn-label">Missing Phased Report</span>
+        </button>
+        <button class="report-btn report-btn--red" data-level="red" type="button">
+          <span class="report-btn-label">Lost Observed</span>
+        </button>
+      </div>
+
+      <p class="select-prompt">Select report type.</p>
+
+      <p class="disclaimer">Reports are monitored regardless of submission.</p>
+
+      <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+    </main>
+
+    <section class="confirm" id="confirm" aria-live="polite" hidden>
+      <p class="confirm-checks" id="confirm-checks"></p>
+      <div class="confirm-icon" id="confirm-icon"></div>
+    </section>
+
+    <script type="module" src="/src/control.js"></script>
+  </body>
+</html>

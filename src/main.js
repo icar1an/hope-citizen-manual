@@ -19,6 +19,11 @@ const CONFIG = {
   notificationInterval: { min: 10000, max: 30000 },
   notificationDuration: 6000,
 
+  // Siren — fires on a fixed wall-clock interval, independent of user input.
+  // Controlled only here; not exposed to mobile controllers.
+  sirenIntervalMs: 10 * 60 * 1000, // 10 minutes
+  sirenDurationMs: 5000,
+
   // Warning flash (periodic black flash with alert)
   warningFlashInterval: { min: 60000, max: 180000 },
   warningFlashIntervalExhibition: { min: 20000, max: 45000 },
@@ -78,16 +83,16 @@ const NOTIFICATIONS = [
       `Report logged. This sector [${randomSector()}] has existing missing records.`,
     type: 'yellow',
   },
-  // Dark — serious warnings
   {
     template: () =>
       `Missing Phased recorded in Sector ${randomSector()}. Do not attempt verification outside the household.`,
-    type: 'dark',
+    type: 'yellow',
   },
   {
     template: () => `Missing Phased recorded [${randomSector()}]. Do not attempt verification outside the household.`,
-    type: 'dark',
+    type: 'yellow',
   },
+  // Dark — serious warnings
   {
     template: () =>
       `Return data unavailable for Sector ${Math.floor(Math.random() * 9)}*${Math.floor(Math.random() * 99)}ver.#.`,
@@ -95,6 +100,7 @@ const NOTIFICATIONS = [
   },
   { template: () => 'Return verification pending // pending // pending', type: 'dark' },
   { template: () => 'Do not open the door.', type: 'dark' },
+  { template: () => 'If I wish on a half moon will only half of my wish come true?', type: 'dark' },
   // Red — danger / Lost
   { template: () => 'The Lost is present. Do not engage.', type: 'red' },
   {
@@ -166,20 +172,55 @@ function updateState() {
 }
 
 // ─── Alert Banner ────────────────────────────────────────────
+// `source` is 'state' (driven by the cycle state machine) or 'control'
+// (driven by a mobile button press via the Worker/DO). Control pushes
+// take priority and aren't clobbered by state transitions.
+let bannerSource = null
+let controlClearTimer = null
+
 function showAlertBanner() {
+  if (bannerSource === 'control') return
   const alerts = NOTIFICATIONS.filter((n) => n.type === 'red')
   const alert = alerts[Math.floor(Math.random() * alerts.length)]
   alertText.textContent = alert.template()
+  alertBanner.removeAttribute('data-banner-level')
   alertBanner.hidden = false
+  bannerSource = 'state'
   requestAnimationFrame(() => {
     alertBanner.classList.add('visible')
   })
 }
 
 function hideAlertBanner() {
+  if (bannerSource === 'control') return
   alertBanner.classList.remove('visible')
+  bannerSource = null
   setTimeout(() => {
+    if (!bannerSource) alertBanner.hidden = true
+  }, 500)
+}
+
+function showControlledBanner(level, message) {
+  clearTimeout(controlClearTimer)
+  alertText.textContent = message
+  alertBanner.dataset.bannerLevel = level
+  alertBanner.hidden = false
+  bannerSource = 'control'
+  alertBanner.classList.remove('glitch')
+  requestAnimationFrame(() => {
+    alertBanner.classList.add('visible', 'glitch')
+  })
+  setTimeout(() => alertBanner.classList.remove('glitch'), 900)
+}
+
+function clearControlledBanner() {
+  if (bannerSource !== 'control') return
+  alertBanner.classList.remove('visible')
+  bannerSource = null
+  controlClearTimer = setTimeout(() => {
+    alertBanner.removeAttribute('data-banner-level')
     alertBanner.hidden = true
+    if (currentState === 'night') showAlertBanner()
   }, 500)
 }
 
@@ -259,6 +300,126 @@ function scheduleNextNotification() {
   }, delay)
 }
 
+// ─── Siren (fixed-interval, client-local) ────────────────────
+const sirenAudio = document.getElementById('siren')
+let sirenUnlocked = false
+
+function unlockSirenAudio() {
+  if (sirenUnlocked || !sirenAudio) return
+  sirenUnlocked = true
+  // Play + immediately pause on the first user gesture so subsequent
+  // programmatic .play() calls satisfy autoplay policies.
+  sirenAudio.muted = true
+  sirenAudio
+    .play()
+    .then(() => {
+      sirenAudio.pause()
+      sirenAudio.currentTime = 0
+      sirenAudio.muted = false
+    })
+    .catch(() => {
+      sirenAudio.muted = false
+    })
+}
+
+function fireSiren() {
+  if (sirenAudio) {
+    try {
+      sirenAudio.currentTime = 0
+      const playPromise = sirenAudio.play()
+      if (playPromise && typeof playPromise.catch === 'function') {
+        playPromise.catch((err) => console.warn('[siren] play blocked', err))
+      }
+    } catch (err) {
+      console.warn('[siren] play threw', err)
+    }
+  }
+  triggerWarningFlash()
+}
+
+function scheduleSiren() {
+  const now = Date.now()
+  const msUntilNext = CONFIG.sirenIntervalMs - (now % CONFIG.sirenIntervalMs)
+  setTimeout(() => {
+    fireSiren()
+    setInterval(fireSiren, CONFIG.sirenIntervalMs)
+  }, msUntilNext)
+}
+
+// ─── Banner Sync (WebSocket to Durable Object) ───────────────
+let bannerSocket = null
+let bannerBackoffMs = 500
+const BANNER_BACKOFF_MAX_MS = 15_000
+
+function handleBannerMessage(raw) {
+  let msg
+  try {
+    msg = JSON.parse(raw)
+  } catch {
+    return
+  }
+  if (msg.type === 'banner' && msg.level && msg.message) {
+    showControlledBanner(msg.level, msg.message)
+  } else if (msg.type === 'clear') {
+    clearControlledBanner()
+  }
+}
+
+function connectBannerSocket() {
+  const proto = location.protocol === 'https:' ? 'wss:' : 'ws:'
+  const url = `${proto}//${location.host}/api/ws`
+  let ws
+  try {
+    ws = new WebSocket(url)
+  } catch (err) {
+    console.warn('[banner] ws construction failed', err)
+    scheduleBannerReconnect()
+    return
+  }
+  bannerSocket = ws
+
+  ws.addEventListener('open', () => {
+    bannerBackoffMs = 500
+    console.log('[banner] ws open →', url)
+  })
+  ws.addEventListener('message', (ev) => {
+    console.log('[banner] ws message', ev.data)
+    handleBannerMessage(ev.data)
+  })
+  ws.addEventListener('close', (ev) => {
+    console.log('[banner] ws close', ev.code, ev.reason)
+    bannerSocket = null
+    scheduleBannerReconnect()
+  })
+  ws.addEventListener('error', () => {
+    console.warn('[banner] ws error')
+    try {
+      ws.close()
+    } catch {
+      // ignore
+    }
+  })
+}
+
+function scheduleBannerReconnect() {
+  const delay = bannerBackoffMs
+  bannerBackoffMs = Math.min(bannerBackoffMs * 2, BANNER_BACKOFF_MAX_MS)
+  setTimeout(connectBannerSocket, delay)
+}
+
+async function rehydrateBannerState() {
+  try {
+    const res = await fetch('/api/state')
+    if (!res.ok) return
+    const { banner } = await res.json()
+    if (banner && banner.level && banner.message) {
+      showControlledBanner(banner.level, banner.message)
+    }
+  } catch {
+    // ignore; WS will deliver future updates
+  }
+}
+
 // ─── Main Loop ───────────────────────────────────────────────
 function tick() {
   const remaining = getTimeRemaining()
@@ -288,6 +449,14 @@ function runIntroSequence() {
 
 // ─── Initialize ──────────────────────────────────────────────
 async function init() {
+  // Capture the first user gesture to unlock siren audio playback.
+  const gestureEvents = ['pointerdown', 'touchstart', 'keydown']
+  const onFirstGesture = () => {
+    unlockSirenAudio()
+    gestureEvents.forEach((ev) => window.removeEventListener(ev, onFirstGesture))
+  }
+  gestureEvents.forEach((ev) => window.addEventListener(ev, onFirstGesture, { once: true, passive: true }))
+
   // Run dark landing → auto-scroll intro
   await runIntroSequence()
 
@@ -308,6 +477,13 @@ async function init() {
 
   // Start periodic warning flashes
   setTimeout(() => scheduleWarningFlash(), 15000)
+
+  // Connect to the banner DO so mobile button presses can drive the banner
+  rehydrateBannerState()
+  connectBannerSocket()
+
+  // Schedule the siren on its fixed interval
+  scheduleSiren()
 
   if (isExhibition) {
     console.log('[WATCHLIGHT] Exhibition mode: 20-minute cycle')

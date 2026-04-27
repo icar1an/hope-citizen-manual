@@ -1,0 +1,358 @@
+@font-face {
+  font-family: '35-FTR';
+  src: url('/fonts/ilott-type-35-ftr-light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: '35-FTR';
+  src: url('/fonts/ilott-type-35-ftr-regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: '35-FTR';
+  src: url('/fonts/ilott-type-35-ftr-bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: '35-FTR';
+  src: url('/fonts/ilott-type-35-ftr-black.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --bg: #e9e7e8;
+  --fg: #000;
+  --green: rgb(7 146 0 / 50%);
+  --green-solid: #079100;
+  --yellow: rgb(235 218 98 / 50%);
+  --yellow-solid: #ebda62;
+  --red: rgb(188 0 3 / 50%);
+  --red-solid: #bb0003;
+  --font-body: '35-FTR', 'Space Grotesk', 'Helvetica Neue', sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  width: 100%;
+  min-height: 100%;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior: none;
+}
+
+body {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.control {
+  width: 100%;
+  max-width: 402px;
+  min-height: 100vh;
+  min-height: 100dvh;
+  margin: 0 auto;
+  padding: 18px 24px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.control-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  height: 47px;
+  margin-bottom: 20px;
+}
+
+.sector-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--fg);
+}
+
+.pin-icon {
+  width: 19px;
+  height: 28px;
+  display: block;
+}
+
+.sector-name {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 700;
+  font-style: italic;
+  letter-spacing: 1.5px;
+}
+
+.status-dot {
+  width: 155px;
+  height: 29px;
+  background: #000;
+  border-radius: 14.5px;
+}
+
+.title {
+  font-family: var(--font-body);
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #000;
+  margin-bottom: 20px;
+}
+
+.logo-mark {
+  width: 200px;
+  height: 190px;
+  margin: 0 auto 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-mark img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+}
+
+.buttons {
+  width: 100%;
+  max-width: 295px;
+  display: flex;
+  flex-direction: column;
+  gap: 13px;
+  margin: 0 auto;
+}
+
+.report-btn {
+  position: relative;
+  width: 100%;
+  height: 104px;
+  border: 0;
+  border-radius: 15px;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #000;
+  cursor: pointer;
+  transition:
+    transform 0.08s ease,
+    filter 0.15s ease,
+    opacity 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.report-btn:active {
+  transform: scale(0.97);
+  filter: brightness(0.92);
+}
+
+.report-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.report-btn--green {
+  background: var(--green);
+}
+
+.report-btn--yellow {
+  background: var(--yellow);
+}
+
+.report-btn--red {
+  background: var(--red);
+}
+
+.report-btn.flash {
+  animation: btnFlash 0.45s ease;
+}
+
+@keyframes btnFlash {
+  0% {
+    filter: brightness(1);
+  }
+
+  40% {
+    filter: brightness(1.6);
+  }
+
+  100% {
+    filter: brightness(1);
+  }
+}
+
+.report-btn-label {
+  display: block;
+  padding: 0 12px;
+  text-align: center;
+}
+
+.select-prompt {
+  margin-top: 18px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: #000;
+  opacity: 0.6;
+  text-align: center;
+}
+
+.disclaimer {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  color: #000;
+  opacity: 0.6;
+}
+
+/* ═══ Confirmation overlay (shown 2s after a button press) ═══ */
+.confirm {
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  padding: 48px 32px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.22s ease;
+}
+
+.confirm[hidden] {
+  display: none;
+}
+
+.confirm.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.confirm-checks {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 400;
+  line-height: 1.9;
+  letter-spacing: 0.08em;
+  color: #000;
+  white-space: pre-line;
+  text-align: left;
+  max-width: 320px;
+  width: 100%;
+}
+
+.confirm-icon {
+  width: 83px;
+  height: 83px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.confirm-icon--disc {
+  background: #000;
+  border-radius: 50%;
+}
+
+.confirm-icon svg {
+  display: block;
+}
+
+.confirm--glitch {
+  background: #000;
+  gap: 0;
+}
+
+.confirm--glitch .confirm-checks {
+  color: #fff;
+  text-align: center;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  line-height: 1.6;
+  max-width: none;
+}
+
+.confirm--glitch .confirm-icon {
+  display: none;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 56px;
+  transform: translateX(-50%) translateY(16px);
+  background: #000;
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 400;
+  padding: 10px 18px;
+  border-radius: 999px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
+}
+
+.toast.visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+  pointer-events: auto;
+}
+
+.toast[data-kind='error'] {
+  background: var(--red-solid);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
