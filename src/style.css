@@ -360,7 +360,7 @@ body {
 /* --- Status Info (left side, lower area above countdown) --- */
 .status-info {
   position: absolute;
-  bottom: 22vh;
+  bottom: 30vh;
   left: 7vw;
   z-index: 10;
   font-family: var(--font-body);
@@ -385,7 +385,7 @@ body {
   font-weight: 400;
   letter-spacing: 0.23em;
   text-align: left;
-  margin: 0 0 0.4em;
+  margin: 1.5em 0 0;
   color: var(--fg);
 }
 
@@ -393,16 +393,12 @@ body {
   color: var(--yellow);
 }
 
-/* --- Countdown Section (BOTTOM, stacked) ---
-   width: max-content shrinks the container to the countdown's natural width
-   so the siren-label (text-align:left) lands flush with the timer's first
-   digit, while the tagline (text-align:center) stays under the timer. */
+/* --- Countdown Section (BOTTOM, stacked) --- */
 .countdown-section {
   position: absolute;
   bottom: 3vh;
-  left: 50%;
-  transform: translateX(-50%);
-  width: max-content;
+  left: 0;
+  right: 0;
   z-index: 10;
   text-align: center;
 }
@@ -734,7 +730,7 @@ body {
      white-space: nowrap so "Atmospheric Obscuration Status: XX%" stays on one line
      (matches Figma; 324px container can't hold the rendered text at 20px). */
   .status-info {
-    top: 600px;
+    top: 540px;
     left: 64px;
     bottom: auto;
     width: auto;
@@ -744,10 +740,8 @@ body {
     white-space: nowrap;
   }
 
-  /* Siren label — sits inside .countdown-section just above the timer,
-     left-aligned with the timer's first digit. countdown-section is
-     width: max-content (= timer width), so text-align: left flushes the
-     label to the timer's left edge. */
+  /* Siren label — flows under the status lines inside .status-info,
+     sharing the same left edge (canvas x=64). */
   .siren-label {
     position: static;
     display: block;
@@ -755,7 +749,7 @@ body {
     text-align: left;
     font-size: 30px;
     letter-spacing: 0.23em;
-    margin: 0 0 8px;
+    margin: 32px 0 0;
   }
 
   /* Notification + alert bracket — (468, 417), 584.712×153.363 */
@@ -801,6 +795,158 @@ body {
     transform: translateX(-50%);
     width: max-content;
     text-align: center;
+  }
+}
+
+/* ═══ Glitch event (mobile glitch screen → main site cluster + globe blackout) ═══ */
+.glitch-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 30;
+  pointer-events: none;
+  display: none;
+}
+
+.glitch-overlay.active {
+  display: block;
+}
+
+.glitch-banner {
+  position: absolute;
+  width: clamp(400px, 40vw, 680px);
+  aspect-ratio: 683 / 179;
+  opacity: 0.85;
+  animation: glitchBannerFlicker 0.18s steps(2) infinite;
+}
+
+.glitch-banner .alert-shape {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch-banner .alert-bg {
+  fill: var(--red);
+}
+
+.glitch-banner .alert-inner {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  height: 100%;
+  padding: 3.7% 6% 5.3% 12%;
+}
+
+.glitch-banner .alert-icon {
+  flex-shrink: 0;
+  width: 24px;
+}
+
+.glitch-banner .alert-icon img {
+  width: 100%;
+  height: auto;
+}
+
+.glitch-banner .alert-text {
+  font-family: var(--font-body);
+  font-size: clamp(13px, 1.1vw, 20px);
+  font-weight: 700;
+  font-style: italic;
+  color: var(--alert-yellow);
+}
+
+@keyframes glitchBannerFlicker {
+  0% {
+    opacity: 0.85;
+    transform: translate(0, 0) skewX(0);
+  }
+
+  20% {
+    opacity: 0.55;
+    transform: translate(-3px, 2px) skewX(-1deg);
+  }
+
+  40% {
+    opacity: 0.95;
+    transform: translate(2px, -1px) skewX(1deg);
+  }
+
+  60% {
+    opacity: 0.4;
+    transform: translate(-1px, 3px) skewX(0);
+  }
+
+  80% {
+    opacity: 0.9;
+    transform: translate(1px, -2px) skewX(-1deg);
+  }
+
+  100% {
+    opacity: 0.85;
+    transform: translate(0, 0) skewX(0);
+  }
+}
+
+/* Globe glitch: rapid filter flicker on the world map, settling to black.
+   Container holds a small translate jitter; map cycles brightness/invert. */
+body.glitch-active .globe-container {
+  animation: globeJitter 0.07s steps(2) infinite;
+}
+
+body.glitch-active .globe-image {
+  animation: globeImageGlitch 2.5s steps(20, end) forwards;
+}
+
+@keyframes globeJitter {
+  0% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(2px, -2px);
+  }
+
+  100% {
+    transform: translate(-2px, 1px);
+  }
+}
+
+@keyframes globeImageGlitch {
+  0%,
+  100% {
+    filter: none;
+  }
+
+  5% {
+    filter: brightness(0);
+  }
+
+  10% {
+    filter: invert(1) brightness(2);
+  }
+
+  15% {
+    filter: brightness(0);
+  }
+
+  20% {
+    filter: none;
+  }
+
+  25% {
+    filter: brightness(0);
+  }
+
+  35% {
+    filter: invert(1) brightness(0.5);
+  }
+
+  45%,
+  100% {
+    filter: brightness(0);
   }
 }
 

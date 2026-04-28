@@ -68,6 +68,7 @@
         <p class="status-line">System Status: Maintained</p>
         <p class="status-line">Atmospheric Obscuration Status: <span id="obscuration">0</span>%</p>
         <p class="status-line">Self Report: <span id="self-report">30</span>% Completed</p>
+        <p class="siren-label">NEXT SIREN ACTIVATION</p>
       </div>
 
       <!-- Notification Ticker (overlays on globe area) -->
@@ -102,9 +103,11 @@
         </div>
       </div>
 
-      <!-- Bottom: Siren label + Countdown + Tagline -->
+      <!-- Glitch event overlay (mobile glitch screen → cluster + globe blackout) -->
+      <div class="glitch-overlay" id="glitch-overlay" aria-hidden="true"></div>
+
+      <!-- Bottom: Countdown + Tagline -->
       <div class="countdown-section">
-        <p class="siren-label">NEXT SIREN ACTIVATION</p>
         <div class="countdown" id="countdown">00:00:00</div>
         <p class="tagline">cooperation secures a bright morning.</p>
       </div>
