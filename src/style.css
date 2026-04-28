@@ -671,6 +671,122 @@ body {
   color: var(--alert-yellow);
 }
 
+/* --- 14" MacBook Pro breakpoint (scaled canvas — Option Z) ---
+   Pins the dashboard to a fixed 1520×987 canvas matching Figma
+   frame "MacBook Pro 14" - 1" exactly, then scales the whole thing
+   uniformly to fit the viewport. Every child is placed with Figma's
+   raw pixel values — no vh/vw drift.
+   Scoped to 1440–1599px so the 16" layout (≥1600px) is untouched. */
+@media (min-width: 1440px) and (max-width: 1599px) {
+  .dashboard {
+    inset: auto;
+    top: 50%;
+    left: 50%;
+    width: 1520px;
+    height: 987px;
+    transform: translate(-50%, -50%) scale(max(calc(100vw / 1520px), calc(100vh / 987px)));
+    transform-origin: center center;
+  }
+
+  /* Logo — 171×163 at (27, 15) */
+  .logo {
+    top: 15px;
+    left: 27px;
+    width: 171px;
+  }
+
+  /* Globe PNG — container at (-4, -89), 1483 wide (auto height keeps aspect) */
+  .globe-map {
+    top: -89px;
+    left: -4px;
+    width: 1483px;
+    max-width: none;
+    transform: none;
+  }
+
+  /* Globe arc (sphere base SVG) — (0, 48), 1525×969.951 */
+  .globe-arc {
+    top: 48px;
+    left: 0;
+    width: 1525px;
+    height: 969.951px;
+    bottom: auto;
+  }
+
+  /* Status info — (64, 520), 20px Light, tight line-height.
+     white-space: nowrap so "Atmospheric Obscuration Status: XX%" stays on one line
+     (matches Figma; 324px container can't hold the rendered text at 20px). */
+  .status-info {
+    top: 520px;
+    left: 64px;
+    bottom: auto;
+    width: auto;
+    font-size: 20px;
+    line-height: 1.03;
+    letter-spacing: 0.13em;
+    white-space: nowrap;
+  }
+
+  /* Siren label — Figma places this text-box on the LEFT side of the frame,
+     at canvas x=-10 w=590 (visible text ≈ left-aligned with timer's first digit).
+     Status-info is at canvas x=64, so offset = -10 - 64 = -74. */
+  .siren-label {
+    position: absolute;
+    top: 131px;
+    left: -74px;
+    width: 590px;
+    margin-top: 0;
+    text-align: center;
+    font-size: 30px;
+    letter-spacing: 0.23em;
+  }
+
+  /* Notification + alert bracket — (468, 417), 584.712×153.363 */
+  .notification,
+  .alert-banner {
+    top: 417px;
+    left: 468px;
+    width: 584.712px;
+    height: 153.363px;
+    aspect-ratio: auto;
+    transform: none;
+  }
+
+  .notification-text,
+  .alert-text {
+    font-size: 17px;
+  }
+
+  /* Countdown — 190px Technik Mono, tracking 0.39em.
+     Negative margin-right absorbs the trailing letter-spacing so text-align:center
+     centers the visible glyphs, not the glyphs + trailing whitespace. */
+  .countdown {
+    font-size: 190px;
+    letter-spacing: 0.39em;
+    line-height: 1;
+    margin-right: -0.39em;
+    white-space: nowrap;
+  }
+
+  /* Tagline — 24px Light Oblique, zero gap to countdown (Figma: y=909 = countdown.bottom) */
+  .tagline {
+    font-size: 24px;
+    letter-spacing: 0.1em;
+    margin-top: 0;
+  }
+
+  /* Countdown section — force-center explicitly against the 1520 canvas
+     so the countdown sits at canvas center x=760 regardless of cascade. */
+  .countdown-section {
+    bottom: 54px;
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%);
+    width: max-content;
+    text-align: center;
+  }
+}
+
 /* --- Reduced Motion --- */
 @media (prefers-reduced-motion: reduce) {
   *,
