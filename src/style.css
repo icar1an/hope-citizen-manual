@@ -82,6 +82,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Browser fullscreen: ::backdrop defaults to black behind the fullscreened
+   element, leaving a dark frame around the dashboard on letterboxed screens.
+   Match it to the page bg so the empty space blends with the dashboard. */
+::backdrop {
+  background: var(--bg);
+}
+
+:fullscreen {
+  background: var(--bg);
+}
+
 /* ═══════════════════════════════════════
    LOADING / INTRO SEQUENCE
    Dark landing → auto-scroll → dashboard
