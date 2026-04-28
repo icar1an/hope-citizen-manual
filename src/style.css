@@ -360,7 +360,7 @@ body {
 /* --- Status Info (left side, lower area above countdown) --- */
 .status-info {
   position: absolute;
-  bottom: 38vh;
+  bottom: 33vh;
   left: 7vw;
   z-index: 10;
   font-family: var(--font-body);
@@ -728,7 +728,7 @@ body {
      white-space: nowrap so "Atmospheric Obscuration Status: XX%" stays on one line
      (matches Figma; 324px container can't hold the rendered text at 20px). */
   .status-info {
-    top: 520px;
+    top: 560px;
     left: 64px;
     bottom: auto;
     width: auto;
