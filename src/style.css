@@ -317,7 +317,7 @@ body {
 /* --- H.O.P.E. Logo (top-left corner) --- */
 .logo {
   position: absolute;
-  top: 2.5vh;
+  top: 5vh;
   left: 2vw;
   z-index: 10;
   width: clamp(90px, 11.5vw, 200px);
@@ -699,9 +699,9 @@ body {
     transform-origin: center center;
   }
 
-  /* Logo — 171×163 at (27, 15) */
+  /* Logo — 171×163 at (27, 40) — nudged down from Figma's 15px */
   .logo {
-    top: 15px;
+    top: 40px;
     left: 27px;
     width: 171px;
   }
