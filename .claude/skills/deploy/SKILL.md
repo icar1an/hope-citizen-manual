@@ -7,6 +7,20 @@ description: Build and deploy hope-citizen-manual to Cloudflare Workers. Use whe
 
 This project is served as a Cloudflare Worker with static assets. Worker name: `hope-citizen-manual` (see `wrangler.jsonc`). SPA routing is built in.
 
+## FIRST: Check the freeze
+
+Before doing anything else, check whether `FREEZE.md` exists at the repo root:
+
+```
+test -f FREEZE.md && cat FREEZE.md
+```
+
+If `FREEZE.md` is present, **stop and report it to the user**. Do not attempt
+to deploy, rebuild, or rollback. The owner has locked production to a specific
+worker version. Read `FREEZE.md` to find the locked version ID and the
+unfreeze procedure; only proceed if the user explicitly confirms they want to
+break the freeze.
+
 ## Credentials
 
 Stored as env vars in `~/.zprofile`:
@@ -36,10 +50,11 @@ Wrangler auto-reads both env vars — do not pass them as flags.
    ```
    Output goes to `./dist` — which `wrangler.jsonc` serves as static assets.
 
-4. **Deploy**. Wrangler isn't in `package.json`, so `npx` fetches it. Use the alt cache to dodge the root-owned `~/.npm` issue:
+4. **Deploy** — always via `npm run deploy`, never raw `wrangler deploy`. The npm script fires a `predeploy` hook that aborts if `FREEZE.md` exists, which is the only enforcement against accidentally publishing over a frozen version:
    ```
-   source ~/.zprofile && npm_config_cache=/tmp/npm-cache-hcm npx wrangler deploy
+   source ~/.zprofile && npm_config_cache=/tmp/npm-cache-hcm npm run deploy
    ```
+   Wrangler is now a devDependency, so `npm run deploy` resolves it locally — no `npx` fetch needed.
 
 5. **Report back** the deploy URL (e.g. `https://hope-citizen-manual.noodl-api.workers.dev`) and the Version ID from wrangler's output.
 
@@ -56,3 +71,6 @@ Wrangler auto-reads both env vars — do not pass them as flags.
 - Do not run `wrangler login` — API token auth is already configured via env vars.
 - Do not modify `wrangler.jsonc` as part of a deploy.
 - Do not write the token to any file in the repo.
+- Do not invoke `wrangler deploy` directly (raw or via `npx`). The freeze guard is wired through the `predeploy` npm hook; raw wrangler bypasses it. Always go through `npm run deploy`.
+- Do not run `wrangler deploy` immediately after `wrangler rollback`. The rollback already promotes a prior version to 100% — a follow-up deploy of the current `dist/` will overwrite the rollback with whatever your working tree contains. This exact pattern caused the May 3 → May 11 re-freeze incident.
+- Do not delete `FREEZE.md` casually. Treat it as a production lock; confirm with the user before removing.

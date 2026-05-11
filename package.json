@@ -14,7 +14,9 @@
     "quality": "npm run format && npm run lint:fix",
     "screenshot": "node tests/visual/screenshot.spec.js",
     "visual-diff": "node tests/visual/compare.js",
-    "check-all": "npm run quality && npm run build && npm run screenshot && npm run visual-diff"
+    "check-all": "npm run quality && npm run build && npm run screenshot && npm run visual-diff",
+    "predeploy": "node -e \"if (require('fs').existsSync('FREEZE.md')) { console.error('\\n\\u274C  DEPLOY BLOCKED: FREEZE.md present at repo root. See FREEZE.md for unfreeze procedure.\\n'); process.exit(1); }\"",
+    "deploy": "wrangler deploy"
   },
   "dependencies": {
     "gsap": "^3.14.2",
